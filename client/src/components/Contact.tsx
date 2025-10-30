@@ -123,15 +123,15 @@ export default function Contact() {
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 rounded-full bg-green-500 mt-2 flex-shrink-0" aria-hidden="true" />
-                  <div className="text-foreground">Available for opportunities</div>
+                  <div className="text-foreground">Actively looking for opportunities</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 rounded-full bg-blue-500 mt-2 flex-shrink-0" aria-hidden="true" />
-                  <div className="text-foreground">MS Engineering Management Student</div>
+                  <div className="text-foreground">MS Data Science Student</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 rounded-full bg-purple-500 mt-2 flex-shrink-0" aria-hidden="true" />
-                  <div className="text-foreground">Perplexity AI Business Fellow</div>
+                  <div className="text-foreground">Eager to connect and collaborate</div>
                 </div>
               </div>
             </Card>

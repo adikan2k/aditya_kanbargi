@@ -187,9 +187,9 @@ Preferred communication style: Simple, everyday language.
 4. **Contact Section - Enhanced Layout**
    - Changed tagline from center-aligned to full-width left-aligned for better readability
    - Added "Current Status" card with colored indicators:
-     - Green dot: Available for opportunities
-     - Blue dot: MS Engineering Management Student  
-     - Purple dot: Perplexity AI Business Fellow
+     - Green dot: Actively looking for opportunities
+     - Blue dot: MS Data Science Student  
+     - Purple dot: Eager to connect and collaborate
    - Reordered sidebar: Current Status → Contact Information → Connect
 
 5. **About Section - Professional Certifications**
