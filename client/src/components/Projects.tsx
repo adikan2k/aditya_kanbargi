@@ -14,7 +14,7 @@ const projects = [
       "Agentic AI research framework that transforms messy, multimodal data into clear, citation-rich insights. AI-powered research analyst that plans, navigates, verifies, and synthesizes.",
     image: webAppImage,
     tags: ["LangGraph", "FastAPI", "Next.js", "Qdrant", "Postgres", "LLM Agents"],
-    category: "AI",
+    categories: ["AI"],
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ const projects = [
       "End-to-end platform using Llama-3.1-70B and BGE-large embeddings within a RAG pipeline, enabling natural-language Q&A with citations, automated multi-state policy comparisons, and structured regulatory insights. Improved policy analysis efficiency by >50% with sub-5s response latency across 100+ documents.",
     image: mobileAppImage,
     tags: ["Llama-3.1-70B", "RAG", "BGE Embeddings", "LLMs", "Python", "NLP"],
-    category: "AI",
+    categories: ["AI"],
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ const projects = [
       "Built an end-to-end analytics pipeline combining EDA, regression, clustering, statistical testing, and ML models (XGBoost, LightGBM, LSTMs) to analyze 100k+ Steam game records with 92% forecast accuracy. Designed & deployed interactive visualizations and dashboards (Plotly, Tableau) to communicate market trends, ownership forecasting, and player behavior insights.",
     image: designImage,
     tags: ["XGBoost", "LightGBM", "LSTM", "EDA", "Plotly", "Tableau", "Python"],
-    category: "Machine Learning",
+    categories: ["Machine Learning", "Analytics and Forecasting"],
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ const projects = [
       "Designed and deployed a cloud-native few-shot image classification system on AWS using MAML, building a full-stack pipeline with Python, Flask, S3, SageMaker, and EC2 to deliver real-time inference with end-to-end scalability, automation, and cloud integration.",
     image: webAppImage,
     tags: ["MAML", "AWS", "SageMaker", "Flask", "S3", "EC2", "Meta-Learning"],
-    category: "Deep Learning",
+    categories: ["Machine Learning"],
   },
   {
     id: 5,
@@ -50,7 +50,7 @@ const projects = [
       "Performed comparative study to detect and classify music files automatically based on genre using various classification algorithms including SVM, K-Nearest Neighbors, CNN, RNN, Random Forest and Decision trees. Published in International Journal of Science Research and Management (IJSREM) Volume 7, Issue 12 on December 14, 2023.",
     image: mobileAppImage,
     tags: ["SVM", "CNN", "RNN", "Random Forest", "K-Nearest Neighbors", "Python"],
-    category: "Machine Learning",
+    categories: ["Machine Learning"],
   },
   {
     id: 6,
@@ -59,7 +59,7 @@ const projects = [
       "Real-time face mask detection system using deep learning. Built with OpenCV, Keras, and TensorFlow to detect face masks in real-time video streams, enabling automated compliance monitoring for safety protocols.",
     image: designImage,
     tags: ["Keras", "TensorFlow", "OpenCV", "Deep Learning", "Computer Vision"],
-    category: "Computer Vision",
+    categories: ["Computer Vision", "Machine Learning", "Deep Learning"],
   },
   {
     id: 7,
@@ -68,7 +68,7 @@ const projects = [
       "Social distancing detector built using YOLO (COCO Model) along with OpenCV. Applies object detection to detect all people in video streams, computes pairwise distances between detected people, and checks if any two people are less than N pixels apart for social distancing compliance.",
     image: webAppImage,
     tags: ["YOLO", "OpenCV", "Computer Vision", "Deep Learning", "Object Detection"],
-    category: "Computer Vision",
+    categories: ["Computer Vision", "Deep Learning"],
   },
   {
     id: 8,
@@ -77,7 +77,7 @@ const projects = [
       "LSTM-based Bitcoin price prediction project using Google Trend keywords. Determines if LSTM algorithm can predict Bitcoin close price by analyzing keyword volume from Google Trends. Bitcoin price dataset downloaded hourly using coinapi.io API, and Google Trends keywords downloaded using Python pytrend library. Predicted Bitcoin close prices better than expected by improving learning in every epoch.",
     image: designImage,
     tags: ["LSTM", "RNN", "Deep Learning", "Bitcoin", "Google Trends", "Python", "Time Series"],
-    category: "Deep Learning",
+    categories: ["Deep Learning", "Analytics and Forecasting"],
   },
   {
     id: 9,
@@ -86,7 +86,7 @@ const projects = [
       "Insightful journey into understanding the patterns behind road fatalities in the U.S. and creating actionable insights for a safer future. Analysis of 36,891 observations with 83 features from FARS 2022 Dataset using R programming language for comprehensive statistical analysis and visualization.",
     image: mobileAppImage,
     tags: ["R", "Statistical Analysis", "Data Visualization", "FARS Dataset", "Public Health"],
-    category: "Analytics and Forecasting",
+    categories: ["Analytics and Forecasting", "Data Science Foundations"],
   },
   {
     id: 10,
@@ -95,7 +95,7 @@ const projects = [
       "Delves into the top-ranking songs on Spotify, exploring the intricate dynamics behind global and regional music trends. Using data on track features like danceability, energy, tempo, and popularity, uncovers what makes a song a chart-topper. By examining patterns in explicit content, album releases, and listener preferences across countries, this exploratory analysis offers valuable insights into the evolving world of music streaming.",
     image: webAppImage,
     tags: ["Python", "Spotify API", "Data Analysis", "Music Analytics", "Statistical Analysis"],
-    category: "Data Science Foundations",
+    categories: ["Analytics and Forecasting", "Data Science Foundations"],
   },
   {
     id: 11,
@@ -104,7 +104,7 @@ const projects = [
       "Deep learning model built to detect the precise location of the Brachial Plexus nerve that is present near the shoulder from ultrasound images. Implements advanced image segmentation techniques to aid in medical diagnostics and improve accuracy in nerve block procedures.",
     image: designImage,
     tags: ["Deep Learning", "Medical Imaging", "Ultrasound", "Image Segmentation", "Computer Vision", "Healthcare"],
-    category: "Deep Learning",
+    categories: ["Deep Learning", "Computer Vision"],
   },
 ];
 
@@ -117,7 +117,7 @@ export default function Projects() {
   const filteredProjects =
     activeCategory === "All"
       ? projects
-      : projects.filter((p) => p.category === activeCategory);
+      : projects.filter((p) => p.categories.includes(activeCategory));
 
   return (
     <section id="projects" className="py-24 bg-muted/30">
