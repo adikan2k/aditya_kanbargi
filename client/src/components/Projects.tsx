@@ -2,6 +2,12 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import project1Image from "@assets/1_1761838910338.jpg";
+import project2Image from "@assets/2_1761838910338.jpg";
+import project3Image from "@assets/3_1761838910338.png";
+import project4Image from "@assets/4_1761838910338.png";
+import project5Image from "@assets/5_1761838910338.png";
+import project6Image from "@assets/6_1761838910339.jpg";
 import webAppImage from "@assets/generated_images/Web_app_project_showcase_83480b2a.png";
 import mobileAppImage from "@assets/generated_images/Mobile_app_project_showcase_c25f05fd.png";
 import designImage from "@assets/generated_images/Design_project_showcase_d267c0ce.png";
@@ -12,7 +18,7 @@ const projects = [
     title: "Evidentia - Multimodal Multiagent Research Analyst",
     description:
       "Agentic AI research framework that transforms messy, multimodal data into clear, citation-rich insights. AI-powered research analyst that plans, navigates, verifies, and synthesizes.",
-    image: webAppImage,
+    image: project1Image,
     tags: ["LangGraph", "FastAPI", "Next.js", "Qdrant", "Postgres", "LLM Agents"],
     categories: ["AI"],
   },
@@ -21,7 +27,7 @@ const projects = [
     title: "Telehealth Compass: AI-Powered Telehealth Policy Intelligence Platform",
     description:
       "End-to-end platform using Llama-3.1-70B and BGE-large embeddings within a RAG pipeline, enabling natural-language Q&A with citations, automated multi-state policy comparisons, and structured regulatory insights. Improved policy analysis efficiency by >50% with sub-5s response latency across 100+ documents.",
-    image: mobileAppImage,
+    image: project2Image,
     tags: ["Llama-3.1-70B", "RAG", "BGE Embeddings", "LLMs", "Python", "NLP"],
     categories: ["AI"],
   },
@@ -30,7 +36,7 @@ const projects = [
     title: "Pixels to Patterns: ML-Driven Analytics of Steam Games",
     description:
       "Built an end-to-end analytics pipeline combining EDA, regression, clustering, statistical testing, and ML models (XGBoost, LightGBM, LSTMs) to analyze 100k+ Steam game records with 92% forecast accuracy. Designed & deployed interactive visualizations and dashboards (Plotly, Tableau) to communicate market trends, ownership forecasting, and player behavior insights.",
-    image: designImage,
+    image: project3Image,
     tags: ["XGBoost", "LightGBM", "LSTM", "EDA", "Plotly", "Tableau", "Python"],
     categories: ["Machine Learning", "Analytics and Forecasting"],
   },
@@ -39,7 +45,7 @@ const projects = [
     title: "Few-shot Image Classification on AWS using Meta-Learning (MAML)",
     description:
       "Designed and deployed a cloud-native few-shot image classification system on AWS using MAML, building a full-stack pipeline with Python, Flask, S3, SageMaker, and EC2 to deliver real-time inference with end-to-end scalability, automation, and cloud integration.",
-    image: webAppImage,
+    image: project4Image,
     tags: ["MAML", "AWS", "SageMaker", "Flask", "S3", "EC2", "Meta-Learning"],
     categories: ["Machine Learning"],
   },
@@ -48,7 +54,7 @@ const projects = [
     title: "Music Genre Classification Using Machine Learning Techniques",
     description:
       "Performed comparative study to detect and classify music files automatically based on genre using various classification algorithms including SVM, K-Nearest Neighbors, CNN, RNN, Random Forest and Decision trees. Published in International Journal of Science Research and Management (IJSREM) Volume 7, Issue 12 on December 14, 2023.",
-    image: mobileAppImage,
+    image: project5Image,
     tags: ["SVM", "CNN", "RNN", "Random Forest", "K-Nearest Neighbors", "Python"],
     categories: ["Machine Learning"],
   },
@@ -57,7 +63,7 @@ const projects = [
     title: "Detection of Face Mask using Keras and TensorFlow",
     description:
       "Real-time face mask detection system using deep learning. Built with OpenCV, Keras, and TensorFlow to detect face masks in real-time video streams, enabling automated compliance monitoring for safety protocols.",
-    image: designImage,
+    image: project6Image,
     tags: ["Keras", "TensorFlow", "OpenCV", "Deep Learning", "Computer Vision"],
     categories: ["Computer Vision", "Machine Learning", "Deep Learning"],
   },
