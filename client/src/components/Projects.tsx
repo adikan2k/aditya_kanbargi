@@ -70,6 +70,33 @@ const projects = [
     tags: ["YOLO", "OpenCV", "Computer Vision", "Deep Learning", "Object Detection"],
     category: "Computer Vision",
   },
+  {
+    id: 8,
+    title: "Bitcoin Price Prediction using LSTM and Google Trends",
+    description:
+      "LSTM-based Bitcoin price prediction project using Google Trend keywords. Determines if LSTM algorithm can predict Bitcoin close price by analyzing keyword volume from Google Trends. Bitcoin price dataset downloaded hourly using coinapi.io API, and Google Trends keywords downloaded using Python pytrend library. Predicted Bitcoin close prices better than expected by improving learning in every epoch.",
+    image: designImage,
+    tags: ["LSTM", "RNN", "Deep Learning", "Bitcoin", "Google Trends", "Python", "Time Series"],
+    category: "Deep Learning",
+  },
+  {
+    id: 9,
+    title: "Dead Ends and Data Trends: A Journey Through America's Recent Accident Stats",
+    description:
+      "Insightful journey into understanding the patterns behind road fatalities in the U.S. and creating actionable insights for a safer future. Analysis of 36,891 observations with 83 features from FARS 2022 Dataset using R programming language for comprehensive statistical analysis and visualization.",
+    image: mobileAppImage,
+    tags: ["R", "Statistical Analysis", "Data Visualization", "FARS Dataset", "Public Health"],
+    category: "Analytics and Forecasting",
+  },
+  {
+    id: 10,
+    title: "Beats and Bytes: A Statistical Symphony of Spotify's Best Tracks",
+    description:
+      "Delves into the top-ranking songs on Spotify, exploring the intricate dynamics behind global and regional music trends. Using data on track features like danceability, energy, tempo, and popularity, uncovers what makes a song a chart-topper. By examining patterns in explicit content, album releases, and listener preferences across countries, this exploratory analysis offers valuable insights into the evolving world of music streaming.",
+    image: webAppImage,
+    tags: ["Python", "Spotify API", "Data Analysis", "Music Analytics", "Statistical Analysis"],
+    category: "Data Science Foundations",
+  },
 ];
 
 const categories = ["All", "Machine Learning", "AI", "Analytics and Forecasting", "Data Science Foundations", "Deep Learning", "Computer Vision"];
