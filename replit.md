@@ -35,6 +35,9 @@ Preferred communication style: Simple, everyday language.
 - Reusable UI components from shadcn/ui: Button, Card, Badge, Input, Textarea, Form components
 - Custom animations: NetworkBackground and NeuralNetworkAnimation for visual engagement
 - Responsive Navigation with scroll tracking and mobile menu
+- Scroll animations: IntersectionObserver-based fade-in/slide-up effects on all major sections
+- Back to Top button with smooth scroll behavior
+- Keyword highlighting throughout content (technical terms, quantitative metrics)
 
 ### Backend Architecture
 
@@ -118,3 +121,45 @@ Preferred communication style: Simple, everyday language.
 - Static assets in `attached_assets` directory
 - Profile images and project screenshots
 - Custom alias `@assets` for importing assets in components
+
+## Recent Enhancements (October 2025)
+
+### Visual Improvements
+1. **Enhanced Neural Network Animation** (About section)
+   - Increased node count from 30 to 50 for fuller visual presence
+   - Multi-colored nodes with glow effects (indigo, purple, pink)
+   - Thicker connection lines with higher opacity (0.6)
+   - Extended connection radius (180px) for more dynamic linking
+   - Increased canvas opacity from 0.4 to 0.7 for better visibility
+   - Faster node movement for more engaging animation
+
+2. **Scroll Animations System**
+   - Custom `useScrollAnimation` hook using IntersectionObserver API
+   - Fade-in and slide-up animations triggered when sections enter viewport
+   - Applied to all major sections: About, Experience, Projects, TechStack, Contact
+   - Smooth transitions with 0.6s duration and ease-out timing
+   - 50% threshold for optimal trigger timing
+
+3. **Content Highlighting**
+   - Keyword highlighting for technical terms throughout content
+   - Full-phrase highlighting for quantitative outcomes in Experience section
+   - Examples: "Extended early-warning prediction lead time by 6 hours"
+   - Subtle bg-primary/10 background with rounded corners
+   - Improved visual hierarchy and readability
+
+### Functional Updates
+1. **Download Resume Button**
+   - Updated to link directly to Google Drive
+   - URL: https://drive.google.com/file/d/1cEuFXF9V4iW0W52X6-GHWlH1ULWZ8eqo/view?usp=sharing
+   - Opens in new tab with proper security attributes (target="_blank", rel="noopener noreferrer")
+
+2. **Back to Top Button**
+   - Sticky positioning at bottom-right corner
+   - Smooth scroll behavior when clicked
+   - Appears when user scrolls down
+
+### User Experience
+- Improved visual engagement through animations and transitions
+- Better content scannability with strategic highlighting
+- Enhanced mobile responsiveness across all sections
+- Maintained light/dark mode compatibility for all new features
