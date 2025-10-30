@@ -9,7 +9,7 @@ import designImage from "@assets/generated_images/Design_project_showcase_d267c0
 const projects = [
   {
     id: 1,
-    title: "Evidentia 📊 🔍",
+    title: "Evidentia - Multimodal Multiagent Research Analyst",
     description:
       "Agentic AI research framework that transforms messy, multimodal data into clear, citation-rich insights. AI-powered research analyst that plans, navigates, verifies, and synthesizes.",
     image: webAppImage,

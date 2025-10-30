@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Briefcase, Award, Rocket, BookOpen, Brain, GraduationCap } from "lucide-react";
-import headshotImage from "@assets/generated_images/Professional_headshot_portrait_d6e9d2d3.png";
+import headshotImage from "@assets/profile_1761803769301.png";
 
 const skills = [
   {

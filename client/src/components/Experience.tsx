@@ -74,7 +74,7 @@ export default function Experience() {
 
               <ul className="space-y-2 mb-4 list-disc list-inside">
                 {exp.description.map((item, i) => (
-                  <li key={i} className="text-foreground">
+                  <li key={i} className="text-foreground text-justify">
                     {item}
                   </li>
                 ))}
