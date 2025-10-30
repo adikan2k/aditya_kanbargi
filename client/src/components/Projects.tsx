@@ -18,12 +18,12 @@ const projects = [
   },
   {
     id: 2,
-    title: "Fitness Tracking App",
+    title: "Telehealth Compass: AI-Powered Telehealth Policy Intelligence Platform",
     description:
-      "Mobile-first progressive web app for tracking workouts and nutrition goals.",
+      "End-to-end platform using Llama-3.1-70B and BGE-large embeddings within a RAG pipeline, enabling natural-language Q&A with citations, automated multi-state policy comparisons, and structured regulatory insights. Improved policy analysis efficiency by >50% with sub-5s response latency across 100+ documents.",
     image: mobileAppImage,
-    tags: ["React Native", "Firebase", "TypeScript"],
-    category: "Mobile",
+    tags: ["Llama-3.1-70B", "RAG", "BGE Embeddings", "LLMs", "Python", "NLP"],
+    category: "AI",
   },
   {
     id: 3,
