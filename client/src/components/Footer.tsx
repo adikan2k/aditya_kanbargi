@@ -1,4 +1,4 @@
-import { Mail, Github, Linkedin, Twitter, Heart } from "lucide-react";
+import { Mail, Github, Linkedin, Heart } from "lucide-react";
 import headshotImage from "@assets/generated_images/Professional_headshot_portrait_d6e9d2d3.png";
 
 export default function Footer() {
@@ -57,14 +57,14 @@ export default function Footer() {
             <h3 className="font-semibold mb-4">Connect</h3>
             <div className="flex gap-3 mb-6">
               <a
-                href="mailto:alex@example.com"
+                href="mailto:adityakan2000@gmail.com"
                 className="h-10 w-10 rounded-lg bg-muted hover-elevate flex items-center justify-center"
                 data-testid="link-footer-email"
               >
                 <Mail className="h-5 w-5" />
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/adikan2k"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="h-10 w-10 rounded-lg bg-muted hover-elevate flex items-center justify-center"
@@ -73,22 +73,13 @@ export default function Footer() {
                 <Github className="h-5 w-5" />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/adikan2k/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="h-10 w-10 rounded-lg bg-muted hover-elevate flex items-center justify-center"
                 data-testid="link-footer-linkedin"
               >
                 <Linkedin className="h-5 w-5" />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="h-10 w-10 rounded-lg bg-muted hover-elevate flex items-center justify-center"
-                data-testid="link-footer-twitter"
-              >
-                <Twitter className="h-5 w-5" />
               </a>
             </div>
             <p className="text-sm text-muted-foreground">

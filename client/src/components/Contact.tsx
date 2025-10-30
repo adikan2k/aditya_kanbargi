@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MapPin, Linkedin, Github, Twitter } from "lucide-react";
+import { Mail, MapPin, Linkedin, Github } from "lucide-react";
 import { useState } from "react";
 
 export default function Contact() {
@@ -27,8 +27,7 @@ export default function Contact() {
           Get In Touch
         </h2>
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Have a question or want to work together? Feel free to reach out
-          directly or use the contact form below.
+          Have a Project in Mind? Want to Collaborate? Or Just Want to Chat About Data Science and Fitness? I'd Love to Hear From You.
         </p>
 
         <div className="grid lg:grid-cols-5 gap-8">
@@ -103,10 +102,10 @@ export default function Contact() {
                   <div>
                     <div className="font-medium">Email</div>
                     <a
-                      href="mailto:alex@example.com"
+                      href="mailto:adityakan2000@gmail.com"
                       className="text-muted-foreground hover:text-primary"
                     >
-                      alex@example.com
+                      adityakan2000@gmail.com
                     </a>
                   </div>
                 </div>
@@ -115,7 +114,7 @@ export default function Contact() {
                   <div>
                     <div className="font-medium">Location</div>
                     <div className="text-muted-foreground">
-                      San Francisco, CA
+                      Arlington, VA
                     </div>
                   </div>
                 </div>
@@ -126,7 +125,7 @@ export default function Contact() {
               <h3 className="font-semibold text-lg mb-4">Connect</h3>
               <div className="flex flex-col gap-3">
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/adikan2k/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-muted-foreground hover:text-primary"
@@ -136,7 +135,7 @@ export default function Contact() {
                   <span>LinkedIn</span>
                 </a>
                 <a
-                  href="https://github.com"
+                  href="https://github.com/adikan2k"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-muted-foreground hover:text-primary"
@@ -146,37 +145,14 @@ export default function Contact() {
                   <span>GitHub</span>
                 </a>
                 <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="mailto:adityakan2000@gmail.com"
                   className="flex items-center gap-3 text-muted-foreground hover:text-primary"
-                  data-testid="link-twitter"
+                  data-testid="link-gmail"
                 >
-                  <Twitter className="h-5 w-5" />
-                  <span>Twitter</span>
+                  <Mail className="h-5 w-5" />
+                  <span>Gmail</span>
                 </a>
               </div>
-            </Card>
-
-            <Card className="p-6 bg-primary/10 border-primary/20">
-              <h3 className="font-semibold text-lg mb-2">
-                Can't wait? Book directly
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                Schedule a meeting instantly using the booking calendar above.
-              </p>
-              <Button
-                variant="default"
-                className="w-full"
-                onClick={() =>
-                  document
-                    .getElementById("booking")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                data-testid="button-quick-book"
-              >
-                Book a Meeting
-              </Button>
             </Card>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Calendar, ArrowRight, Sparkles, Brain, Compass, Globe, ChefHat, Mail, Code2 } from "lucide-react";
+import { ArrowRight, Sparkles, Brain, Compass, Globe, ChefHat, Mail, Code2 } from "lucide-react";
 import { SiLinkedin, SiGithub, SiGmail } from "react-icons/si";
 import NetworkBackground from "./NetworkBackground";
 
@@ -135,7 +135,7 @@ export default function Hero({ onBookMeeting, onViewWork, isDark = false }: Hero
 
           <div className="flex flex-wrap gap-4 justify-center items-center mb-8">
             <a
-              href="https://linkedin.com/in/adityakanbargi"
+              href="https://www.linkedin.com/in/adikan2k/"
               target="_blank"
               rel="noopener noreferrer"
               className={`group flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 hover:scale-110 hover-elevate active-elevate-2 ${
@@ -148,7 +148,7 @@ export default function Hero({ onBookMeeting, onViewWork, isDark = false }: Hero
               }`} />
             </a>
             <a
-              href="https://github.com/adityakanbargi"
+              href="https://github.com/adikan2k"
               target="_blank"
               rel="noopener noreferrer"
               className={`group flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 hover:scale-110 hover-elevate active-elevate-2 ${
@@ -161,7 +161,7 @@ export default function Hero({ onBookMeeting, onViewWork, isDark = false }: Hero
               }`} />
             </a>
             <a
-              href="mailto:aditya@kanbargi.com"
+              href="mailto:adityakan2000@gmail.com"
               className={`group flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 hover:scale-110 hover-elevate active-elevate-2 ${
                 isDark ? "bg-slate-800/50 hover:bg-red-600" : "bg-white hover:bg-red-600"
               }`}
@@ -178,10 +178,10 @@ export default function Hero({ onBookMeeting, onViewWork, isDark = false }: Hero
               size="lg"
               className="gap-2 shadow-lg hover:shadow-xl transition-all duration-300"
               onClick={onBookMeeting}
-              data-testid="button-book-meeting"
+              data-testid="button-get-in-touch"
             >
-              <Calendar className="h-5 w-5" />
-              Book a Meeting
+              <Mail className="h-5 w-5" />
+              Get In Touch
             </Button>
             <Button
               size="lg"

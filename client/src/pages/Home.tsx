@@ -5,7 +5,6 @@ import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
 import TechStack from "@/components/TechStack";
-import BookingSection from "@/components/BookingSection";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -30,9 +29,9 @@ export default function Home() {
     localStorage.setItem("theme", newTheme ? "dark" : "light");
   };
 
-  const scrollToBooking = () => {
+  const scrollToContact = () => {
     document
-      .getElementById("booking")
+      .getElementById("contact")
       ?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -45,12 +44,11 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <Navigation onThemeToggle={toggleTheme} isDark={isDark} />
-      <Hero onBookMeeting={scrollToBooking} onViewWork={scrollToProjects} isDark={isDark} />
+      <Hero onBookMeeting={scrollToContact} onViewWork={scrollToProjects} isDark={isDark} />
       <About />
       <Experience />
       <Projects />
       <TechStack />
-      <BookingSection />
       <Contact />
       <Footer />
     </div>
