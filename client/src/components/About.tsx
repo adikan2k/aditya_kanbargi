@@ -53,7 +53,7 @@ export default function About() {
           <div className="flex-shrink-0">
             <img
               src={headshotImage}
-              alt="Alex Morgan"
+              alt="Aditya Kanbargi"
               className="w-48 h-48 rounded-full object-cover shadow-lg"
               data-testid="img-headshot"
             />
@@ -61,7 +61,7 @@ export default function About() {
 
           <div className="flex-1 space-y-4 text-foreground leading-relaxed">
             <p>
-              Hi! I'm Alex, a passionate full-stack developer with a keen eye
+              Hi! I'm Aditya, a passionate full-stack developer with a keen eye
               for design and a love for building seamless digital experiences.
               With over 5 years in the industry, I've helped startups and
               established companies bring their visions to life.

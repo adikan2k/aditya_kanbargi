@@ -10,11 +10,11 @@ export default function Footer() {
             <div className="flex items-center gap-4 mb-4">
               <img
                 src={headshotImage}
-                alt="Alex Morgan"
+                alt="Aditya Kanbargi"
                 className="w-16 h-16 rounded-full object-cover"
               />
               <div>
-                <h3 className="font-semibold text-lg">Alex Morgan</h3>
+                <h3 className="font-semibold text-lg">Aditya Kanbargi</h3>
                 <p className="text-sm text-muted-foreground">
                   Full-Stack Developer
                 </p>
@@ -97,7 +97,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <p>© 2025 Alex Morgan. All rights reserved.</p>
+          <p>© 2025 Aditya Kanbargi. All rights reserved.</p>
           <p className="flex items-center gap-1">
             Built with <Heart className="h-4 w-4 text-red-500 fill-red-500" />{" "}
             using React, TypeScript & Tailwind CSS

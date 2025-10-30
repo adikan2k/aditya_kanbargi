@@ -31,7 +31,7 @@ export default function Hero({ onBookMeeting, onViewWork }: HeroProps) {
           </div>
 
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
-            Alex Morgan
+            Aditya Kanbargi
           </h1>
           <p className="text-xl md:text-2xl text-white/90 mb-4 font-medium">
             Full-Stack Developer & Creative Problem Solver
