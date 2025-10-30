@@ -1,23 +1,52 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-// Helper function to highlight quantitative outcomes
+// Helper function to highlight quantitative outcomes with full phrases
 function highlightMetrics(text: string) {
-  // Pattern to match numbers with units like "6 hours", "20%", "25%", "3x", etc.
-  const pattern = /(\d+(?:–\d+)?(?:\.\d+)?(?:%|x| hours| hours?|%))/g;
-  const parts = text.split(pattern);
+  // Extended patterns to capture full phrases with quantitative outcomes
+  const phrases = [
+    /Extended early-warning prediction lead time by 6 hours/gi,
+    /Reduced projected readmissions and increased nurse-to-patient efficiency by 20%/gi,
+    /Lowered projected nurse attrition by 8–10% annually/gi,
+    /Increased research throughput by 25%/gi,
+    /improving predictive accuracy by 25%/gi,
+    /reducing data preparation time by 40%/gi,
+    /Enabled 3x faster decision-making/gi,
+    /boosting analytics adoption by 30%/gi,
+  ];
   
-  return parts.map((part, index) => {
-    if (pattern.test(part)) {
-      return (
-        <span key={index} className="font-bold text-primary">
-          {part}
-        </span>
-      );
-    }
-    return part;
+  let result: (string | JSX.Element)[] = [text];
+  let keyCounter = 0;
+  
+  phrases.forEach((phrasePattern) => {
+    const newResult: (string | JSX.Element)[] = [];
+    result.forEach((part) => {
+      if (typeof part === "string") {
+        const parts = part.split(phrasePattern);
+        const matches = part.match(phrasePattern);
+        
+        parts.forEach((subPart, subIndex) => {
+          if (subPart) {
+            newResult.push(subPart);
+          }
+          if (matches && subIndex < matches.length) {
+            newResult.push(
+              <span key={`metric-${keyCounter++}`} className="font-bold text-primary bg-primary/10 px-1 rounded">
+                {matches[subIndex]}
+              </span>
+            );
+          }
+        });
+      } else {
+        newResult.push(part);
+      }
+    });
+    result = newResult;
   });
+  
+  return result;
 }
 
 const experiences = [
@@ -51,8 +80,14 @@ const experiences = [
 ];
 
 export default function Experience() {
+  const { ref, isVisible } = useScrollAnimation();
+  
   return (
-    <section id="experience" className="py-24 bg-muted/30">
+    <section 
+      ref={ref as React.RefObject<HTMLElement>}
+      id="experience" 
+      className={`py-24 bg-muted/30 scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-center">
           Experience

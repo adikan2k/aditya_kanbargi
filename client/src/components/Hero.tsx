@@ -214,7 +214,11 @@ export default function Hero({ onBookMeeting, onViewWork, isDark = false }: Hero
               asChild
               data-testid="button-download-resume"
             >
-              <a href="/resume.pdf" download="Aditya_Kanbargi_Resume.pdf">
+              <a 
+                href="https://drive.google.com/file/d/1cEuFXF9V4iW0W52X6-GHWlH1ULWZ8eqo/view?usp=sharing" 
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Download className="h-5 w-5" />
                 Download Resume
               </a>

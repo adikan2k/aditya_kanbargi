@@ -4,8 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Linkedin, Github } from "lucide-react";
 import { useState } from "react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export default function Contact() {
+  const { ref, isVisible } = useScrollAnimation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -39,7 +41,11 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-muted/30">
+    <section 
+      ref={ref as React.RefObject<HTMLElement>}
+      id="contact" 
+      className={`py-24 bg-muted/30 scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-center">
           Get In Touch

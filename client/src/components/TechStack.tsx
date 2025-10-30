@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Code2, Database, Cloud, BarChart3, Sparkles, GitBranch, Zap, Activity, Grid3x3, FileSpreadsheet, Briefcase, Building2 } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { 
   SiPython, SiR, SiPostgresql, SiJavascript, SiC, SiHtml5, SiCss3,
   SiReact, SiNextdotjs, SiFastapi, SiFlask, SiScikitlearn, SiTensorflow,
@@ -132,8 +133,14 @@ const techCategories = [
 ];
 
 export default function TechStack() {
+  const { ref, isVisible } = useScrollAnimation();
+  
   return (
-    <section id="tech-stack" className="py-24 bg-background">
+    <section 
+      ref={ref as React.RefObject<HTMLElement>}
+      id="tech-stack" 
+      className={`py-24 bg-background scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="max-w-7xl mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-center">
           Tech Stack

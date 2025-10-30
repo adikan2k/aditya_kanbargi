@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import project1Image from "@assets/1_1761838910338.jpg";
 import project2Image from "@assets/2_1761838910338.jpg";
 import project3Image from "@assets/3_1761838910338.png";
@@ -119,6 +120,7 @@ const projects = [
 const categories = ["All", "Machine Learning", "AI", "Analytics and Forecasting", "Data Science Foundations", "Deep Learning", "Computer Vision"];
 
 export default function Projects() {
+  const { ref, isVisible } = useScrollAnimation();
   const [activeCategory, setActiveCategory] = useState("All");
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const [showAllProjects, setShowAllProjects] = useState(false);
@@ -139,7 +141,11 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="py-24 bg-muted/30">
+    <section 
+      ref={ref as React.RefObject<HTMLElement>}
+      id="projects" 
+      className={`py-24 bg-muted/30 scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="max-w-7xl mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-center">
           Featured Projects

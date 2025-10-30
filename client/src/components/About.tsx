@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Briefcase, Award, Rocket, BookOpen, Brain, GraduationCap } from "lucide-react";
 import headshotImage from "@assets/profile_1761803769301.png";
 import NeuralNetworkAnimation from "./NeuralNetworkAnimation";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 // Helper function to highlight keywords
 function highlightKeywords(text: string) {
@@ -79,8 +80,14 @@ const achievements = [
 ];
 
 export default function About() {
+  const { ref, isVisible } = useScrollAnimation();
+  
   return (
-    <section id="about" className="relative py-24 bg-background overflow-hidden">
+    <section 
+      ref={ref as React.RefObject<HTMLElement>}
+      id="about" 
+      className={`relative py-24 bg-background overflow-hidden scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <NeuralNetworkAnimation />
       
       <div className="relative z-10 max-w-4xl mx-auto px-6">
