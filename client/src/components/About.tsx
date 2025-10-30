@@ -6,7 +6,7 @@ import headshotImage from "@assets/generated_images/Professional_headshot_portra
 const skills = [
   {
     category: "Core Competencies",
-    items: ["Machine Learning", "Statistical Analysis", "Data Mining", "Predictive Modeling"],
+    items: ["Machine Learning & Predictive Modeling", "AI Systems Engineering & LLM Integration", "Data Visualization & Decision Science", "Quantitative Analysis & Statistical Modelling"],
   },
   {
     category: "Programming & Tools",
@@ -21,23 +21,23 @@ const skills = [
 const achievements = [
   {
     icon: Code2,
-    title: "30+ Projects",
-    description: "ML models deployed",
+    title: "GPA 4.0",
+    description: "Master's in Data Science",
   },
   {
     icon: Users,
-    title: "20+ Clients",
-    description: "Data solutions delivered",
+    title: "Global Leaders",
+    description: "Fellowship Recipient",
   },
   {
     icon: Zap,
-    title: "5+ Years",
-    description: "Data science experience",
+    title: "ML & NLP",
+    description: "Healthcare & Enterprise",
   },
   {
     icon: Palette,
-    title: "Certified",
-    description: "AWS & GCP ML",
+    title: "Full Stack",
+    description: "Python, R, SQL, Cloud",
   },
 ];
 
@@ -61,25 +61,19 @@ export default function About() {
 
           <div className="flex-1 space-y-4 text-foreground leading-relaxed">
             <p>
-              Hi! I'm Aditya, a data scientist passionate about extracting
-              insights from complex datasets and building machine learning
-              solutions that drive real business impact. With over 5 years in
-              the field, I've helped organizations leverage their data to make
-              better decisions.
+              Hey there — I'm Aditya Kanbargi, a data scientist who loves uncovering stories hidden inside messy, beautiful data. For me, data isn't just numbers and models — it's a way to understand people, decisions, and the little patterns that make big things happen.
             </p>
             <p>
-              I believe great data science is more than algorithms—it's about
-              asking the right questions, understanding business context, and
-              communicating insights effectively. My approach combines
-              statistical rigor with practical problem-solving to deliver
-              actionable results.
+              I'm currently pursuing my Master's in Data Science at The George Washington University (GPA 4.0), where I was awarded the Global Leaders Fellowship for academic excellence. Between projects on machine learning, NLP, and cloud computing, I've learned that the magic of data science lies in connecting technical depth with real-world impact.
             </p>
             <p>
-              When I'm not analyzing data, you'll find me exploring new ML
-              techniques, contributing to open source projects, or sharing
-              knowledge through technical writing and mentoring. I'm always
-              excited to tackle challenging problems that push the boundaries of
-              what's possible with data.
+              Over the past few years, I've worked across public health and enterprise analytics, building everything from early-warning prediction systems that help clinicians act faster, to dashboards that power smarter business decisions. At GW's School of Nursing, I helped create ML models that detect patient deterioration risks before they happen. Earlier, at LTIMindtree, I worked on predictive analytics and automation pipelines that made business insights faster, cleaner, and more reliable.
+            </p>
+            <p>
+              I'm fluent in Python, R, SQL, and love experimenting with tools like TensorFlow, PyTorch, and LangChain. Whether it's designing an LLM-powered research assistant, or optimizing a data workflow in the cloud, I enjoy building solutions that feel as good to use as they are to explain.
+            </p>
+            <p>
+              Outside the world of code and models, you'll probably find me at the gym, watching football, or diving into a good read. I'm driven by curiosity, caffeine, and the thrill of turning raw data into something that tells a great story — one that actually means something.
             </p>
           </div>
         </div>
