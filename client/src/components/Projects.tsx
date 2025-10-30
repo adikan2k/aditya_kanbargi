@@ -27,21 +27,21 @@ const projects = [
   },
   {
     id: 3,
-    title: "Brand Identity System",
+    title: "Pixels to Patterns: ML-Driven Analytics of Steam Games",
     description:
-      "Complete brand redesign including logo, color system, and design guidelines.",
+      "Built an end-to-end analytics pipeline combining EDA, regression, clustering, statistical testing, and ML models (XGBoost, LightGBM, LSTMs) to analyze 100k+ Steam game records with 92% forecast accuracy. Designed & deployed interactive visualizations and dashboards (Plotly, Tableau) to communicate market trends, ownership forecasting, and player behavior insights.",
     image: designImage,
-    tags: ["Figma", "Brand Design", "UI/UX"],
-    category: "Design",
+    tags: ["XGBoost", "LightGBM", "LSTM", "EDA", "Plotly", "Tableau", "Python"],
+    category: "Machine Learning",
   },
   {
     id: 4,
-    title: "Analytics Dashboard",
+    title: "Few-shot Image Classification on AWS using Meta-Learning (MAML)",
     description:
-      "Real-time data visualization platform with customizable widgets and reports.",
+      "Designed and deployed a cloud-native few-shot image classification system on AWS using MAML, building a full-stack pipeline with Python, Flask, S3, SageMaker, and EC2 to deliver real-time inference with end-to-end scalability, automation, and cloud integration.",
     image: webAppImage,
-    tags: ["React", "D3.js", "Express", "MongoDB"],
-    category: "Web",
+    tags: ["MAML", "AWS", "SageMaker", "Flask", "S3", "EC2", "Meta-Learning"],
+    category: "Deep Learning",
   },
   {
     id: 5,
