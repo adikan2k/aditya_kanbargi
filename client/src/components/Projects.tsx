@@ -63,7 +63,7 @@ const projects = [
   },
 ];
 
-const categories = ["All", "Web", "Mobile", "Design"];
+const categories = ["All", "Machine Learning", "AI", "Analytics and Forecasting", "Data Science Foundations", "Deep Learning", "Computer Vision"];
 
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState("All");
