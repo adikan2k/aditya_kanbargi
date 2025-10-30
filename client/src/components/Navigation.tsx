@@ -53,94 +53,103 @@ export default function Navigation({
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-border"
+          ? "bg-background/95 backdrop-blur-xl border-b border-border shadow-sm"
           : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
-          <div className="font-bold text-2xl tracking-tight">
+        <div className="flex items-center justify-between h-20">
+          <div className="relative group">
             <a 
               href="#" 
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="hover-elevate active-elevate-2 px-3 py-1 rounded-lg inline-block transition-all duration-300"
+              className="relative flex items-center justify-center w-12 h-12 font-bold text-xl tracking-tight rounded-xl bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 active:scale-95"
             >
-              AK
+              <span className="relative z-10">AK</span>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </a>
           </div>
 
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-1 bg-card/50 backdrop-blur-sm rounded-full px-2 py-2 border border-card-border">
             {navLinks.map((link) => {
               const Icon = link.icon;
               const isActive = activeSection === link.href.replace("#", "");
               return (
-                <Button
+                <button
                   key={link.href}
-                  variant="ghost"
                   onClick={() => handleNavClick(link.href)}
                   data-testid={`link-nav-${link.label.toLowerCase().replace(/\s/g, "-")}`}
-                  className={`gap-2 transition-all duration-300 hover-elevate active-elevate-2 ${
-                    isActive ? "bg-primary/10 text-primary" : ""
+                  className={`relative flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 overflow-visible ${
+                    isActive 
+                      ? "text-primary-foreground" 
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
-                  <Icon className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
-                  <span className="font-medium">{link.label}</span>
-                </Button>
+                  {isActive && (
+                    <span className="absolute inset-0 bg-primary rounded-full shadow-md transition-all duration-300" />
+                  )}
+                  <Icon className={`h-4 w-4 relative z-10 transition-transform duration-300 ${
+                    isActive ? "" : "group-hover:scale-110"
+                  }`} />
+                  <span className="relative z-10 whitespace-nowrap">{link.label}</span>
+                  {!isActive && (
+                    <span className="absolute inset-0 rounded-full bg-accent opacity-0 hover:opacity-100 transition-opacity duration-300" />
+                  )}
+                </button>
               );
             })}
           </div>
 
           <div className="flex items-center gap-2">
-            <Button
-              size="icon"
-              variant="ghost"
+            <button
               onClick={onThemeToggle}
               data-testid="button-theme-toggle"
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-card/50 backdrop-blur-sm border border-card-border hover-elevate active-elevate-2 transition-all duration-300"
             >
               {isDark ? (
-                <Sun className="h-5 w-5" />
+                <Sun className="h-5 w-5 text-foreground transition-transform duration-300 hover:rotate-90" />
               ) : (
-                <Moon className="h-5 w-5" />
+                <Moon className="h-5 w-5 text-foreground transition-transform duration-300 hover:-rotate-12" />
               )}
-            </Button>
+            </button>
 
-            <Button
-              size="icon"
-              variant="ghost"
-              className="md:hidden"
+            <button
+              className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-card/50 backdrop-blur-sm border border-card-border hover-elevate active-elevate-2 transition-all duration-300"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               data-testid="button-mobile-menu"
             >
               {mobileMenuOpen ? (
-                <X className="h-5 w-5" />
+                <X className="h-5 w-5 text-foreground" />
               ) : (
-                <Menu className="h-5 w-5" />
+                <Menu className="h-5 w-5 text-foreground" />
               )}
-            </Button>
+            </button>
           </div>
         </div>
       </div>
 
       {mobileMenuOpen && (
-        <div className="md:hidden bg-background border-b border-border animate-in slide-in-from-top duration-300">
-          <div className="px-6 py-4 space-y-2">
-            {navLinks.map((link) => {
+        <div className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border animate-in slide-in-from-top duration-300">
+          <div className="px-6 py-6 space-y-2">
+            {navLinks.map((link, index) => {
               const Icon = link.icon;
               const isActive = activeSection === link.href.replace("#", "");
               return (
-                <Button
+                <button
                   key={link.href}
-                  variant="ghost"
-                  className={`w-full justify-start gap-3 hover-elevate active-elevate-2 ${
-                    isActive ? "bg-primary/10 text-primary" : ""
-                  }`}
                   onClick={() => handleNavClick(link.href)}
+                  className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+                    isActive 
+                      ? "bg-primary text-primary-foreground shadow-md" 
+                      : "hover-elevate active-elevate-2"
+                  }`}
+                  style={{ animationDelay: `${index * 50}ms` }}
                 >
-                  <Icon className="h-4 w-4" />
+                  <Icon className="h-5 w-5" />
                   <span>{link.label}</span>
-                </Button>
+                </button>
               );
             })}
           </div>
