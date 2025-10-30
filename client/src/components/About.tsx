@@ -10,7 +10,8 @@ const skills = [
   },
   {
     category: "Education",
-    items: ["Master's in Data Science", "George Washington University", "GPA 4.0", "Global Leaders Fellowship", "Coursework: Data Visualization, Machine Learning, Data Mining, NLP, Deep Learning, Cloud Computing, Algorithm Design, Linux for DevOps"],
+    items: ["Master's in Data Science", "George Washington University", "GPA 4.0", "Global Leaders Fellowship"],
+    coursework: ["Data Visualization", "Machine Learning", "Data Mining", "NLP", "Deep Learning", "Cloud Computing", "Algorithm Design", "Linux for DevOps"],
   },
 ];
 
@@ -83,13 +84,27 @@ export default function About() {
               <h3 className="font-semibold text-lg mb-4">
                 {skillGroup.category}
               </h3>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mb-4">
                 {skillGroup.items.map((skill) => (
                   <Badge key={skill} variant="secondary">
                     {skill}
                   </Badge>
                 ))}
               </div>
+              {skillGroup.coursework && (
+                <>
+                  <h4 className="font-medium text-sm mb-2 text-muted-foreground">
+                    Coursework:
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {skillGroup.coursework.map((course) => (
+                      <Badge key={course} variant="outline">
+                        {course}
+                      </Badge>
+                    ))}
+                  </div>
+                </>
+              )}
             </Card>
           ))}
         </div>
