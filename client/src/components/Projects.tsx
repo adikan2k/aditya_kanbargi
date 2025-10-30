@@ -97,6 +97,15 @@ const projects = [
     tags: ["Python", "Spotify API", "Data Analysis", "Music Analytics", "Statistical Analysis"],
     category: "Data Science Foundations",
   },
+  {
+    id: 11,
+    title: "PNB Nerve Segmentation from Ultrasound Images using Deep Learning",
+    description:
+      "Deep learning model built to detect the precise location of the Brachial Plexus nerve that is present near the shoulder from ultrasound images. Implements advanced image segmentation techniques to aid in medical diagnostics and improve accuracy in nerve block procedures.",
+    image: designImage,
+    tags: ["Deep Learning", "Medical Imaging", "Ultrasound", "Image Segmentation", "Computer Vision", "Healthcare"],
+    category: "Deep Learning",
+  },
 ];
 
 const categories = ["All", "Machine Learning", "AI", "Analytics and Forecasting", "Data Science Foundations", "Deep Learning", "Computer Vision"];
