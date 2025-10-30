@@ -39,7 +39,7 @@ export default function Experience() {
         <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-center">
           Experience
         </h2>
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+        <p className="text-center text-muted-foreground mb-12">
           My professional journey in data science and analytics, building
           solutions that leverage data for business value.
         </p>
