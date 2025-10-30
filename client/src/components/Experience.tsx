@@ -1,7 +1,8 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, MapPin, Building2, GraduationCap } from "lucide-react";
+import { Calendar, MapPin, Building2 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import gwLogoImage from "@assets/image_1761867788819.png";
 
 // Helper function to highlight quantitative outcomes with full phrases
 function highlightMetrics(text: string) {
@@ -53,7 +54,8 @@ const experiences = [
   {
     title: "Research Analyst – Public Health",
     company: "GW School of Nursing",
-    companyIcon: GraduationCap,
+    companyLogo: gwLogoImage,
+    companyLogoType: "image" as const,
     location: "Virginia",
     period: "Dec 2024 – May 2025",
     description: [
@@ -68,6 +70,8 @@ const experiences = [
     title: "Quantitative Analyst / Decision Science Analyst",
     company: "LTIMindtree",
     companyIcon: Building2,
+    companyLogoType: "icon" as const,
+    companyIconColor: "#1C4B82",
     location: "India",
     period: "Sept 2022 – May 2024",
     description: [
@@ -111,9 +115,14 @@ export default function Experience() {
                   <h3 className="text-xl md:text-2xl font-semibold mb-2">
                     {exp.title}
                   </h3>
-                  <div className="flex items-center gap-2 text-lg font-medium text-primary mb-2">
-                    {exp.companyIcon && <exp.companyIcon className="h-5 w-5" />}
-                    <span>{exp.company}</span>
+                  <div className="flex items-center gap-2 text-lg font-medium mb-2">
+                    {exp.companyLogoType === "image" && exp.companyLogo && (
+                      <img src={exp.companyLogo} alt={`${exp.company} logo`} className="h-5 object-contain" />
+                    )}
+                    {exp.companyLogoType === "icon" && exp.companyIcon && (
+                      <exp.companyIcon className="h-5 w-5" style={{ color: exp.companyIconColor }} />
+                    )}
+                    <span className="text-foreground">{exp.company}</span>
                   </div>
                   <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                     <div className="flex items-center gap-2">
