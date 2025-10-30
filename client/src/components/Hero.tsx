@@ -69,17 +69,20 @@ export default function Hero({ onBookMeeting, onViewWork, isDark = false }: Hero
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-6 flex items-center justify-center gap-3">
             <div className="flex gap-1.5">
-              {[0, 1, 2].map((i) => (
-                <div
-                  key={i}
-                  className={`w-2.5 h-2.5 rounded-full animate-pulse ${
-                    isDark ? "bg-blue-500" : "bg-indigo-600"
-                  }`}
-                  style={{
-                    animationDelay: `${i * 0.2}s`,
-                  }}
-                />
-              ))}
+              {[0, 1, 2].map((i) => {
+                const colors = isDark 
+                  ? ["bg-blue-500", "bg-violet-500", "bg-pink-500"]
+                  : ["bg-indigo-600", "bg-purple-600", "bg-rose-600"];
+                return (
+                  <div
+                    key={i}
+                    className={`w-2.5 h-2.5 rounded-full animate-pulse ${colors[i]}`}
+                    style={{
+                      animationDelay: `${i * 0.2}s`,
+                    }}
+                  />
+                );
+              })}
             </div>
             <span className={`text-sm md:text-base font-semibold tracking-widest uppercase ${
               isDark ? "text-blue-400" : "text-indigo-700"
@@ -87,17 +90,20 @@ export default function Hero({ onBookMeeting, onViewWork, isDark = false }: Hero
               Decoding Data With
             </span>
             <div className="flex gap-1.5">
-              {[0, 1, 2].map((i) => (
-                <div
-                  key={i}
-                  className={`w-2.5 h-2.5 rounded-full animate-pulse ${
-                    isDark ? "bg-blue-500" : "bg-indigo-600"
-                  }`}
-                  style={{
-                    animationDelay: `${i * 0.2}s`,
-                  }}
-                />
-              ))}
+              {[0, 1, 2].map((i) => {
+                const colors = isDark 
+                  ? ["bg-blue-500", "bg-violet-500", "bg-pink-500"]
+                  : ["bg-indigo-600", "bg-purple-600", "bg-rose-600"];
+                return (
+                  <div
+                    key={i}
+                    className={`w-2.5 h-2.5 rounded-full animate-pulse ${colors[i]}`}
+                    style={{
+                      animationDelay: `${i * 0.2}s`,
+                    }}
+                  />
+                );
+              })}
             </div>
           </div>
 
