@@ -1,0 +1,23 @@
+PROFESSIONAL EXPERIENCE
+Research Analyst – Public Health [GW School of Nursing, VA] Dec 2024 – May 2025
+• Extended early-warning prediction lead time by 6 hours by building machine learning models on EHR and vital signs data to
+detect patient deterioration risks such as sepsis, cardiac arrest, and chronic disease flare-ups, enabling faster clinical intervention.
+• Reduced projected readmissions by and increased nurse-to-patient efficiency by 20% by applying clustering and predictive
+analytics for personalized care planning.
+• Lowered projected nurse attrition by 8–10% annually by developing statistical attrition prediction models that identified
+key turnover drivers, allowing administrators to implement targeted retention strategies in high-stress chronic care units.
+• Increased research throughput by 25% by developing interactive Tableau dashboards that streamlined analysis of patient
+outcomes, enabling faculty to rapidly test hypotheses, uncover patterns, and accelerate publication timelines.
+Quantitative Analyst / Decision Science Analyst [LTIMindtree, India] Sept 2022 – May 2024
+• Performed advanced statistical modeling and machine learning (regression, clustering, classification)in Python & SQL on
+customer, operational, and transactional datasets, improving predictive accuracy by 25% and enabling more reliable business
+forecasting.
+• Automated scalable ETL workflows to ingest, clean, and transform multi-format data (JSON, CSV, APIs) from PostgreSQL, Oracle,
+and cloud data warehouses, reducing data preparation time by 40% and improving data consistency for downstream analytics.
+• Enabled 3x faster decision-making by developing and deploying interactive dashboards in Power BI that visualized KPIs, financial
+metrics, and statistical trends in real time, directly supporting senior leadership and cross-functional teams.
+• Strengthened data integrity and boosted analytics adoption by 30% by implementing robust SQL query validation, resolving
+data inconsistencies, and applying statistical anomaly detection methods across enterprise datasets, ensuring dashboards and ML
+models delivered accurate, trustworthy insights.
+• Streamlined cross-functional collaboration (business, operations, engineering) to translate requirements into analytics
+solutions, ensuring alignment of statistical outputs with corporate objectives.
