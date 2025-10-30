@@ -163,3 +163,53 @@ Preferred communication style: Simple, everyday language.
 - Better content scannability with strategic highlighting
 - Enhanced mobile responsiveness across all sections
 - Maintained light/dark mode compatibility for all new features
+
+## Latest Updates (October 30, 2025)
+
+### UI/UX Enhancements
+1. **Resume Button Simplification**
+   - Changed button text from "Download Resume" to "Resume" for cleaner interface
+   - Maintains Google Drive link functionality
+
+2. **Experience Section - Company Icons**
+   - Added visual company icons next to each role
+   - GW School of Nursing: GraduationCap icon (Lucide React)
+   - LTIMindtree: Building2 icon (Lucide React)
+   - Icons display inline with company name for better visual hierarchy
+
+3. **Projects Section - Dynamic Taglines**
+   - Implemented dynamic tagline system that changes based on active category filter
+   - Each category (All, Machine Learning, AI, Analytics, Deep Learning, Computer Vision) has unique descriptive tagline
+   - Provides context-specific descriptions for filtered project views
+   - Example: "AI" filter shows "Intelligent systems leveraging LLMs, agentic frameworks, and advanced AI architectures"
+
+4. **Contact Section - Enhanced Layout**
+   - Changed tagline from center-aligned to full-width left-aligned for better readability
+   - Added "Current Status" card with colored indicators:
+     - Green dot: Available for opportunities
+     - Blue dot: MS Engineering Management Student  
+     - Purple dot: Perplexity AI Business Fellow
+   - Reordered sidebar: Current Status → Contact Information → Connect
+
+5. **About Section - Professional Certifications**
+   - Added new horizontal certifications card below achievement stats
+   - Three certifications displayed with company icons:
+     - AWS Certified AI Practitioner (SiAmazon icon, orange)
+     - Databricks Certified GenAI Accreditation (SiDatabricks icon, red)
+     - AWS Certified ML Engineer - Associate (SiAmazon icon, orange)
+   - Grid layout with responsive design (3 columns on medium+ screens)
+   - Each certification shows icon, title, and specialization
+
+6. **Project Cards - Hover Interaction Redesign**
+   - Replaced blue overlay with semi-transparent dark overlay (bg-black/40)
+   - Eye icon (Lucide React) appears centered on hover
+   - Icon displayed in circular badge with backdrop blur effect
+   - Removed "View Details" text for cleaner, icon-only interaction
+   - Entire card is clickable and links to GitHub repository
+
+### Technical Implementation
+- All sections maintain responsive design with fluid scaling across screen sizes
+- Mobile-first approach with breakpoints at md (768px) and lg (1024px)
+- Dark mode compatibility maintained across all new components
+- Icons sourced from Lucide React and react-icons/si for consistency
+- Hover states use existing hover-elevate utility classes

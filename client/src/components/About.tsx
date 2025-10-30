@@ -4,6 +4,7 @@ import { Briefcase, Award, Rocket, BookOpen, Brain, GraduationCap } from "lucide
 import headshotImage from "@assets/profile_1761803769301.png";
 import NeuralNetworkAnimation from "./NeuralNetworkAnimation";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { SiAmazon, SiDatabricks } from "react-icons/si";
 
 // Helper function to highlight keywords
 function highlightKeywords(text: string) {
@@ -164,7 +165,7 @@ export default function About() {
           })}
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
           {achievements.map((achievement) => {
             const Icon = achievement.icon;
             return (
@@ -183,6 +184,36 @@ export default function About() {
             );
           })}
         </div>
+
+        <Card className="p-6 hover-elevate">
+          <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
+            <Award className="h-5 w-5 text-primary" />
+            Professional Certifications
+          </h3>
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
+              <SiAmazon className="h-8 w-8 text-orange-500 flex-shrink-0" />
+              <div>
+                <div className="font-medium text-sm">AWS Certified</div>
+                <div className="text-xs text-muted-foreground">AI Practitioner</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
+              <SiDatabricks className="h-8 w-8 text-red-500 flex-shrink-0" />
+              <div>
+                <div className="font-medium text-sm">Databricks Certified</div>
+                <div className="text-xs text-muted-foreground">GenAI Accreditation</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
+              <SiAmazon className="h-8 w-8 text-orange-500 flex-shrink-0" />
+              <div>
+                <div className="font-medium text-sm">AWS Certified</div>
+                <div className="text-xs text-muted-foreground">ML Engineer - Associate</div>
+              </div>
+            </div>
+          </div>
+        </Card>
       </div>
     </section>
   );

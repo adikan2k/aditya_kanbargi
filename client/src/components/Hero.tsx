@@ -220,7 +220,7 @@ export default function Hero({ onBookMeeting, onViewWork, isDark = false }: Hero
                 rel="noopener noreferrer"
               >
                 <Download className="h-5 w-5" />
-                Download Resume
+                Resume
               </a>
             </Button>
           </div>

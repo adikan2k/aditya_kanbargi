@@ -50,7 +50,7 @@ export default function Contact() {
         <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-center">
           Get In Touch
         </h2>
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+        <p className="text-muted-foreground mb-12 text-left leading-relaxed">
           Have a Project in Mind? Want to Collaborate? Or Just Want to Chat About Data Science and Fitness? I'd Love to Hear From You.
         </p>
 
@@ -116,6 +116,26 @@ export default function Contact() {
           </Card>
 
           <div className="lg:col-span-2 space-y-6">
+            <Card className="p-6">
+              <h3 className="font-semibold text-lg mb-4">
+                Current Status
+              </h3>
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full bg-green-500 mt-2 flex-shrink-0" aria-hidden="true" />
+                  <div className="text-foreground">Available for opportunities</div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full bg-blue-500 mt-2 flex-shrink-0" aria-hidden="true" />
+                  <div className="text-foreground">MS Engineering Management Student</div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full bg-purple-500 mt-2 flex-shrink-0" aria-hidden="true" />
+                  <div className="text-foreground">Perplexity AI Business Fellow</div>
+                </div>
+              </div>
+            </Card>
+
             <Card className="p-6">
               <h3 className="font-semibold text-lg mb-4">
                 Contact Information

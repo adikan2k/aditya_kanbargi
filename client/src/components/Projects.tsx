@@ -152,6 +152,19 @@ export default function Projects() {
     setShowAllProjects(false);
   };
 
+  const getTagline = () => {
+    const taglines: Record<string, string> = {
+      "All": "A comprehensive showcase of my work across AI, Machine Learning, Computer Vision, Analytics, and Data Science projects.",
+      "Machine Learning": "Predictive models and ML systems tackling real-world challenges with advanced algorithms.",
+      "AI": "Intelligent systems leveraging LLMs, agentic frameworks, and advanced AI architectures.",
+      "Analytics and Forecasting": "Data-driven insights and forecasting models to inform strategic decision-making.",
+      "Data Science Foundations": "Exploratory analysis and statistical modeling revealing patterns in complex datasets.",
+      "Deep Learning": "Neural networks and deep architectures solving complex pattern recognition problems.",
+      "Computer Vision": "Visual intelligence systems for image analysis, object detection, and real-time monitoring.",
+    };
+    return taglines[activeCategory] || taglines["All"];
+  };
+
   return (
     <section 
       ref={ref as React.RefObject<HTMLElement>}
@@ -163,8 +176,7 @@ export default function Projects() {
           Featured Projects
         </h2>
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          A selection of my recent work spanning web development, mobile apps,
-          and creative design projects.
+          {getTagline()}
         </p>
 
         <div className="flex justify-center gap-2 mb-12 flex-wrap">

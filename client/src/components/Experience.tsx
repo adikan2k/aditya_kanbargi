@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, MapPin } from "lucide-react";
+import { Calendar, MapPin, Building2, GraduationCap } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 // Helper function to highlight quantitative outcomes with full phrases
@@ -53,6 +53,7 @@ const experiences = [
   {
     title: "Research Analyst – Public Health",
     company: "GW School of Nursing",
+    companyIcon: GraduationCap,
     location: "Virginia",
     period: "Dec 2024 – May 2025",
     description: [
@@ -66,6 +67,7 @@ const experiences = [
   {
     title: "Quantitative Analyst / Decision Science Analyst",
     company: "LTIMindtree",
+    companyIcon: Building2,
     location: "India",
     period: "Sept 2022 – May 2024",
     description: [
@@ -105,12 +107,13 @@ export default function Experience() {
               data-testid={`card-experience-${index}`}
             >
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                <div>
+                <div className="flex-1">
                   <h3 className="text-xl md:text-2xl font-semibold mb-2">
                     {exp.title}
                   </h3>
-                  <div className="text-lg font-medium text-primary mb-2">
-                    {exp.company}
+                  <div className="flex items-center gap-2 text-lg font-medium text-primary mb-2">
+                    {exp.companyIcon && <exp.companyIcon className="h-5 w-5" />}
+                    <span>{exp.company}</span>
                   </div>
                   <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                     <div className="flex items-center gap-2">
