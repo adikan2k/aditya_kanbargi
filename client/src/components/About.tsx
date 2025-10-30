@@ -17,8 +17,8 @@ const skills = [
 const achievements = [
   {
     icon: Code2,
-    title: "GPA 4.0",
-    description: "Master's in Data Science",
+    title: "2+ Years",
+    description: "Data Science Experience",
   },
   {
     icon: Users,
@@ -27,13 +27,13 @@ const achievements = [
   },
   {
     icon: Zap,
-    title: "ML & NLP",
-    description: "Healthcare & Enterprise",
+    title: "10+ Projects",
+    description: "End-to-end Deployments",
   },
   {
     icon: Palette,
-    title: "Full Stack",
-    description: "Python, R, SQL, Cloud",
+    title: "Published",
+    description: "IJSREM Journal on ML",
   },
 ];
 
