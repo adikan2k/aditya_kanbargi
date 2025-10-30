@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { Eye } from "lucide-react";
 import project1Image from "@assets/1_1761838910338.jpg";
 import project2Image from "@assets/2_1761838910338.jpg";
 import project3Image from "@assets/3_1761838910338.png";
@@ -24,6 +25,7 @@ const projects = [
     image: project1Image,
     tags: ["LangGraph", "FastAPI", "Next.js", "Qdrant", "Postgres", "LLM Agents"],
     categories: ["AI"],
+    githubUrl: "https://github.com/adikan2k",
   },
   {
     id: 2,
@@ -33,6 +35,7 @@ const projects = [
     image: project2Image,
     tags: ["Llama-3.1-70B", "RAG", "BGE Embeddings", "LLMs", "Python", "NLP"],
     categories: ["AI"],
+    githubUrl: "https://github.com/adikan2k",
   },
   {
     id: 3,
@@ -42,6 +45,7 @@ const projects = [
     image: project3Image,
     tags: ["XGBoost", "LightGBM", "LSTM", "EDA", "Plotly", "Tableau", "Python"],
     categories: ["Machine Learning", "Analytics and Forecasting"],
+    githubUrl: "https://github.com/adikan2k",
   },
   {
     id: 4,
@@ -51,6 +55,7 @@ const projects = [
     image: project4Image,
     tags: ["MAML", "AWS", "SageMaker", "Flask", "S3", "EC2", "Meta-Learning"],
     categories: ["Machine Learning"],
+    githubUrl: "https://github.com/adikan2k",
   },
   {
     id: 5,
@@ -60,6 +65,7 @@ const projects = [
     image: project5Image,
     tags: ["SVM", "CNN", "RNN", "Random Forest", "K-Nearest Neighbors", "Python"],
     categories: ["Machine Learning"],
+    githubUrl: "https://github.com/adikan2k",
   },
   {
     id: 6,
@@ -69,6 +75,7 @@ const projects = [
     image: project6Image,
     tags: ["Keras", "TensorFlow", "OpenCV", "Deep Learning", "Computer Vision"],
     categories: ["Computer Vision", "Machine Learning", "Deep Learning"],
+    githubUrl: "https://github.com/adikan2k",
   },
   {
     id: 7,
@@ -78,6 +85,7 @@ const projects = [
     image: project7Image,
     tags: ["YOLO", "OpenCV", "Computer Vision", "Deep Learning", "Object Detection"],
     categories: ["Computer Vision", "Deep Learning"],
+    githubUrl: "https://github.com/adikan2k",
   },
   {
     id: 8,
@@ -87,6 +95,7 @@ const projects = [
     image: project8Image,
     tags: ["LSTM", "RNN", "Deep Learning", "Bitcoin", "Google Trends", "Python", "Time Series"],
     categories: ["Deep Learning", "Analytics and Forecasting"],
+    githubUrl: "https://github.com/adikan2k",
   },
   {
     id: 9,
@@ -96,6 +105,7 @@ const projects = [
     image: project9Image,
     tags: ["R", "Statistical Analysis", "Data Visualization", "FARS Dataset", "Public Health"],
     categories: ["Analytics and Forecasting", "Data Science Foundations"],
+    githubUrl: "https://github.com/adikan2k",
   },
   {
     id: 10,
@@ -105,6 +115,7 @@ const projects = [
     image: project10Image,
     tags: ["Python", "Spotify API", "Data Analysis", "Music Analytics", "Statistical Analysis"],
     categories: ["Analytics and Forecasting", "Data Science Foundations"],
+    githubUrl: "https://github.com/adikan2k",
   },
   {
     id: 11,
@@ -114,6 +125,7 @@ const projects = [
     image: project11Image,
     tags: ["Deep Learning", "Medical Imaging", "Ultrasound", "Image Segmentation", "Computer Vision", "Healthcare"],
     categories: ["Deep Learning", "Computer Vision"],
+    githubUrl: "https://github.com/adikan2k",
   },
 ];
 
@@ -170,41 +182,49 @@ export default function Projects() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayedProjects.map((project) => (
-            <Card
+            <a
               key={project.id}
-              className="overflow-hidden hover-elevate cursor-pointer group"
-              onMouseEnter={() => setHoveredProject(project.id)}
-              onMouseLeave={() => setHoveredProject(null)}
-              data-testid={`card-project-${project.id}`}
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+              data-testid={`link-project-${project.id}`}
             >
-              <div className="relative aspect-[16/10] overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                {hoveredProject === project.id && (
-                  <div className="absolute inset-0 bg-primary/90 flex items-center justify-center transition-opacity duration-300">
-                    <span className="text-white font-semibold">
-                      View Details
-                    </span>
-                  </div>
-                )}
-              </div>
-              <CardContent className="p-6">
-                <h3 className="font-semibold text-xl mb-2">{project.title}</h3>
-                <p className="text-muted-foreground text-sm mb-4">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <Badge key={tag} variant="secondary">
-                      {tag}
-                    </Badge>
-                  ))}
+              <Card
+                className="overflow-hidden hover-elevate cursor-pointer group h-full"
+                onMouseEnter={() => setHoveredProject(project.id)}
+                onMouseLeave={() => setHoveredProject(null)}
+                data-testid={`card-project-${project.id}`}
+              >
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  {hoveredProject === project.id && (
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center transition-all duration-300">
+                      <div className="bg-white/90 dark:bg-gray-800/90 p-4 rounded-full shadow-lg backdrop-blur-sm">
+                        <Eye className="h-8 w-8 text-foreground" />
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </CardContent>
-            </Card>
+                <CardContent className="p-6">
+                  <h3 className="font-semibold text-xl mb-2">{project.title}</h3>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <Badge key={tag} variant="secondary">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </a>
           ))}
         </div>
 
