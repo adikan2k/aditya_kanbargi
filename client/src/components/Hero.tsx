@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles, Brain, Compass, Globe, ChefHat, Mail, Code2 } from "lucide-react";
+import { ArrowRight, Sparkles, Brain, Compass, Globe, ChefHat, Mail, Code2, Download } from "lucide-react";
 import { SiLinkedin, SiGithub, SiGmail } from "react-icons/si";
 import NetworkBackground from "./NetworkBackground";
 
@@ -107,11 +107,21 @@ export default function Hero({ onBookMeeting, onViewWork, isDark = false }: Hero
             </div>
           </div>
 
-          <h1 className={`text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-8 ${
-            isDark ? "text-white" : "text-slate-900"
-          }`}>
-            Aditya Kanbargi
-          </h1>
+          <div className="relative mb-8">
+            {/* Gradient overlay effect behind name */}
+            <div className="absolute inset-0 -z-10 flex items-center justify-center">
+              <div className={`w-[600px] h-[200px] blur-3xl opacity-30 ${
+                isDark 
+                  ? "bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500" 
+                  : "bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400"
+              }`} />
+            </div>
+            <h1 className={`text-5xl md:text-7xl lg:text-8xl font-bold leading-tight ${
+              isDark ? "text-white" : "text-slate-900"
+            }`}>
+              Aditya Kanbargi
+            </h1>
+          </div>
 
           <div className="flex items-center justify-center gap-3 mb-8 min-h-[3.5rem]">
             <div className={`flex items-center gap-2 text-2xl md:text-3xl lg:text-4xl font-bold ${currentColor}`}>
@@ -196,6 +206,18 @@ export default function Hero({ onBookMeeting, onViewWork, isDark = false }: Hero
             >
               View My Work
               <ArrowRight className="h-5 w-5" />
+            </Button>
+            <Button
+              size="lg"
+              variant="secondary"
+              className="gap-2 shadow-lg hover:shadow-xl transition-all duration-300"
+              asChild
+              data-testid="button-download-resume"
+            >
+              <a href="/resume.pdf" download="Aditya_Kanbargi_Resume.pdf">
+                <Download className="h-5 w-5" />
+                Download Resume
+              </a>
             </Button>
           </div>
         </div>

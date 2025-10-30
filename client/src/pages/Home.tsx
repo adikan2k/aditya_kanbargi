@@ -7,6 +7,7 @@ import Projects from "@/components/Projects";
 import TechStack from "@/components/TechStack";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import BackToTop from "@/components/BackToTop";
 
 export default function Home() {
   const [isDark, setIsDark] = useState(false);
@@ -51,6 +52,7 @@ export default function Home() {
       <TechStack />
       <Contact />
       <Footer />
+      <BackToTop />
     </div>
   );
 }

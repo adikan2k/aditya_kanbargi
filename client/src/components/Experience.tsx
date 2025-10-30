@@ -2,6 +2,24 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin } from "lucide-react";
 
+// Helper function to highlight quantitative outcomes
+function highlightMetrics(text: string) {
+  // Pattern to match numbers with units like "6 hours", "20%", "25%", "3x", etc.
+  const pattern = /(\d+(?:–\d+)?(?:\.\d+)?(?:%|x| hours| hours?|%))/g;
+  const parts = text.split(pattern);
+  
+  return parts.map((part, index) => {
+    if (pattern.test(part)) {
+      return (
+        <span key={index} className="font-bold text-primary">
+          {part}
+        </span>
+      );
+    }
+    return part;
+  });
+}
+
 const experiences = [
   {
     title: "Research Analyst – Public Health",
@@ -75,7 +93,7 @@ export default function Experience() {
               <ul className="space-y-2 mb-4 list-disc list-inside">
                 {exp.description.map((item, i) => (
                   <li key={i} className="text-foreground text-justify">
-                    {item}
+                    {highlightMetrics(item)}
                   </li>
                 ))}
               </ul>
