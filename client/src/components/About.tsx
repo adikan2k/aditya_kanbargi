@@ -5,39 +5,39 @@ import headshotImage from "@assets/generated_images/Professional_headshot_portra
 
 const skills = [
   {
-    category: "Frontend Development",
-    items: ["React", "TypeScript", "Tailwind CSS", "Next.js"],
+    category: "Core Competencies",
+    items: ["Machine Learning", "Statistical Analysis", "Data Mining", "Predictive Modeling"],
   },
   {
-    category: "Backend Development",
-    items: ["Node.js", "Express", "PostgreSQL", "REST APIs"],
+    category: "Programming & Tools",
+    items: ["Python", "R", "SQL", "TensorFlow", "PyTorch"],
   },
   {
-    category: "Tools & Design",
-    items: ["Git", "Figma", "Docker", "CI/CD"],
+    category: "Visualization & BI",
+    items: ["Tableau", "Power BI", "Matplotlib", "Seaborn"],
   },
 ];
 
 const achievements = [
   {
     icon: Code2,
-    title: "50+ Projects",
-    description: "Successfully delivered",
+    title: "30+ Projects",
+    description: "ML models deployed",
   },
   {
     icon: Users,
-    title: "30+ Clients",
-    description: "Satisfied worldwide",
+    title: "20+ Clients",
+    description: "Data solutions delivered",
   },
   {
     icon: Zap,
-    title: "5 Years",
-    description: "Industry experience",
+    title: "5+ Years",
+    description: "Data science experience",
   },
   {
     icon: Palette,
-    title: "Award Winner",
-    description: "Design excellence",
+    title: "Certified",
+    description: "AWS & GCP ML",
   },
 ];
 
@@ -61,22 +61,25 @@ export default function About() {
 
           <div className="flex-1 space-y-4 text-foreground leading-relaxed">
             <p>
-              Hi! I'm Aditya, a passionate full-stack developer with a keen eye
-              for design and a love for building seamless digital experiences.
-              With over 5 years in the industry, I've helped startups and
-              established companies bring their visions to life.
+              Hi! I'm Aditya, a data scientist passionate about extracting
+              insights from complex datasets and building machine learning
+              solutions that drive real business impact. With over 5 years in
+              the field, I've helped organizations leverage their data to make
+              better decisions.
             </p>
             <p>
-              I believe great software is more than just code—it's about
-              understanding user needs, solving real problems, and creating
-              interfaces that feel natural and intuitive. My approach combines
-              technical excellence with creative thinking.
+              I believe great data science is more than algorithms—it's about
+              asking the right questions, understanding business context, and
+              communicating insights effectively. My approach combines
+              statistical rigor with practical problem-solving to deliver
+              actionable results.
             </p>
             <p>
-              When I'm not coding, you'll find me exploring new technologies,
-              contributing to open source, or mentoring aspiring developers.
-              I'm always excited to collaborate on innovative projects that make
-              a difference.
+              When I'm not analyzing data, you'll find me exploring new ML
+              techniques, contributing to open source projects, or sharing
+              knowledge through technical writing and mentoring. I'm always
+              excited to tackle challenging problems that push the boundaries of
+              what's possible with data.
             </p>
           </div>
         </div>

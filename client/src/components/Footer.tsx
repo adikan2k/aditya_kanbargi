@@ -16,13 +16,13 @@ export default function Footer() {
               <div>
                 <h3 className="font-semibold text-lg">Aditya Kanbargi</h3>
                 <p className="text-sm text-muted-foreground">
-                  Full-Stack Developer
+                  Data Scientist & ML Engineer
                 </p>
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
-              Building beautiful, functional web experiences. Available for
-              freelance projects and collaboration.
+              Transforming data into insights and building ML solutions.
+              Available for data science projects and collaboration.
             </p>
           </div>
 
@@ -31,8 +31,9 @@ export default function Footer() {
             <div className="space-y-2">
               {[
                 { label: "About", href: "#about" },
+                { label: "Experience", href: "#experience" },
                 { label: "Projects", href: "#projects" },
-                { label: "Book Meeting", href: "#booking" },
+                { label: "Tech Stack", href: "#tech-stack" },
                 { label: "Contact", href: "#contact" },
               ].map((link) => (
                 <a

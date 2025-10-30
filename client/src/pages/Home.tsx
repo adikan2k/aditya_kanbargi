@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
+import TechStack from "@/components/TechStack";
 import BookingSection from "@/components/BookingSection";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -45,7 +47,9 @@ export default function Home() {
       <Navigation onThemeToggle={toggleTheme} isDark={isDark} />
       <Hero onBookMeeting={scrollToBooking} onViewWork={scrollToProjects} />
       <About />
+      <Experience />
       <Projects />
+      <TechStack />
       <BookingSection />
       <Contact />
       <Footer />

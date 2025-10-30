@@ -9,7 +9,7 @@ interface HeroProps {
 
 export default function Hero({ onBookMeeting, onViewWork }: HeroProps) {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
       <div
         className="absolute inset-0 z-0"
         style={{
@@ -34,12 +34,12 @@ export default function Hero({ onBookMeeting, onViewWork }: HeroProps) {
             Aditya Kanbargi
           </h1>
           <p className="text-xl md:text-2xl text-white/90 mb-4 font-medium">
-            Full-Stack Developer & Creative Problem Solver
+            Data Scientist & ML Engineer
           </p>
           <p className="text-lg text-white/80 mb-12 leading-relaxed max-w-2xl">
-            Crafting elegant digital experiences that merge functionality with
-            beautiful design. Specializing in React, Node.js, and modern web
-            technologies.
+            Transforming complex data into actionable insights. Specializing in
+            machine learning, predictive analytics, and data-driven solutions
+            that drive business impact.
           </p>
 
           <div className="flex flex-wrap gap-4">
