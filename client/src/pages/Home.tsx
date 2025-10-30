@@ -48,8 +48,8 @@ export default function Home() {
       <Hero onBookMeeting={scrollToContact} onViewWork={scrollToProjects} isDark={isDark} />
       <About />
       <Experience />
-      <Projects />
       <TechStack />
+      <Projects />
       <Contact />
       <Footer />
       <BackToTop />
