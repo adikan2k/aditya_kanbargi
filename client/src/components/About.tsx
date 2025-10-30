@@ -60,7 +60,7 @@ export default function About() {
               It all started with me asking too many "why's" until I discovered that data had a language for every one of them. What began as curiosity turned into a lifelong fascination with how information shapes the world around us.
             </p>
             <p className="text-justify">
-              I'm Aditya Kanbargi, a data scientist who loves uncovering stories hidden inside messy, beautiful data. For me, data isn't just numbers and models; it's a way to understand people, decisions, and the little patterns that make big things happen. It all started with me staring at a dataset like it was a mystery novel, every column a clue and every row a story, and I've been hooked on solving those stories ever since.
+              I'm Aditya Kanbargi, a data scientist who believes the best insights come from combining rigorous analysis with a sense of human context. For me, data isn't just numbers and models; it's a way to understand people, decisions, and the little patterns that make big things happen. It all started with me staring at a dataset like it was a mystery novel, every column a clue and every row a story, and I've been hooked on solving those stories ever since.
             </p>
             <p className="text-justify">
               I'm currently pursuing my Master's in Data Science at The George Washington University (GPA 4.0), where I was awarded the Global Leaders Fellowship for academic excellence. Between projects on machine learning, NLP, and cloud computing, I've learned that the magic of data science lies in connecting technical depth with real-world impact.
