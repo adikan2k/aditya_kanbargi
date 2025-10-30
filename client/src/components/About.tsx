@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Code2, Palette, Zap, Users } from "lucide-react";
+import { Briefcase, Award, Rocket, BookOpen } from "lucide-react";
 import headshotImage from "@assets/generated_images/Professional_headshot_portrait_d6e9d2d3.png";
 
 const skills = [
@@ -16,22 +16,22 @@ const skills = [
 
 const achievements = [
   {
-    icon: Code2,
+    icon: Briefcase,
     title: "2+ Years",
-    description: "Data Science Experience",
+    description: "Professional Experience in Data Science",
   },
   {
-    icon: Users,
+    icon: Award,
     title: "Global Leaders",
-    description: "Fellowship Recipient",
+    description: "Fellowship Recipient recognized for academic excellence @ GW",
   },
   {
-    icon: Zap,
+    icon: Rocket,
     title: "10+ Projects",
     description: "End-to-end Deployments",
   },
   {
-    icon: Palette,
+    icon: BookOpen,
     title: "Published",
     description: "IJSREM Journal on ML",
   },
