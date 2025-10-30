@@ -171,11 +171,12 @@ Preferred communication style: Simple, everyday language.
    - Changed button text from "Download Resume" to "Resume" for cleaner interface
    - Maintains Google Drive link functionality
 
-2. **Experience Section - Company Icons**
-   - Added visual company icons next to each role
-   - GW School of Nursing: GraduationCap icon (Lucide React)
-   - LTIMindtree: Building2 icon (Lucide React)
-   - Icons display inline with company name for better visual hierarchy
+2. **Experience Section - Company Logos**
+   - Added actual company logos next to each role
+   - GW School of Nursing: Official GW logo with brand colors (navy blue and gold)
+   - LTIMindtree: Official LTIMindtree logo with brand colors (blue)
+   - Logos are displayed as small thumbnails (h-6) inline with company name
+   - Maintains original brand colors for authenticity and professional appearance
 
 3. **Projects Section - Dynamic Taglines**
    - Implemented dynamic tagline system that changes based on active category filter
