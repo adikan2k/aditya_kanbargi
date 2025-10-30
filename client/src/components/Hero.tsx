@@ -113,16 +113,16 @@ export default function Hero({ onBookMeeting, onViewWork, isDark = false }: Hero
             Aditya Kanbargi
           </h1>
 
-          <div className="flex items-center justify-center gap-4 mb-8 min-h-[3.5rem]">
-            <div className={`text-2xl md:text-3xl lg:text-4xl font-bold ${currentColor}`}>
-              {displayedText}
+          <div className="flex items-center justify-center gap-3 mb-8 min-h-[3.5rem]">
+            <div className={`flex items-center gap-2 text-2xl md:text-3xl lg:text-4xl font-bold ${currentColor}`}>
+              <span>{displayedText}</span>
+              <CurrentIcon className={`w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 ${currentColor} animate-pulse flex-shrink-0`} />
               <span
-                className={`inline-block w-0.5 h-8 md:h-10 lg:h-12 ml-1 ${currentColor} ${
+                className={`inline-block w-0.5 h-8 md:h-10 lg:h-12 ${currentColor} ${
                   showCursor ? "opacity-100" : "opacity-0"
                 }`}
               />
             </div>
-            <CurrentIcon className={`h-7 w-7 md:h-9 md:w-9 lg:h-10 lg:w-10 ${currentColor} animate-pulse`} />
           </div>
 
           <div className="mb-10">
