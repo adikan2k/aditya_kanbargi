@@ -65,10 +65,16 @@ export default function Navigation({
             <a 
               href="#" 
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="relative flex items-center justify-center w-12 h-12 font-bold text-xl tracking-tight rounded-xl bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 active:scale-95"
+              className={`relative flex items-center justify-center w-12 h-12 font-bold text-xl tracking-tight rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 ${
+                isDark 
+                  ? "bg-gradient-to-br from-blue-600 via-blue-500 to-purple-600 text-white" 
+                  : "bg-gradient-to-br from-indigo-600 via-indigo-500 to-purple-600 text-white"
+              }`}
             >
               <span className="relative z-10">AK</span>
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className={`absolute inset-0 rounded-xl bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
+                isDark ? "from-blue-400/20 to-purple-400/20" : "from-indigo-400/20 to-purple-400/20"
+              }`} />
             </a>
           </div>
 

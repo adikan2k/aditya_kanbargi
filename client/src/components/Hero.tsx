@@ -1,23 +1,25 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Calendar, ArrowRight, BookOpen, Sparkles, Brain, Compass, Globe, ChefHat } from "lucide-react";
-import heroImage from "@assets/generated_images/Professional_workspace_hero_image_1752f486.png";
+import { Calendar, ArrowRight, BookOpen, Sparkles, Brain, Compass, Globe, ChefHat, Mail } from "lucide-react";
+import { SiLinkedin, SiGithub, SiGmail } from "react-icons/si";
+import NetworkBackground from "./NetworkBackground";
 
 interface HeroProps {
   onBookMeeting?: () => void;
   onViewWork?: () => void;
+  isDark?: boolean;
 }
 
 const typewriterPhrases = [
-  { text: "Data Storyteller", icon: BookOpen },
-  { text: "AI Enthusiast", icon: Sparkles },
-  { text: "Machine learning engineer", icon: Brain },
-  { text: "Curious Voyager", icon: Compass },
-  { text: "Digital Explorer", icon: Globe },
-  { text: "Culinary Creator", icon: ChefHat },
+  { text: "Data Storyteller", icon: BookOpen, color: "text-blue-400" },
+  { text: "AI Enthusiast", icon: Sparkles, color: "text-purple-400" },
+  { text: "Machine Learning Engineer", icon: Brain, color: "text-pink-400" },
+  { text: "Curious Voyager", icon: Compass, color: "text-emerald-400" },
+  { text: "Digital Explorer", icon: Globe, color: "text-cyan-400" },
+  { text: "Culinary Creator", icon: ChefHat, color: "text-orange-400" },
 ];
 
-export default function Hero({ onBookMeeting, onViewWork }: HeroProps) {
+export default function Hero({ onBookMeeting, onViewWork, isDark = false }: HeroProps) {
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -55,34 +57,13 @@ export default function Hero({ onBookMeeting, onViewWork }: HeroProps) {
   }, [displayedText, isDeleting, currentPhraseIndex]);
 
   const CurrentIcon = typewriterPhrases[currentPhraseIndex].icon;
+  const currentColor = typewriterPhrases[currentPhraseIndex].color;
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
-      <div
-        className="absolute inset-0 z-0 opacity-20"
-        style={{
-          backgroundImage: `url(${heroImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
-      
-      <div className="absolute inset-0 z-0">
-        {[...Array(50)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full bg-primary/20 animate-pulse"
-            style={{
-              width: Math.random() * 3 + 1 + "px",
-              height: Math.random() * 3 + 1 + "px",
-              top: Math.random() * 100 + "%",
-              left: Math.random() * 100 + "%",
-              animationDelay: Math.random() * 3 + "s",
-              animationDuration: Math.random() * 3 + 2 + "s",
-            }}
-          />
-        ))}
-      </div>
+    <section id="hero" className={`relative min-h-screen flex items-center overflow-hidden ${
+      isDark ? "bg-slate-950" : "bg-slate-50"
+    }`}>
+      <NetworkBackground isDark={isDark} />
 
       <div className="relative z-10 w-full max-w-6xl mx-auto px-6 py-24">
         <div className="max-w-4xl mx-auto text-center">
@@ -91,21 +72,27 @@ export default function Hero({ onBookMeeting, onViewWork }: HeroProps) {
               {[0, 1, 2].map((i) => (
                 <div
                   key={i}
-                  className="w-2 h-2 rounded-full bg-primary animate-pulse"
+                  className={`w-2.5 h-2.5 rounded-full animate-pulse ${
+                    isDark ? "bg-blue-500" : "bg-indigo-600"
+                  }`}
                   style={{
                     animationDelay: `${i * 0.2}s`,
                   }}
                 />
               ))}
             </div>
-            <span className="text-sm md:text-base font-medium text-primary tracking-widest uppercase">
+            <span className={`text-sm md:text-base font-semibold tracking-widest uppercase ${
+              isDark ? "text-blue-400" : "text-indigo-700"
+            }`}>
               Decoding Data With
             </span>
             <div className="flex gap-1.5">
               {[0, 1, 2].map((i) => (
                 <div
                   key={i}
-                  className="w-2 h-2 rounded-full bg-primary animate-pulse"
+                  className={`w-2.5 h-2.5 rounded-full animate-pulse ${
+                    isDark ? "bg-blue-500" : "bg-indigo-600"
+                  }`}
                   style={{
                     animationDelay: `${i * 0.2}s`,
                   }}
@@ -114,32 +101,76 @@ export default function Hero({ onBookMeeting, onViewWork }: HeroProps) {
             </div>
           </div>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight mb-8">
+          <h1 className={`text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-8 ${
+            isDark ? "text-white" : "text-slate-900"
+          }`}>
             Aditya Kanbargi
           </h1>
 
-          <div className="flex items-center justify-center gap-3 mb-8 min-h-[3rem]">
-            <CurrentIcon className="h-6 w-6 md:h-8 md:w-8 text-primary" />
-            <div className="text-2xl md:text-3xl lg:text-4xl font-semibold text-primary">
+          <div className="flex items-center justify-center gap-4 mb-8 min-h-[3.5rem]">
+            <div className={`text-2xl md:text-3xl lg:text-4xl font-bold ${currentColor}`}>
               {displayedText}
               <span
-                className={`inline-block w-0.5 h-8 md:h-10 lg:h-12 bg-primary ml-1 ${
+                className={`inline-block w-0.5 h-8 md:h-10 lg:h-12 ml-1 ${currentColor} ${
                   showCursor ? "opacity-100" : "opacity-0"
                 }`}
               />
             </div>
+            <CurrentIcon className={`h-7 w-7 md:h-9 md:w-9 lg:h-10 lg:w-10 ${currentColor} animate-pulse`} />
           </div>
 
-          <p className="text-lg md:text-xl text-white/80 mb-12 leading-relaxed max-w-2xl mx-auto">
-            Turning digital chaos into elegant insight. Specializing in machine
-            learning, predictive analytics, and data-driven solutions that drive
-            business impact.
-          </p>
+          <div className="mb-10">
+            <p className={`text-xl md:text-2xl font-semibold tracking-wide ${
+              isDark ? "text-slate-300" : "text-slate-700"
+            }`}>
+              Turning digital chaos into elegant insight.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-4 justify-center items-center mb-8">
+            <a
+              href="https://linkedin.com/in/adityakanbargi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 hover:scale-110 hover-elevate active-elevate-2 ${
+                isDark ? "bg-slate-800/50 hover:bg-blue-600" : "bg-white hover:bg-blue-600"
+              }`}
+              data-testid="link-linkedin"
+            >
+              <SiLinkedin className={`h-6 w-6 transition-colors duration-300 ${
+                isDark ? "text-blue-400 group-hover:text-white" : "text-blue-600 group-hover:text-white"
+              }`} />
+            </a>
+            <a
+              href="https://github.com/adityakanbargi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 hover:scale-110 hover-elevate active-elevate-2 ${
+                isDark ? "bg-slate-800/50 hover:bg-slate-700" : "bg-white hover:bg-slate-800"
+              }`}
+              data-testid="link-github"
+            >
+              <SiGithub className={`h-6 w-6 transition-colors duration-300 ${
+                isDark ? "text-slate-300 group-hover:text-white" : "text-slate-700 group-hover:text-white"
+              }`} />
+            </a>
+            <a
+              href="mailto:aditya@kanbargi.com"
+              className={`group flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 hover:scale-110 hover-elevate active-elevate-2 ${
+                isDark ? "bg-slate-800/50 hover:bg-red-600" : "bg-white hover:bg-red-600"
+              }`}
+              data-testid="link-email"
+            >
+              <SiGmail className={`h-6 w-6 transition-colors duration-300 ${
+                isDark ? "text-red-400 group-hover:text-white" : "text-red-600 group-hover:text-white"
+              }`} />
+            </a>
+          </div>
 
           <div className="flex flex-wrap gap-4 justify-center">
             <Button
               size="lg"
-              className="gap-2"
+              className="gap-2 shadow-lg hover:shadow-xl transition-all duration-300"
               onClick={onBookMeeting}
               data-testid="button-book-meeting"
             >
@@ -149,7 +180,11 @@ export default function Hero({ onBookMeeting, onViewWork }: HeroProps) {
             <Button
               size="lg"
               variant="outline"
-              className="gap-2 backdrop-blur-md bg-white/10 border-white/20 text-white hover:bg-white/20"
+              className={`gap-2 transition-all duration-300 shadow-lg hover:shadow-xl ${
+                isDark 
+                  ? "bg-slate-800/50 border-slate-600 text-slate-200 hover:bg-slate-700" 
+                  : "bg-white border-slate-300 text-slate-700 hover:bg-slate-100"
+              }`}
               onClick={onViewWork}
               data-testid="button-view-work"
             >

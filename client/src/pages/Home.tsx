@@ -45,7 +45,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <Navigation onThemeToggle={toggleTheme} isDark={isDark} />
-      <Hero onBookMeeting={scrollToBooking} onViewWork={scrollToProjects} />
+      <Hero onBookMeeting={scrollToBooking} onViewWork={scrollToProjects} isDark={isDark} />
       <About />
       <Experience />
       <Projects />
