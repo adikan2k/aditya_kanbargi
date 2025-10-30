@@ -113,11 +113,22 @@ const categories = ["All", "Machine Learning", "AI", "Analytics and Forecasting"
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const [showAllProjects, setShowAllProjects] = useState(false);
 
   const filteredProjects =
     activeCategory === "All"
       ? projects
       : projects.filter((p) => p.categories.includes(activeCategory));
+
+  const displayedProjects =
+    activeCategory === "All" && !showAllProjects
+      ? filteredProjects.slice(0, 5)
+      : filteredProjects;
+
+  const handleCategoryChange = (category: string) => {
+    setActiveCategory(category);
+    setShowAllProjects(false);
+  };
 
   return (
     <section id="projects" className="py-24 bg-muted/30">
@@ -135,7 +146,7 @@ export default function Projects() {
             <Button
               key={category}
               variant={activeCategory === category ? "default" : "outline"}
-              onClick={() => setActiveCategory(category)}
+              onClick={() => handleCategoryChange(category)}
               data-testid={`button-filter-${category.toLowerCase()}`}
             >
               {category}
@@ -144,7 +155,7 @@ export default function Projects() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => (
+          {displayedProjects.map((project) => (
             <Card
               key={project.id}
               className="overflow-hidden hover-elevate cursor-pointer group"
@@ -182,6 +193,18 @@ export default function Projects() {
             </Card>
           ))}
         </div>
+
+        {activeCategory === "All" && !showAllProjects && projects.length > 5 && (
+          <div className="flex justify-center mt-12">
+            <Button
+              size="lg"
+              onClick={() => setShowAllProjects(true)}
+              data-testid="button-view-all-projects"
+            >
+              View All Projects ({projects.length})
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
