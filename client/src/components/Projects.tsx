@@ -8,9 +8,11 @@ import project3Image from "@assets/3_1761838910338.png";
 import project4Image from "@assets/4_1761838910338.png";
 import project5Image from "@assets/5_1761838910338.png";
 import project6Image from "@assets/6_1761838910339.jpg";
-import webAppImage from "@assets/generated_images/Web_app_project_showcase_83480b2a.png";
-import mobileAppImage from "@assets/generated_images/Mobile_app_project_showcase_c25f05fd.png";
-import designImage from "@assets/generated_images/Design_project_showcase_d267c0ce.png";
+import project7Image from "@assets/7_1761840145743.png";
+import project8Image from "@assets/8_1761840145744.jpg";
+import project9Image from "@assets/9_1761840145744.png";
+import project10Image from "@assets/10_1761840145744.png";
+import project11Image from "@assets/11_1761840145744.jpg";
 
 const projects = [
   {
@@ -72,7 +74,7 @@ const projects = [
     title: "Social Distancing Detector using YOLO and OpenCV",
     description:
       "Social distancing detector built using YOLO (COCO Model) along with OpenCV. Applies object detection to detect all people in video streams, computes pairwise distances between detected people, and checks if any two people are less than N pixels apart for social distancing compliance.",
-    image: webAppImage,
+    image: project7Image,
     tags: ["YOLO", "OpenCV", "Computer Vision", "Deep Learning", "Object Detection"],
     categories: ["Computer Vision", "Deep Learning"],
   },
@@ -81,7 +83,7 @@ const projects = [
     title: "Bitcoin Price Prediction using LSTM and Google Trends",
     description:
       "LSTM-based Bitcoin price prediction project using Google Trend keywords. Determines if LSTM algorithm can predict Bitcoin close price by analyzing keyword volume from Google Trends. Bitcoin price dataset downloaded hourly using coinapi.io API, and Google Trends keywords downloaded using Python pytrend library. Predicted Bitcoin close prices better than expected by improving learning in every epoch.",
-    image: designImage,
+    image: project8Image,
     tags: ["LSTM", "RNN", "Deep Learning", "Bitcoin", "Google Trends", "Python", "Time Series"],
     categories: ["Deep Learning", "Analytics and Forecasting"],
   },
@@ -90,7 +92,7 @@ const projects = [
     title: "Dead Ends and Data Trends: A Journey Through America's Recent Accident Stats",
     description:
       "Insightful journey into understanding the patterns behind road fatalities in the U.S. and creating actionable insights for a safer future. Analysis of 36,891 observations with 83 features from FARS 2022 Dataset using R programming language for comprehensive statistical analysis and visualization.",
-    image: mobileAppImage,
+    image: project9Image,
     tags: ["R", "Statistical Analysis", "Data Visualization", "FARS Dataset", "Public Health"],
     categories: ["Analytics and Forecasting", "Data Science Foundations"],
   },
@@ -99,7 +101,7 @@ const projects = [
     title: "Beats and Bytes: A Statistical Symphony of Spotify's Best Tracks",
     description:
       "Delves into the top-ranking songs on Spotify, exploring the intricate dynamics behind global and regional music trends. Using data on track features like danceability, energy, tempo, and popularity, uncovers what makes a song a chart-topper. By examining patterns in explicit content, album releases, and listener preferences across countries, this exploratory analysis offers valuable insights into the evolving world of music streaming.",
-    image: webAppImage,
+    image: project10Image,
     tags: ["Python", "Spotify API", "Data Analysis", "Music Analytics", "Statistical Analysis"],
     categories: ["Analytics and Forecasting", "Data Science Foundations"],
   },
@@ -108,7 +110,7 @@ const projects = [
     title: "PNB Nerve Segmentation from Ultrasound Images using Deep Learning",
     description:
       "Deep learning model built to detect the precise location of the Brachial Plexus nerve that is present near the shoulder from ultrasound images. Implements advanced image segmentation techniques to aid in medical diagnostics and improve accuracy in nerve block procedures.",
-    image: designImage,
+    image: project11Image,
     tags: ["Deep Learning", "Medical Imaging", "Ultrasound", "Image Segmentation", "Computer Vision", "Healthcare"],
     categories: ["Deep Learning", "Computer Vision"],
   },
