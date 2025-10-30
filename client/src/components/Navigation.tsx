@@ -20,7 +20,7 @@ export default function Navigation({
       setScrolled(window.scrollY > 50);
       
       // Track active section
-      const sections = ["home", "about", "experience", "projects", "tech-stack", "contact"];
+      const sections = ["home", "about", "experience", "tech-stack", "projects", "contact"];
       for (const section of sections) {
         const element = document.getElementById(section === "home" ? "hero" : section);
         if (element) {
@@ -40,8 +40,8 @@ export default function Navigation({
     { label: "Home", href: "#hero", icon: Home },
     { label: "About", href: "#about", icon: User },
     { label: "Experience", href: "#experience", icon: Briefcase },
-    { label: "Projects", href: "#projects", icon: FolderOpen },
     { label: "Tech Stack", href: "#tech-stack", icon: Code2 },
+    { label: "Projects", href: "#projects", icon: FolderOpen },
     { label: "Contact", href: "#contact", icon: Mail },
   ];
 
