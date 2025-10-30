@@ -10,7 +10,7 @@ const skills = [
   },
   {
     category: "Education",
-    items: ["Master's in Data Science, George Washington University", "GPA 4.0", "Global Leaders Fellowship", "Focus: ML, NLP, Cloud Computing"],
+    items: ["Master's in Data Science", "George Washington University", "GPA 4.0", "Global Leaders Fellowship", "Coursework: Data Visualization, Machine Learning, Data Mining, NLP, Deep Learning, Cloud Computing, Algorithm Design, Linux for DevOps"],
   },
 ];
 
