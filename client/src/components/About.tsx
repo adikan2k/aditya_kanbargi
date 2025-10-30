@@ -1,15 +1,17 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Briefcase, Award, Rocket, BookOpen } from "lucide-react";
+import { Briefcase, Award, Rocket, BookOpen, Brain, GraduationCap } from "lucide-react";
 import headshotImage from "@assets/generated_images/Professional_headshot_portrait_d6e9d2d3.png";
 
 const skills = [
   {
     category: "Core Competencies",
+    icon: Brain,
     items: ["Machine Learning & Predictive Modeling", "AI Systems Engineering & LLM Integration", "Data Visualization & Decision Science", "Quantitative Analysis & Statistical Modelling"],
   },
   {
     category: "Education",
+    icon: GraduationCap,
     items: ["Master's in Data Science", "George Washington University", "GPA 4.0", "Global Leaders Fellowship"],
     coursework: ["Data Visualization", "Machine Learning", "Data Mining", "NLP", "Deep Learning", "Cloud Computing", "Algorithm Design", "Linux for DevOps"],
   },
@@ -79,34 +81,40 @@ export default function About() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 mb-16">
-          {skills.map((skillGroup) => (
-            <Card key={skillGroup.category} className="p-6">
-              <h3 className="font-semibold text-lg mb-4">
-                {skillGroup.category}
-              </h3>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {skillGroup.items.map((skill) => (
-                  <Badge key={skill} variant="secondary">
-                    {skill}
-                  </Badge>
-                ))}
-              </div>
-              {skillGroup.coursework && (
-                <>
-                  <h4 className="font-medium text-sm mb-2 text-muted-foreground">
-                    Coursework:
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {skillGroup.coursework.map((course) => (
-                      <Badge key={course} variant="outline">
-                        {course}
-                      </Badge>
-                    ))}
-                  </div>
-                </>
-              )}
-            </Card>
-          ))}
+          {skills.map((skillGroup) => {
+            const SkillIcon = skillGroup.icon;
+            return (
+              <Card key={skillGroup.category} className="p-6 hover-elevate transition-all duration-300">
+                <div className="flex items-center gap-2 mb-4">
+                  <SkillIcon className="h-6 w-6 text-primary" />
+                  <h3 className="font-semibold text-lg">
+                    {skillGroup.category}
+                  </h3>
+                </div>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {skillGroup.items.map((skill) => (
+                    <Badge key={skill} variant="secondary">
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+                {skillGroup.coursework && (
+                  <>
+                    <h4 className="font-medium text-sm mb-2 text-muted-foreground">
+                      Coursework:
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {skillGroup.coursework.map((course) => (
+                        <Badge key={course} variant="outline">
+                          {course}
+                        </Badge>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </Card>
+            );
+          })}
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
