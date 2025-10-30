@@ -45,21 +45,30 @@ const projects = [
   },
   {
     id: 5,
-    title: "Task Management System",
+    title: "Music Genre Classification Using Machine Learning Techniques",
     description:
-      "Collaborative project management tool with kanban boards and team features.",
+      "Performed comparative study to detect and classify music files automatically based on genre using various classification algorithms including SVM, K-Nearest Neighbors, CNN, RNN, Random Forest and Decision trees. Published in International Journal of Science Research and Management (IJSREM) Volume 7, Issue 12 on December 14, 2023.",
     image: mobileAppImage,
-    tags: ["Next.js", "Tailwind", "Prisma"],
-    category: "Web",
+    tags: ["SVM", "CNN", "RNN", "Random Forest", "K-Nearest Neighbors", "Python"],
+    category: "Machine Learning",
   },
   {
     id: 6,
-    title: "Portfolio Redesign",
+    title: "Detection of Face Mask using Keras and TensorFlow",
     description:
-      "Modern portfolio website with smooth animations and interactive elements.",
+      "Real-time face mask detection system using deep learning. Built with OpenCV, Keras, and TensorFlow to detect face masks in real-time video streams, enabling automated compliance monitoring for safety protocols.",
     image: designImage,
-    tags: ["Design System", "Framer Motion", "React"],
-    category: "Design",
+    tags: ["Keras", "TensorFlow", "OpenCV", "Deep Learning", "Computer Vision"],
+    category: "Computer Vision",
+  },
+  {
+    id: 7,
+    title: "Social Distancing Detector using YOLO and OpenCV",
+    description:
+      "Social distancing detector built using YOLO (COCO Model) along with OpenCV. Applies object detection to detect all people in video streams, computes pairwise distances between detected people, and checks if any two people are less than N pixels apart for social distancing compliance.",
+    image: webAppImage,
+    tags: ["YOLO", "OpenCV", "Computer Vision", "Deep Learning", "Object Detection"],
+    category: "Computer Vision",
   },
 ];
 
