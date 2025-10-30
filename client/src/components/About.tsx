@@ -9,12 +9,8 @@ const skills = [
     items: ["Machine Learning & Predictive Modeling", "AI Systems Engineering & LLM Integration", "Data Visualization & Decision Science", "Quantitative Analysis & Statistical Modelling"],
   },
   {
-    category: "Programming & Tools",
-    items: ["Python", "R", "SQL", "TensorFlow", "PyTorch"],
-  },
-  {
-    category: "Visualization & BI",
-    items: ["Tableau", "Power BI", "Matplotlib", "Seaborn"],
+    category: "Education",
+    items: ["Master's in Data Science, George Washington University", "GPA 4.0", "Global Leaders Fellowship", "Focus: ML, NLP, Cloud Computing"],
   },
 ];
 
@@ -59,26 +55,26 @@ export default function About() {
             />
           </div>
 
-          <div className="flex-1 space-y-4 text-foreground leading-relaxed">
-            <p>
+          <div className="flex-1 border-2 border-black dark:border-white rounded-md p-6 space-y-4 text-foreground leading-relaxed">
+            <p className="text-justify">
               Hey there — I'm Aditya Kanbargi, a data scientist who loves uncovering stories hidden inside messy, beautiful data. For me, data isn't just numbers and models — it's a way to understand people, decisions, and the little patterns that make big things happen.
             </p>
-            <p>
+            <p className="text-justify">
               I'm currently pursuing my Master's in Data Science at The George Washington University (GPA 4.0), where I was awarded the Global Leaders Fellowship for academic excellence. Between projects on machine learning, NLP, and cloud computing, I've learned that the magic of data science lies in connecting technical depth with real-world impact.
             </p>
-            <p>
+            <p className="text-justify">
               Over the past few years, I've worked across public health and enterprise analytics, building everything from early-warning prediction systems that help clinicians act faster, to dashboards that power smarter business decisions. At GW's School of Nursing, I helped create ML models that detect patient deterioration risks before they happen. Earlier, at LTIMindtree, I worked on predictive analytics and automation pipelines that made business insights faster, cleaner, and more reliable.
             </p>
-            <p>
+            <p className="text-justify">
               I'm fluent in Python, R, SQL, and love experimenting with tools like TensorFlow, PyTorch, and LangChain. Whether it's designing an LLM-powered research assistant, or optimizing a data workflow in the cloud, I enjoy building solutions that feel as good to use as they are to explain.
             </p>
-            <p>
+            <p className="text-justify">
               Outside the world of code and models, you'll probably find me at the gym, watching football, or diving into a good read. I'm driven by curiosity, caffeine, and the thrill of turning raw data into something that tells a great story — one that actually means something.
             </p>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
+        <div className="grid md:grid-cols-2 gap-6 mb-16">
           {skills.map((skillGroup) => (
             <Card key={skillGroup.category} className="p-6">
               <h3 className="font-semibold text-lg mb-4">
