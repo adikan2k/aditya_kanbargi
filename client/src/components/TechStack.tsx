@@ -10,7 +10,7 @@ import {
   SiDocker, SiKubernetes, SiApachespark, SiTableau,
   SiStreamlit, SiGrafana, SiOpenai, SiMeta,
   SiGit, SiGithub, SiJira, SiTrello, SiConfluence, SiNotion,
-  SiD3Dotjs, SiGoogle
+  SiD3Dotjs, SiGoogle, SiAmazonwebservices as SiAmazonQuicksight
 } from "react-icons/si";
 
 const techCategories = [
@@ -92,9 +92,11 @@ const techCategories = [
     technologies: [
       { name: "Tableau", icon: SiTableau, color: "text-[#E97627]" },
       { name: "Power BI", icon: Grid3x3, color: "text-[#F2C811]" },
+      { name: "Amazon QuickSight", icon: SiAmazonQuicksight, color: "text-[#FF9900]" },
+      { name: "Plotly", icon: SiPlotly, color: "text-[#3F4F75]" },
       { name: "Streamlit", icon: SiStreamlit, color: "text-[#FF4B4B]" },
       { name: "Grafana", icon: SiGrafana, color: "text-[#F46800]" },
-      { name: "Excel (VBA)", icon: FileSpreadsheet, color: "text-[#217346]" },
+      { name: "Excel (VBA, Power Query, Pivot Tables)", icon: FileSpreadsheet, color: "text-[#217346]" },
     ],
   },
   {
