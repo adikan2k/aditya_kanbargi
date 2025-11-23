@@ -30,16 +30,6 @@ const projects = [
     githubUrl: "https://github.com/adikan2k",
   },
   {
-    id: 13,
-    title: "John Lewis Christmas Ad Sentiment and Topic Modeling",
-    description:
-      "This project investigates audience sentiment and topic patterns in YouTube comments about the John Lewis 2025 Christmas advertisement. The ad's portrayal of masculinity and gender roles generated significant online discussion, making it an interesting case study for sentiment analysis and topic modeling.",
-    image: project13Image,
-    tags: ["Python", "NLP", "Sentiment Analysis", "Topic Modeling", "YouTube API", "NLTK", "Transformers"],
-    categories: ["Natural Language Processing"],
-    githubUrl: "https://github.com/adikan2k",
-  },
-  {
     id: 1,
     title: "Evidentia - Multimodal Multiagent Research Analyst",
     description:
@@ -147,6 +137,16 @@ const projects = [
     image: project11Image,
     tags: ["Deep Learning", "Medical Imaging", "Ultrasound", "Image Segmentation", "Computer Vision", "Healthcare"],
     categories: ["Deep Learning", "Computer Vision"],
+    githubUrl: "https://github.com/adikan2k",
+  },
+  {
+    id: 13,
+    title: "John Lewis Christmas Ad Sentiment and Topic Modeling",
+    description:
+      "This project investigates audience sentiment and topic patterns in YouTube comments about the John Lewis 2025 Christmas advertisement. The ad's portrayal of masculinity and gender roles generated significant online discussion, making it an interesting case study for sentiment analysis and topic modeling.",
+    image: project13Image,
+    tags: ["Python", "NLP", "Sentiment Analysis", "Topic Modeling", "YouTube API", "NLTK", "Transformers"],
+    categories: ["Natural Language Processing"],
     githubUrl: "https://github.com/adikan2k",
   },
 ];
