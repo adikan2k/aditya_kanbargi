@@ -28,20 +28,20 @@ export default function Hero({ onBookMeeting, onViewWork, isDark = false }: Hero
   useEffect(() => {
     const cursorInterval = setInterval(() => {
       setShowCursor((prev) => !prev);
-    }, 500);
+    }, 300);
     return () => clearInterval(cursorInterval);
   }, []);
 
   useEffect(() => {
     const currentPhrase = typewriterPhrases[currentPhraseIndex].text;
-    const typingSpeed = isDeleting ? 50 : 100;
+    const typingSpeed = isDeleting ? 30 : 50;
 
     const timeout = setTimeout(() => {
       if (!isDeleting) {
         if (displayedText.length < currentPhrase.length) {
           setDisplayedText(currentPhrase.slice(0, displayedText.length + 1));
         } else {
-          setTimeout(() => setIsDeleting(true), 2000);
+          setTimeout(() => setIsDeleting(true), 1200);
         }
       } else {
         if (displayedText.length > 0) {
