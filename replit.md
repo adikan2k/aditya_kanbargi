@@ -164,7 +164,18 @@ Preferred communication style: Simple, everyday language.
 - Enhanced mobile responsiveness across all sections
 - Maintained light/dark mode compatibility for all new features
 
-## Latest Updates (October 30, 2025)
+## Latest Updates (November 23, 2025)
+
+### New Project Added
+1. **USDA Food Security & Forecasting Dashboard**
+   - Added 12th project to the portfolio
+   - Category: Analytics and Forecasting
+   - Tech stack: Power BI, Google BigQuery, SQL, ETL
+   - Description: Live executive dashboard backed by automated BigQuery pipeline tracking USDA agricultural trends
+   - Highlights: 95% reduction in manual data processing time, predictive inflation metrics for supply chain decisions
+   - Includes professional project visualization with dashboard mockup
+
+## Previous Updates (October 30, 2025)
 
 ### UI/UX Enhancements
 1. **Resume Button Simplification**
