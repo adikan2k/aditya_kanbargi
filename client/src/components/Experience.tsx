@@ -9,12 +9,12 @@ import ltiLogoImage from "@assets/image_1761867956939.png";
 function highlightMetrics(text: string) {
   // Extended patterns to capture full phrases with quantitative outcomes
   const phrases = [
-    /Extended early-warning prediction lead time by 6 hours/gi,
+    /extend early-warning prediction lead times by 6 hours/gi,
     /Reduced projected readmissions and increased nurse-to-patient efficiency by 20%/gi,
     /Lowered projected nurse attrition by 8–10% annually/gi,
-    /Increased research throughput by 25%/gi,
+    /increasing research throughput by 25%/gi,
     /improving predictive accuracy by 25%/gi,
-    /reducing data preparation time by 40%/gi,
+    /reduce data preparation time by 40%/gi,
     /Enabled 3x faster decision-making/gi,
     /boosting analytics adoption by 30%/gi,
   ];
@@ -59,12 +59,13 @@ const experiences = [
     location: "Virginia",
     period: "Dec 2024 – May 2025",
     description: [
-      "Extended early-warning prediction lead time by 6 hours by building machine learning models on EHR and vital signs data to detect patient deterioration risks such as sepsis, cardiac arrest, and chronic disease flare-ups, enabling faster clinical intervention",
+      "Analyzed high-frequency patient data using SQL and Python to identify key deterioration patterns, creating visualizations that enabled clinical teams to extend early-warning prediction lead times by 6 hours for critical conditions like sepsis.",
       "Reduced projected readmissions and increased nurse-to-patient efficiency by 20% by applying clustering and predictive analytics for personalized care planning",
       "Lowered projected nurse attrition by 8–10% annually by developing statistical attrition prediction models that identified key turnover drivers, allowing administrators to implement targeted retention strategies in high-stress chronic care units",
-      "Increased research throughput by 25% by developing interactive Tableau dashboards that streamlined analysis of patient outcomes, enabling faculty to rapidly test hypotheses, uncover patterns, and accelerate publication timelines",
+      "Developed interactive Power BI dashboards to visualize clinical KPIs (patient recovery rates, vitals trends), streamlining data access for faculty and increasing research throughput by 25%.",
+      "Automated raw data ingestion for EHR systems using Python (Pandas) scripts to parse and clean JSON/CSV files, replacing manual Excel workflows to reduce data preparation time by 40%.",
     ],
-    skills: ["Machine Learning", "Python", "EHR Data", "Tableau", "Statistical Modeling", "Clustering", "Healthcare Analytics"],
+    skills: ["Machine Learning", "Python", "EHR Data", "SQL", "Power BI", "Pandas", "Statistical Modeling", "Clustering", "Healthcare Analytics"],
   },
   {
     title: "Technical Business Analyst - ServiceNow",
