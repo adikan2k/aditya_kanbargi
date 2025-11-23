@@ -172,9 +172,14 @@ Preferred communication style: Simple, everyday language.
    - Category tagline: "Advanced NLP systems for language understanding, generation, and semantic analysis."
    - Integrated into project filtering system for organized portfolio browsing
 
-### New Project Added
-1. **USDA Food Security & Forecasting Dashboard**
-   - Added 12th project to the portfolio (displayed as most recent)
+### New Projects Added
+1. **John Lewis Christmas Ad Sentiment and Topic Modeling** (Project #13)
+   - Category: Natural Language Processing
+   - Tech stack: Python, NLP, Sentiment Analysis, Topic Modeling, YouTube API, NLTK, Transformers
+   - Description: Analysis of YouTube comments on John Lewis 2025 Christmas ad exploring sentiment patterns and topics around masculinity and gender roles
+   - Showcases sentiment analysis and topic modeling for social media discourse analysis
+
+2. **USDA Food Security & Forecasting Dashboard** (Project #12)
    - Category: Analytics and Forecasting
    - Tech stack: Power BI, Google BigQuery, SQL, ETL
    - Description: Live executive dashboard backed by automated BigQuery pipeline tracking USDA agricultural trends

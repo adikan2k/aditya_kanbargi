@@ -16,6 +16,7 @@ import project9Image from "@assets/9_1761840145744.png";
 import project10Image from "@assets/10_1761840145744.png";
 import project11Image from "@assets/11_1761840145744.jpg";
 import project12Image from "@assets/image_1763919077323.png";
+import project13Image from "@assets/image_1763919442225.png";
 
 const projects = [
   {
@@ -26,6 +27,16 @@ const projects = [
     image: project12Image,
     tags: ["Power BI", "Google BigQuery", "SQL", "ETL"],
     categories: ["Analytics and Forecasting"],
+    githubUrl: "https://github.com/adikan2k",
+  },
+  {
+    id: 13,
+    title: "John Lewis Christmas Ad Sentiment and Topic Modeling",
+    description:
+      "This project investigates audience sentiment and topic patterns in YouTube comments about the John Lewis 2025 Christmas advertisement. The ad's portrayal of masculinity and gender roles generated significant online discussion, making it an interesting case study for sentiment analysis and topic modeling.",
+    image: project13Image,
+    tags: ["Python", "NLP", "Sentiment Analysis", "Topic Modeling", "YouTube API", "NLTK", "Transformers"],
+    categories: ["Natural Language Processing"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
