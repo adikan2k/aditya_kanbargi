@@ -67,7 +67,7 @@ const experiences = [
     skills: ["Machine Learning", "Python", "EHR Data", "Tableau", "Statistical Modeling", "Clustering", "Healthcare Analytics"],
   },
   {
-    title: "Quantitative Analyst / Decision Science Analyst",
+    title: "Technical Business Analyst - ServiceNow",
     company: "LTIMindtree",
     companyLogo: ltiLogoImage,
     location: "India",

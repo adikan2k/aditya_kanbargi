@@ -177,6 +177,7 @@ Preferred communication style: Simple, everyday language.
    - LTIMindtree: Official LTIMindtree logo with brand colors (blue)
    - Logos are displayed as small thumbnails (h-6) inline with company name
    - Maintains original brand colors for authenticity and professional appearance
+   - Updated LTIMindtree role title to "Technical Business Analyst - ServiceNow"
 
 3. **Projects Section - Dynamic Taglines**
    - Implemented dynamic tagline system that changes based on active category filter
