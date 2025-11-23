@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles, Brain, Compass, Globe, ChefHat, Mail, Code2, Download } from "lucide-react";
+import { ArrowRight, Sparkles, Brain, Compass, Globe, ChefHat, Mail, Code2, Download, TrendingUp, Microscope, BookOpen } from "lucide-react";
 import { SiLinkedin, SiGithub, SiGmail } from "react-icons/si";
 import NetworkBackground from "./NetworkBackground";
 
@@ -14,6 +14,9 @@ const typewriterPhrases = [
   { text: "Data Alchemist", icon: Sparkles, color: "text-blue-400" },
   { text: "AI Enthusiast", icon: Brain, color: "text-purple-400" },
   { text: "Machine Learning Engineer", icon: Code2, color: "text-pink-400" },
+  { text: "Metric Maestro", icon: TrendingUp, color: "text-teal-400" },
+  { text: "Pattern Detective", icon: Microscope, color: "text-violet-400" },
+  { text: "Data Storyteller", icon: BookOpen, color: "text-amber-400" },
   { text: "Curious Voyager", icon: Compass, color: "text-emerald-400" },
   { text: "Digital Explorer", icon: Globe, color: "text-cyan-400" },
   { text: "Culinary Creator", icon: ChefHat, color: "text-orange-400" },
