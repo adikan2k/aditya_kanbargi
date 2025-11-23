@@ -19,6 +19,16 @@ import project12Image from "@assets/image_1763919077323.png";
 
 const projects = [
   {
+    id: 12,
+    title: "USDA Food Security & Forecasting Dashboard",
+    description:
+      "Developed a live executive dashboard in Power BI backed by an automated BigQuery pipeline to track USDA agricultural trends, cutting manual data processing time by 95% and visualizing predictive inflation metrics to support strategic supply chain decisions.",
+    image: project12Image,
+    tags: ["Power BI", "Google BigQuery", "SQL", "ETL"],
+    categories: ["Analytics and Forecasting"],
+    githubUrl: "https://github.com/adikan2k",
+  },
+  {
     id: 1,
     title: "Evidentia - Multimodal Multiagent Research Analyst",
     description:
@@ -126,16 +136,6 @@ const projects = [
     image: project11Image,
     tags: ["Deep Learning", "Medical Imaging", "Ultrasound", "Image Segmentation", "Computer Vision", "Healthcare"],
     categories: ["Deep Learning", "Computer Vision"],
-    githubUrl: "https://github.com/adikan2k",
-  },
-  {
-    id: 12,
-    title: "USDA Food Security & Forecasting Dashboard",
-    description:
-      "Developed a live executive dashboard in Power BI backed by an automated BigQuery pipeline to track USDA agricultural trends, cutting manual data processing time by 95% and visualizing predictive inflation metrics to support strategic supply chain decisions.",
-    image: project12Image,
-    tags: ["Power BI", "Google BigQuery", "SQL", "ETL"],
-    categories: ["Analytics and Forecasting"],
     githubUrl: "https://github.com/adikan2k",
   },
 ];
