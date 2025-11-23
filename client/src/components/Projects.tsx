@@ -140,7 +140,7 @@ const projects = [
   },
 ];
 
-const categories = ["All", "Machine Learning", "AI", "Analytics and Forecasting", "Data Science Foundations", "Deep Learning", "Computer Vision"];
+const categories = ["All", "Machine Learning", "AI", "Natural Language Processing", "Analytics and Forecasting", "Data Science Foundations", "Deep Learning", "Computer Vision"];
 
 export default function Projects() {
   const { ref, isVisible } = useScrollAnimation();
@@ -168,6 +168,7 @@ export default function Projects() {
       "All": "A comprehensive showcase of my work across AI, Machine Learning, Computer Vision, Analytics, and Data Science projects.",
       "Machine Learning": "Predictive models and ML systems tackling real-world challenges with advanced algorithms.",
       "AI": "Intelligent systems leveraging LLMs, agentic frameworks, and advanced AI architectures.",
+      "Natural Language Processing": "Advanced NLP systems for language understanding, generation, and semantic analysis.",
       "Analytics and Forecasting": "Data-driven insights and forecasting models to inform strategic decision-making.",
       "Data Science Foundations": "Exploratory analysis and statistical modeling revealing patterns in complex datasets.",
       "Deep Learning": "Neural networks and deep architectures solving complex pattern recognition problems.",

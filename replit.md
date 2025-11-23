@@ -166,9 +166,15 @@ Preferred communication style: Simple, everyday language.
 
 ## Latest Updates (November 23, 2025)
 
+### New Project Category Added
+1. **Natural Language Processing**
+   - Added new project filter category for NLP projects
+   - Category tagline: "Advanced NLP systems for language understanding, generation, and semantic analysis."
+   - Integrated into project filtering system for organized portfolio browsing
+
 ### New Project Added
 1. **USDA Food Security & Forecasting Dashboard**
-   - Added 12th project to the portfolio
+   - Added 12th project to the portfolio (displayed as most recent)
    - Category: Analytics and Forecasting
    - Tech stack: Power BI, Google BigQuery, SQL, ETL
    - Description: Live executive dashboard backed by automated BigQuery pipeline tracking USDA agricultural trends
