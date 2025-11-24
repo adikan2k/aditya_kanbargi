@@ -56,7 +56,7 @@ const projects = [
       "Built an end-to-end analytics pipeline combining EDA, regression, clustering, statistical testing, and ML models (XGBoost, LightGBM, LSTMs) to analyze 100k+ Steam game records with 92% forecast accuracy. Designed & deployed interactive visualizations and dashboards (Plotly, Tableau) to communicate market trends, ownership forecasting, and player behavior insights.",
     image: project3Image,
     tags: ["XGBoost", "LightGBM", "LSTM", "EDA", "Plotly", "Tableau", "Python"],
-    categories: ["Analytics and Forecasting"],
+    categories: ["Machine Learning", "Analytics and Forecasting"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
@@ -151,7 +151,7 @@ const projects = [
   },
 ];
 
-const categories = ["All", "Gen AI", "Analytics and Forecasting", "Deep Learning and Computer Vision", "Natural Language Processing"];
+const categories = ["All", "Gen AI", "Machine Learning", "Analytics and Forecasting", "Deep Learning and Computer Vision", "Natural Language Processing"];
 
 export default function Projects() {
   const { ref, isVisible } = useScrollAnimation();
@@ -176,8 +176,9 @@ export default function Projects() {
 
   const getTagline = () => {
     const taglines: Record<string, string> = {
-      "All": "A comprehensive showcase of my work across Gen AI, Deep Learning, Computer Vision, Analytics, and NLP projects.",
+      "All": "A comprehensive showcase of my work across Gen AI, Machine Learning, Deep Learning, Computer Vision, Analytics, and NLP projects.",
       "Gen AI": "Intelligent systems leveraging LLMs, agentic frameworks, and advanced AI architectures.",
+      "Machine Learning": "Predictive models and ML systems tackling real-world challenges with advanced algorithms.",
       "Analytics and Forecasting": "Data-driven insights and forecasting models to inform strategic decision-making.",
       "Deep Learning and Computer Vision": "Neural networks and visual intelligence systems for pattern recognition, image analysis, and object detection.",
       "Natural Language Processing": "Advanced NLP systems for language understanding, generation, and semantic analysis.",
