@@ -36,7 +36,7 @@ const projects = [
       "Agentic AI research framework that transforms messy, multimodal data into clear, citation-rich insights. AI-powered research analyst that plans, navigates, verifies, and synthesizes.",
     image: project1Image,
     tags: ["LangGraph", "FastAPI", "Next.js", "Qdrant", "Postgres", "LLM Agents"],
-    categories: ["AI"],
+    categories: ["Gen AI"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
@@ -46,7 +46,7 @@ const projects = [
       "End-to-end platform using Llama-3.1-70B and BGE-large embeddings within a RAG pipeline, enabling natural-language Q&A with citations, automated multi-state policy comparisons, and structured regulatory insights. Improved policy analysis efficiency by >50% with sub-5s response latency across 100+ documents.",
     image: project2Image,
     tags: ["Llama-3.1-70B", "RAG", "BGE Embeddings", "LLMs", "Python", "NLP"],
-    categories: ["AI"],
+    categories: ["Gen AI"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
@@ -56,7 +56,7 @@ const projects = [
       "Built an end-to-end analytics pipeline combining EDA, regression, clustering, statistical testing, and ML models (XGBoost, LightGBM, LSTMs) to analyze 100k+ Steam game records with 92% forecast accuracy. Designed & deployed interactive visualizations and dashboards (Plotly, Tableau) to communicate market trends, ownership forecasting, and player behavior insights.",
     image: project3Image,
     tags: ["XGBoost", "LightGBM", "LSTM", "EDA", "Plotly", "Tableau", "Python"],
-    categories: ["Machine Learning", "Analytics and Forecasting"],
+    categories: ["Analytics and Forecasting"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
@@ -66,7 +66,7 @@ const projects = [
       "Designed and deployed a cloud-native few-shot image classification system on AWS using MAML, building a full-stack pipeline with Python, Flask, S3, SageMaker, and EC2 to deliver real-time inference with end-to-end scalability, automation, and cloud integration.",
     image: project4Image,
     tags: ["MAML", "AWS", "SageMaker", "Flask", "S3", "EC2", "Meta-Learning"],
-    categories: ["Machine Learning"],
+    categories: ["Deep Learning and Computer Vision"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
@@ -76,7 +76,7 @@ const projects = [
       "Performed comparative study to detect and classify music files automatically based on genre using various classification algorithms including SVM, K-Nearest Neighbors, CNN, RNN, Random Forest and Decision trees. Published in International Journal of Science Research and Management (IJSREM) Volume 7, Issue 12 on December 14, 2023.",
     image: project5Image,
     tags: ["SVM", "CNN", "RNN", "Random Forest", "K-Nearest Neighbors", "Python"],
-    categories: ["Machine Learning"],
+    categories: ["Deep Learning and Computer Vision"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
@@ -86,7 +86,7 @@ const projects = [
       "Real-time face mask detection system using deep learning. Built with OpenCV, Keras, and TensorFlow to detect face masks in real-time video streams, enabling automated compliance monitoring for safety protocols.",
     image: project6Image,
     tags: ["Keras", "TensorFlow", "OpenCV", "Deep Learning", "Computer Vision"],
-    categories: ["Computer Vision", "Machine Learning", "Deep Learning"],
+    categories: ["Deep Learning and Computer Vision"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
@@ -96,7 +96,7 @@ const projects = [
       "Social distancing detector built using YOLO (COCO Model) along with OpenCV. Applies object detection to detect all people in video streams, computes pairwise distances between detected people, and checks if any two people are less than N pixels apart for social distancing compliance.",
     image: project7Image,
     tags: ["YOLO", "OpenCV", "Computer Vision", "Deep Learning", "Object Detection"],
-    categories: ["Computer Vision", "Deep Learning"],
+    categories: ["Deep Learning and Computer Vision"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
@@ -106,7 +106,7 @@ const projects = [
       "LSTM-based Bitcoin price prediction project using Google Trend keywords. Determines if LSTM algorithm can predict Bitcoin close price by analyzing keyword volume from Google Trends. Bitcoin price dataset downloaded hourly using coinapi.io API, and Google Trends keywords downloaded using Python pytrend library. Predicted Bitcoin close prices better than expected by improving learning in every epoch.",
     image: project8Image,
     tags: ["LSTM", "RNN", "Deep Learning", "Bitcoin", "Google Trends", "Python", "Time Series"],
-    categories: ["Deep Learning", "Analytics and Forecasting"],
+    categories: ["Deep Learning and Computer Vision", "Analytics and Forecasting"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
@@ -116,7 +116,7 @@ const projects = [
       "Insightful journey into understanding the patterns behind road fatalities in the U.S. and creating actionable insights for a safer future. Analysis of 36,891 observations with 83 features from FARS 2022 Dataset using R programming language for comprehensive statistical analysis and visualization.",
     image: project9Image,
     tags: ["R", "Statistical Analysis", "Data Visualization", "FARS Dataset", "Public Health"],
-    categories: ["Analytics and Forecasting", "Data Science Foundations"],
+    categories: ["Analytics and Forecasting"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
@@ -126,7 +126,7 @@ const projects = [
       "Delves into the top-ranking songs on Spotify, exploring the intricate dynamics behind global and regional music trends. Using data on track features like danceability, energy, tempo, and popularity, uncovers what makes a song a chart-topper. By examining patterns in explicit content, album releases, and listener preferences across countries, this exploratory analysis offers valuable insights into the evolving world of music streaming.",
     image: project10Image,
     tags: ["Python", "Spotify API", "Data Analysis", "Music Analytics", "Statistical Analysis"],
-    categories: ["Analytics and Forecasting", "Data Science Foundations"],
+    categories: ["Analytics and Forecasting"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
@@ -136,7 +136,7 @@ const projects = [
       "Deep learning model built to detect the precise location of the Brachial Plexus nerve that is present near the shoulder from ultrasound images. Implements advanced image segmentation techniques to aid in medical diagnostics and improve accuracy in nerve block procedures.",
     image: project11Image,
     tags: ["Deep Learning", "Medical Imaging", "Ultrasound", "Image Segmentation", "Computer Vision", "Healthcare"],
-    categories: ["Deep Learning", "Computer Vision"],
+    categories: ["Deep Learning and Computer Vision"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
@@ -151,7 +151,7 @@ const projects = [
   },
 ];
 
-const categories = ["All", "Machine Learning", "AI", "Natural Language Processing", "Analytics and Forecasting", "Data Science Foundations", "Deep Learning", "Computer Vision"];
+const categories = ["All", "Gen AI", "Analytics and Forecasting", "Deep Learning and Computer Vision", "Natural Language Processing"];
 
 export default function Projects() {
   const { ref, isVisible } = useScrollAnimation();
@@ -176,14 +176,11 @@ export default function Projects() {
 
   const getTagline = () => {
     const taglines: Record<string, string> = {
-      "All": "A comprehensive showcase of my work across AI, Machine Learning, Computer Vision, Analytics, and Data Science projects.",
-      "Machine Learning": "Predictive models and ML systems tackling real-world challenges with advanced algorithms.",
-      "AI": "Intelligent systems leveraging LLMs, agentic frameworks, and advanced AI architectures.",
-      "Natural Language Processing": "Advanced NLP systems for language understanding, generation, and semantic analysis.",
+      "All": "A comprehensive showcase of my work across Gen AI, Deep Learning, Computer Vision, Analytics, and NLP projects.",
+      "Gen AI": "Intelligent systems leveraging LLMs, agentic frameworks, and advanced AI architectures.",
       "Analytics and Forecasting": "Data-driven insights and forecasting models to inform strategic decision-making.",
-      "Data Science Foundations": "Exploratory analysis and statistical modeling revealing patterns in complex datasets.",
-      "Deep Learning": "Neural networks and deep architectures solving complex pattern recognition problems.",
-      "Computer Vision": "Visual intelligence systems for image analysis, object detection, and real-time monitoring.",
+      "Deep Learning and Computer Vision": "Neural networks and visual intelligence systems for pattern recognition, image analysis, and object detection.",
+      "Natural Language Processing": "Advanced NLP systems for language understanding, generation, and semantic analysis.",
     };
     return taglines[activeCategory] || taglines["All"];
   };
