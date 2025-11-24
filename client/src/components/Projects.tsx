@@ -66,7 +66,7 @@ const projects = [
       "Designed and deployed a cloud-native few-shot image classification system on AWS using MAML, building a full-stack pipeline with Python, Flask, S3, SageMaker, and EC2 to deliver real-time inference with end-to-end scalability, automation, and cloud integration.",
     image: project4Image,
     tags: ["MAML", "AWS", "SageMaker", "Flask", "S3", "EC2", "Meta-Learning"],
-    categories: ["Deep Learning and Computer Vision"],
+    categories: ["Machine Learning"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
@@ -76,7 +76,7 @@ const projects = [
       "Performed comparative study to detect and classify music files automatically based on genre using various classification algorithms including SVM, K-Nearest Neighbors, CNN, RNN, Random Forest and Decision trees. Published in International Journal of Science Research and Management (IJSREM) Volume 7, Issue 12 on December 14, 2023.",
     image: project5Image,
     tags: ["SVM", "CNN", "RNN", "Random Forest", "K-Nearest Neighbors", "Python"],
-    categories: ["Deep Learning and Computer Vision"],
+    categories: ["Machine Learning"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
