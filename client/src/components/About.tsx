@@ -47,13 +47,13 @@ const skills = [
   {
     category: "Core Competencies",
     icon: Brain,
-    items: ["Machine Learning & Predictive Modeling", "AI Systems Engineering & LLM Integration", "Data Visualization & Decision Science", "Quantitative Analysis & Statistical Modelling"],
+    items: ["Analytics Engineering & Data Pipelines", "Statistical Modeling & Forecasting", "Data Visualization & BI Dashboards", "Machine Learning & Predictive Analytics"],
   },
   {
     category: "Education",
     icon: GraduationCap,
     items: ["Master's in Data Science", "George Washington University", "GPA 4.0", "Global Leaders Fellowship"],
-    coursework: ["Data Visualization", "Machine Learning", "Data Mining", "NLP", "Deep Learning", "Cloud Computing", "Algorithm Design", "Linux for DevOps"],
+    coursework: ["Visualization of Complex Data", "Data Mining", "Natural Language Processing", "Cloud Computing", "Algorithm Design", "Data Warehousing", "Statistical Modeling", "Machine Learning"],
   },
 ];
 
@@ -70,7 +70,7 @@ const achievements = [
   },
   {
     icon: Rocket,
-    title: "10+ Projects",
+    title: "15+ Projects",
     description: "End-to-end Deployments",
   },
   {
@@ -190,7 +190,7 @@ export default function About() {
             <Award className="h-5 w-5 text-primary" />
             Professional Certifications
           </h3>
-          <div className="grid md:grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-2 gap-4">
             <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
               <SiAmazon className="h-8 w-8 text-orange-500 flex-shrink-0" />
               <div>
@@ -203,13 +203,6 @@ export default function About() {
               <div>
                 <div className="font-medium text-sm">Databricks Certified</div>
                 <div className="text-xs text-muted-foreground">GenAI Accreditation</div>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-              <SiAmazon className="h-8 w-8 text-orange-500 flex-shrink-0" />
-              <div>
-                <div className="font-medium text-sm">AWS Certified</div>
-                <div className="text-xs text-muted-foreground">ML Engineer - Associate</div>
               </div>
             </div>
           </div>
