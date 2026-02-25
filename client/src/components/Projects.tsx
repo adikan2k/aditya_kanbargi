@@ -17,8 +17,63 @@ import project10Image from "@assets/10_1761840145744.png";
 import project11Image from "@assets/11_1761840145744.jpg";
 import project12Image from "@assets/image_1763919077323.png";
 import project13Image from "@assets/image_1763919442225.png";
+import luminaImage from "@assets/lumina_thumbnail.svg";
+import nutrimapImage from "@assets/nutrimap_thumbnail.svg";
+import riskmetricImage from "@assets/riskmetric_thumbnail.svg";
+import nutritionalArbitrageImage from "@assets/nutritional_arbitrage_thumbnail.svg";
+import scholarlyImage from "@assets/scholarly_thumbnail.svg";
 
 const projects = [
+  {
+    id: 14,
+    title: "Lumina: Real-Time U.S. Grid Intelligence & Demand Forecasting",
+    description:
+      "Scalable energy analytics platform processing 400K+ hourly demand records across 10 U.S. balancing authorities and 50 states, revealing that high-renewable states pay 30% less than the national average - disproving the \"clean energy = expensive\" myth.",
+    image: luminaImage,
+    tags: ["Python", "SQL", "Google BigQuery", "Looker Studio", "EIA API"],
+    categories: ["Analytics Engineering & Forecasting"],
+    githubUrl: "https://github.com/adikan2k",
+  },
+  {
+    id: 15,
+    title: "NutriMap: Geospatial Food Analytics & Inflation Forecasting",
+    description:
+      "Real-time geospatial analytics quantifying the 2.5\u00D7 grocery affordability gap between food deserts and high-access areas across 13.6M Americans.",
+    image: nutrimapImage,
+    tags: ["Power BI", "PostgreSQL", "dbt", "Prophet", "Python", "Kroger & USDA Data"],
+    categories: ["Analytics Engineering & Forecasting"],
+    githubUrl: "https://github.com/adikan2k",
+  },
+  {
+    id: 16,
+    title: "RiskMetric: Fraud Detection & Spatial-Temporal Risk Scoring",
+    description:
+      "A zero-cost, high-performance Trust Engine that identifies complex fraud archetypes across 1M+ synthetic banking transactions with sub-second inference speed.",
+    image: riskmetricImage,
+    tags: ["Python", "SQL", "DuckDB", "dbt", "Streamlit", "Plotly"],
+    categories: ["Analytics Engineering & Forecasting"],
+    githubUrl: "https://github.com/adikan2k",
+  },
+  {
+    id: 17,
+    title: "Nutritional Arbitrage: AI-Powered Grocery Optimization",
+    description:
+      "An intelligent web application that uses linear programming to optimize grocery shopping. It finds the perfect combination of foods to meet your nutrition goals at the lowest possible cost.",
+    image: nutritionalArbitrageImage,
+    tags: ["PuLP", "SQLite", "RapidFuzz", "Streamlit", "Plotly"],
+    categories: ["Gen AI"],
+    githubUrl: "https://github.com/adikan2k",
+  },
+  {
+    id: 18,
+    title: "Scholarly Topic Navigator - Explainable Research Digest Pipeline",
+    description:
+      "This project tackles the surge of NLP publications (arXiv, ACL, EMNLP, etc.) by building an automated pipeline that surfaces timely, relevant papers with transparent recommendation logic. It combines modern neural methods with standard NLP preprocessing to enable clustering, classification, retrieval, and summarization, while incorporating faculty feedback for continuous improvement.",
+    image: scholarlyImage,
+    tags: ["BERTopic", "Word2Vec", "SciBERT", "FAISS", "Zero-Shot Learning", "LIME", "Plotly"],
+    categories: ["Natural Language Processing"],
+    githubUrl: "https://github.com/adikan2k",
+  },
   {
     id: 12,
     title: "USDA Food Security & Forecasting Dashboard",
@@ -26,7 +81,7 @@ const projects = [
       "Developed a live executive dashboard in Power BI backed by an automated BigQuery pipeline to track USDA agricultural trends, cutting manual data processing time by 95% and visualizing predictive inflation metrics to support strategic supply chain decisions.",
     image: project12Image,
     tags: ["Power BI", "Google BigQuery", "SQL", "ETL"],
-    categories: ["Analytics and Forecasting"],
+    categories: ["Analytics Engineering & Forecasting"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
@@ -56,7 +111,7 @@ const projects = [
       "Built an end-to-end analytics pipeline combining EDA, regression, clustering, statistical testing, and ML models (XGBoost, LightGBM, LSTMs) to analyze 100k+ Steam game records with 92% forecast accuracy. Designed & deployed interactive visualizations and dashboards (Plotly, Tableau) to communicate market trends, ownership forecasting, and player behavior insights.",
     image: project3Image,
     tags: ["XGBoost", "LightGBM", "LSTM", "EDA", "Plotly", "Tableau", "Python"],
-    categories: ["Machine Learning", "Analytics and Forecasting"],
+    categories: ["Machine Learning", "Analytics Engineering & Forecasting"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
@@ -106,7 +161,7 @@ const projects = [
       "LSTM-based Bitcoin price prediction project using Google Trend keywords. Determines if LSTM algorithm can predict Bitcoin close price by analyzing keyword volume from Google Trends. Bitcoin price dataset downloaded hourly using coinapi.io API, and Google Trends keywords downloaded using Python pytrend library. Predicted Bitcoin close prices better than expected by improving learning in every epoch.",
     image: project8Image,
     tags: ["LSTM", "RNN", "Deep Learning", "Bitcoin", "Google Trends", "Python", "Time Series"],
-    categories: ["Deep Learning and Computer Vision", "Analytics and Forecasting"],
+    categories: ["Deep Learning and Computer Vision", "Analytics Engineering & Forecasting"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
@@ -116,7 +171,7 @@ const projects = [
       "Insightful journey into understanding the patterns behind road fatalities in the U.S. and creating actionable insights for a safer future. Analysis of 36,891 observations with 83 features from FARS 2022 Dataset using R programming language for comprehensive statistical analysis and visualization.",
     image: project9Image,
     tags: ["R", "Statistical Analysis", "Data Visualization", "FARS Dataset", "Public Health"],
-    categories: ["Analytics and Forecasting"],
+    categories: ["Analytics Engineering & Forecasting"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
@@ -126,7 +181,7 @@ const projects = [
       "Delves into the top-ranking songs on Spotify, exploring the intricate dynamics behind global and regional music trends. Using data on track features like danceability, energy, tempo, and popularity, uncovers what makes a song a chart-topper. By examining patterns in explicit content, album releases, and listener preferences across countries, this exploratory analysis offers valuable insights into the evolving world of music streaming.",
     image: project10Image,
     tags: ["Python", "Spotify API", "Data Analysis", "Music Analytics", "Statistical Analysis"],
-    categories: ["Analytics and Forecasting"],
+    categories: ["Analytics Engineering & Forecasting"],
     githubUrl: "https://github.com/adikan2k",
   },
   {
@@ -151,7 +206,7 @@ const projects = [
   },
 ];
 
-const categories = ["All", "Gen AI", "Machine Learning", "Analytics and Forecasting", "Deep Learning and Computer Vision", "Natural Language Processing"];
+const categories = ["All", "Analytics Engineering & Forecasting", "Gen AI", "Natural Language Processing", "Machine Learning", "Deep Learning and Computer Vision"];
 
 export default function Projects() {
   const { ref, isVisible } = useScrollAnimation();
@@ -176,12 +231,12 @@ export default function Projects() {
 
   const getTagline = () => {
     const taglines: Record<string, string> = {
-      "All": "A comprehensive showcase of my work across Gen AI, Machine Learning, Deep Learning, Computer Vision, Analytics, and NLP projects.",
+      "All": "A comprehensive showcase of my work across Analytics Engineering, Gen AI, Machine Learning, Deep Learning, Computer Vision, and NLP projects.",
+      "Analytics Engineering & Forecasting": "End-to-end data pipelines, warehousing, and forecasting dashboards that drive strategic decision-making.",
       "Gen AI": "Intelligent systems leveraging LLMs, agentic frameworks, and advanced AI architectures.",
-      "Machine Learning": "Predictive models and ML systems tackling real-world challenges with advanced algorithms.",
-      "Analytics and Forecasting": "Data-driven insights and forecasting models to inform strategic decision-making.",
-      "Deep Learning and Computer Vision": "Neural networks and visual intelligence systems for pattern recognition, image analysis, and object detection.",
       "Natural Language Processing": "Advanced NLP systems for language understanding, generation, and semantic analysis.",
+      "Machine Learning": "Predictive models and ML systems tackling real-world challenges with advanced algorithms.",
+      "Deep Learning and Computer Vision": "Neural networks and visual intelligence systems for pattern recognition, image analysis, and object detection.",
     };
     return taglines[activeCategory] || taglines["All"];
   };
