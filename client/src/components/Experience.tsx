@@ -9,14 +9,16 @@ import ltiLogoImage from "@assets/image_1761867956939.png";
 function highlightMetrics(text: string) {
   // Extended patterns to capture full phrases with quantitative outcomes
   const phrases = [
-    /extend early-warning prediction lead times by 6 hours/gi,
-    /Reduced projected readmissions and increased nurse-to-patient efficiency by 20%/gi,
-    /Lowered projected nurse attrition by 8–10% annually/gi,
+    /enabled clinical teams to extend early-warning prediction lead times by 6 hours/gi,
+    /slashing data preparation time by 40%/gi,
     /increasing research throughput by 25%/gi,
+    /optimizing nurse-to-patient allocation by 20%/gi,
+    /cut annual turnover by 8-10%/gi,
     /improving predictive accuracy by 25%/gi,
-    /reduce data preparation time by 40%/gi,
-    /Enabled 3x faster decision-making/gi,
-    /boosting analytics adoption by 30%/gi,
+    /expedite strategic decision-making by 3x/gi,
+    /boosting stakeholder trust in analytics adoption by 30%/gi,
+    /reducing data availability latency by 40%/gi,
+    /accelerating the end-to-end analytics project lifecycle by 15%/gi,
   ];
   
   let result: (string | JSX.Element)[] = [text];
@@ -59,28 +61,28 @@ const experiences = [
     location: "Virginia",
     period: "Dec 2024 – May 2025",
     description: [
-      "Analyzed high-frequency patient data using SQL and Python to identify key deterioration patterns, creating visualizations that enabled clinical teams to extend early-warning prediction lead times by 6 hours for critical conditions like sepsis.",
-      "Reduced projected readmissions and increased nurse-to-patient efficiency by 20% by applying clustering and predictive analytics for personalized care planning",
-      "Lowered projected nurse attrition by 8–10% annually by developing statistical attrition prediction models that identified key turnover drivers, allowing administrators to implement targeted retention strategies in high-stress chronic care units",
+      "Engineered an automated ETL pipeline for EHR systems using Python (Pandas) scripts to parse and clean JSON/CSV files, replacing manual Excel workflows and slashing data preparation time by 40%.",
       "Developed interactive Power BI dashboards to visualize clinical KPIs (patient recovery rates, vitals trends), streamlining data access for faculty and increasing research throughput by 25%.",
-      "Automated raw data ingestion for EHR systems using Python (Pandas) scripts to parse and clean JSON/CSV files, replacing manual Excel workflows to reduce data preparation time by 40%.",
+      "Executed risk stratification models (SciPy/Statsmodels) on patient data to identify key deterioration drivers, optimizing nurse-to-patient allocation by 20%.",
+      "Analyzed high-frequency patient data using SQL and Python to identify key deterioration patterns, creating visualizations that enabled clinical teams to extend early-warning prediction lead times by 6 hours for critical conditions like sepsis.",
+      "Modeled historical staffing logs to pinpoint attrition drivers, providing data-backed strategies that cut annual turnover by 8-10%.",
     ],
-    skills: ["Machine Learning", "Python", "EHR Data", "SQL", "Power BI", "Pandas", "Statistical Modeling", "Clustering", "Healthcare Analytics"],
+    skills: ["Python", "SQL", "Power BI", "Pandas", "SciPy", "Statsmodels", "ETL", "EHR Data", "Healthcare Analytics"],
   },
   {
     title: "Technical Business Analyst - ServiceNow",
     company: "LTIMindtree",
     companyLogo: ltiLogoImage,
     location: "India",
-    period: "Sept 2022 – May 2024",
+    period: "Sept 2022 – June 2024",
     description: [
-      "Performed advanced statistical modeling and machine learning (regression, clustering, classification) in Python & SQL on customer, operational, and transactional datasets, improving predictive accuracy by 25% and enabling more reliable business forecasting",
-      "Automated scalable ETL workflows to ingest, clean, and transform multi-format data (JSON, CSV, APIs) from PostgreSQL, Oracle, and cloud data warehouses, reducing data preparation time by 40% and improving data consistency for downstream analytics",
-      "Enabled 3x faster decision-making by developing and deploying interactive dashboards in Power BI that visualized KPIs, financial metrics, and statistical trends in real time, directly supporting senior leadership and cross-functional teams",
-      "Strengthened data integrity and boosted analytics adoption by 30% by implementing robust SQL query validation, resolving data inconsistencies, and applying statistical anomaly detection methods across enterprise datasets, ensuring dashboards and ML models delivered accurate, trustworthy insights",
-      "Streamlined cross-functional collaboration (business, operations, engineering) to translate requirements into analytics solutions, ensuring alignment of statistical outputs with corporate objectives",
+      "Architected real-time executive dashboards using Power BI and ServiceNow Performance Analytics to visualize real-time operational KPIs, enabling leadership to identify process bottlenecks and expedite strategic decision-making by 3x.",
+      "Implemented a comprehensive data quality framework by writing SQL validation scripts to audit enterprise datasets, resolving inconsistencies and boosting stakeholder trust in analytics adoption by 30%.",
+      "Engineered scalable ETL pipelines to migrate multi-format customer and incident data (JSON/CSV) from ServiceNow into AWS S3 and Redshift, reducing data availability latency by 40% for downstream analytics and reporting.",
+      "Translated complex business requirements into technical specifications for 3+ global engineering teams, accelerating the end-to-end analytics project lifecycle by 15%.",
+      "Performed advanced statistical modeling and machine learning (XGBoost and Time-Series models) on customer, operational, and transactional datasets, improving predictive accuracy by 25% and enabling more reliable business forecasting.",
     ],
-    skills: ["Python", "SQL", "Machine Learning", "Power BI", "ETL", "PostgreSQL", "Oracle", "Statistical Modeling", "Data Warehousing"],
+    skills: ["Power BI", "SQL", "AWS S3", "Redshift", "ServiceNow", "ETL", "XGBoost", "Time-Series", "Statistical Modeling"],
   },
 ];
 
