@@ -144,16 +144,6 @@ const projects = [
     githubUrl: "https://github.com/adikan2k",
   },
   {
-    id: 8,
-    title: "Bitcoin Price Prediction using LSTM and Google Trends",
-    description:
-      "LSTM-based Bitcoin price prediction project using Google Trend keywords. Determines if LSTM algorithm can predict Bitcoin close price by analyzing keyword volume from Google Trends. Bitcoin price dataset downloaded hourly using coinapi.io API, and Google Trends keywords downloaded using Python pytrend library. Predicted Bitcoin close prices better than expected by improving learning in every epoch.",
-    image: project8Image,
-    tags: ["LSTM", "RNN", "Deep Learning", "Bitcoin", "Google Trends", "Python", "Time Series"],
-    categories: ["Deep Learning and Computer Vision", "Analytics Engineering & Forecasting"],
-    githubUrl: "https://github.com/adikan2k",
-  },
-  {
     id: 9,
     title: "Dead Ends and Data Trends: A Journey Through America's Recent Accident Stats",
     description:
@@ -172,6 +162,16 @@ const projects = [
     tags: ["Python", "Spotify API", "Data Analysis", "Music Analytics", "Statistical Analysis"],
     categories: ["Analytics Engineering & Forecasting"],
     githubUrl: "https://github.com/adikan2k/Predictive-Analytics-Acoustic-Typologies-Clustering-Ensemble-Classification-of-Global-Spotify-Data",
+  },
+  {
+    id: 8,
+    title: "Bitcoin Price Prediction using LSTM and Google Trends",
+    description:
+      "LSTM-based Bitcoin price prediction project using Google Trend keywords. Determines if LSTM algorithm can predict Bitcoin close price by analyzing keyword volume from Google Trends. Bitcoin price dataset downloaded hourly using coinapi.io API, and Google Trends keywords downloaded using Python pytrend library. Predicted Bitcoin close prices better than expected by improving learning in every epoch.",
+    image: project8Image,
+    tags: ["LSTM", "RNN", "Deep Learning", "Bitcoin", "Google Trends", "Python", "Time Series"],
+    categories: ["Deep Learning and Computer Vision", "Analytics Engineering & Forecasting"],
+    githubUrl: "https://github.com/adikan2k",
   },
   {
     id: 11,
