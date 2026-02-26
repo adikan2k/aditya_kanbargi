@@ -15,13 +15,12 @@ import project8Image from "@assets/8_1761840145744.jpg";
 import project9Image from "@assets/9_1761840145744.png";
 import project10Image from "@assets/10_1761840145744.png";
 import project11Image from "@assets/11_1761840145744.jpg";
-import project12Image from "@assets/image_1763919077323.png";
 import project13Image from "@assets/image_1763919442225.png";
 import luminaImage from "@assets/lumina_thumbnail.png";
 import nutrimapImage from "@assets/nutrimap_thumbnail.png";
-import riskmetricImage from "@assets/riskmetric_thumbnail.svg";
-import nutritionalArbitrageImage from "@assets/nutritional_arbitrage_thumbnail.svg";
-import scholarlyImage from "@assets/scholarly_thumbnail.svg";
+import riskmetricImage from "@assets/Riskmetric.png";
+import nutritionalArbitrageImage from "@assets/na.jpg";
+import scholarlyImage from "@assets/scholarly.jpg";
 
 const projects = [
   {
@@ -32,7 +31,7 @@ const projects = [
     image: luminaImage,
     tags: ["Python", "SQL", "Google BigQuery", "Looker Studio", "EIA API"],
     categories: ["Analytics Engineering & Forecasting"],
-    githubUrl: "https://github.com/adikan2k",
+    githubUrl: "https://github.com/adikan2k/Lumina-Real-Time-U.S.-Grid-Intelligence-Demand-Forecasting",
   },
   {
     id: 15,
@@ -42,7 +41,7 @@ const projects = [
     image: nutrimapImage,
     tags: ["Power BI", "PostgreSQL", "dbt", "Prophet", "Python", "Kroger & USDA Data"],
     categories: ["Analytics Engineering & Forecasting"],
-    githubUrl: "https://github.com/adikan2k",
+    githubUrl: "https://github.com/adikan2k/NutriMap-Geospatial-Food-Analytics-Inflation-Forecasting",
   },
   {
     id: 16,
@@ -52,7 +51,7 @@ const projects = [
     image: riskmetricImage,
     tags: ["Python", "SQL", "DuckDB", "dbt", "Streamlit", "Plotly"],
     categories: ["Analytics Engineering & Forecasting"],
-    githubUrl: "https://github.com/adikan2k",
+    githubUrl: "https://github.com/adikan2k/RiskMetric---Algorithmic-Fraud-Detection-Spatial-Temporal-Risk-Modeling",
   },
   {
     id: 17,
@@ -62,7 +61,7 @@ const projects = [
     image: nutritionalArbitrageImage,
     tags: ["PuLP", "SQLite", "RapidFuzz", "Streamlit", "Plotly"],
     categories: ["Gen AI"],
-    githubUrl: "https://github.com/adikan2k",
+    githubUrl: "https://github.com/adikan2k/Nutritional-Arbitrage-AI-Powered-Grocery-Optimization",
   },
   {
     id: 18,
@@ -72,17 +71,17 @@ const projects = [
     image: scholarlyImage,
     tags: ["BERTopic", "Word2Vec", "SciBERT", "FAISS", "Zero-Shot Learning", "LIME", "Plotly"],
     categories: ["Natural Language Processing"],
-    githubUrl: "https://github.com/adikan2k",
+    githubUrl: "https://github.com/adikan2k/Scholarly-Topic-Navigator---Explainable-Research-Digest-Pipeline",
   },
   {
-    id: 12,
-    title: "USDA Food Security & Forecasting Dashboard",
+    id: 3,
+    title: "Steam Market Trends & Customer Segmentation",
     description:
-      "Developed a live executive dashboard in Power BI backed by an automated BigQuery pipeline to track USDA agricultural trends, cutting manual data processing time by 95% and visualizing predictive inflation metrics to support strategic supply chain decisions.",
-    image: project12Image,
-    tags: ["Power BI", "Google BigQuery", "SQL", "ETL"],
-    categories: ["Analytics Engineering & Forecasting"],
-    githubUrl: "https://github.com/adikan2k",
+      "Built an end-to-end analytics pipeline combining EDA, regression, clustering, statistical testing, and ML models (XGBoost, LightGBM, LSTMs) to analyze 100k+ Steam game records with 92% forecast accuracy. Designed & deployed interactive visualizations and dashboards (Plotly, Tableau) to communicate market trends, ownership forecasting, and player behavior insights.",
+    image: project3Image,
+    tags: ["XGBoost", "LightGBM", "LSTM", "EDA", "Plotly", "Tableau", "Python"],
+    categories: ["Machine Learning", "Analytics Engineering & Forecasting"],
+    githubUrl: "https://github.com/adikan2k/Steam-Market-Trends-and-Customer-Segmentation",
   },
   {
     id: 1,
@@ -92,7 +91,7 @@ const projects = [
     image: project1Image,
     tags: ["LangGraph", "FastAPI", "Next.js", "Qdrant", "Postgres", "LLM Agents"],
     categories: ["Gen AI"],
-    githubUrl: "https://github.com/adikan2k",
+    githubUrl: "https://github.com/adikan2k/Evidentia---Multimodal-Multi-Agent-Research-Analyst",
   },
   {
     id: 2,
@@ -102,17 +101,7 @@ const projects = [
     image: project2Image,
     tags: ["Llama-3.1-70B", "RAG", "BGE Embeddings", "LLMs", "Python", "NLP"],
     categories: ["Gen AI"],
-    githubUrl: "https://github.com/adikan2k",
-  },
-  {
-    id: 3,
-    title: "Pixels to Patterns: ML-Driven Analytics of Steam Games",
-    description:
-      "Built an end-to-end analytics pipeline combining EDA, regression, clustering, statistical testing, and ML models (XGBoost, LightGBM, LSTMs) to analyze 100k+ Steam game records with 92% forecast accuracy. Designed & deployed interactive visualizations and dashboards (Plotly, Tableau) to communicate market trends, ownership forecasting, and player behavior insights.",
-    image: project3Image,
-    tags: ["XGBoost", "LightGBM", "LSTM", "EDA", "Plotly", "Tableau", "Python"],
-    categories: ["Machine Learning", "Analytics Engineering & Forecasting"],
-    githubUrl: "https://github.com/adikan2k",
+    githubUrl: "https://github.com/adikan2k/TeleCompass-AI-Powered-Telehealth-Policy-Intelligence-Platform",
   },
   {
     id: 4,
@@ -176,13 +165,13 @@ const projects = [
   },
   {
     id: 10,
-    title: "Beats and Bytes: A Statistical Symphony of Spotify's Best Tracks",
+    title: "Predictive Analytics & Acoustic Typologies: Clustering Ensemble Classification of Global Spotify Data",
     description:
       "Delves into the top-ranking songs on Spotify, exploring the intricate dynamics behind global and regional music trends. Using data on track features like danceability, energy, tempo, and popularity, uncovers what makes a song a chart-topper. By examining patterns in explicit content, album releases, and listener preferences across countries, this exploratory analysis offers valuable insights into the evolving world of music streaming.",
     image: project10Image,
     tags: ["Python", "Spotify API", "Data Analysis", "Music Analytics", "Statistical Analysis"],
     categories: ["Analytics Engineering & Forecasting"],
-    githubUrl: "https://github.com/adikan2k",
+    githubUrl: "https://github.com/adikan2k/Predictive-Analytics-Acoustic-Typologies-Clustering-Ensemble-Classification-of-Global-Spotify-Data",
   },
   {
     id: 11,
@@ -221,7 +210,7 @@ export default function Projects() {
 
   const displayedProjects =
     activeCategory === "All" && !showAllProjects
-      ? filteredProjects.slice(0, 5)
+      ? filteredProjects.slice(0, 6)
       : filteredProjects;
 
   const handleCategoryChange = (category: string) => {
@@ -316,7 +305,7 @@ export default function Projects() {
           ))}
         </div>
 
-        {activeCategory === "All" && !showAllProjects && projects.length > 5 && (
+        {activeCategory === "All" && !showAllProjects && projects.length > 6 && (
           <div className="flex justify-center mt-12">
             <Button
               size="lg"
