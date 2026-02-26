@@ -16,13 +16,13 @@ export default function Footer() {
               <div>
                 <h3 className="font-semibold text-lg">Aditya Kanbargi</h3>
                 <p className="text-sm text-muted-foreground">
-                  Data Scientist & ML Engineer
+                  Analytics Engineer & Data Scientist
                 </p>
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
-              Transforming data into insights and building ML solutions.
-              Available for data science projects and collaboration.
+              Building scalable data pipelines, analytics dashboards, and predictive models.
+              Available for analytics engineering and data science collaborations.
             </p>
           </div>
 
@@ -89,7 +89,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <p>© 2025 Aditya Kanbargi. All rights reserved.</p>
+          <p>© 2026 Aditya Kanbargi. All rights reserved.</p>
           <p className="flex items-center gap-1">
             Built with <Heart className="h-4 w-4 text-red-500 fill-red-500" />{" "}
             using React, TypeScript & Tailwind CSS
