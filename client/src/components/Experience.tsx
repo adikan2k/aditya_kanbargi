@@ -55,7 +55,7 @@ function highlightMetrics(text: string) {
 
 const experiences = [
   {
-    title: "Research Analyst – Public Health",
+    title: "Data Analyst (Graduate Assistant)",
     company: "GW School of Nursing",
     companyLogo: gwLogoImage,
     location: "Virginia",
@@ -70,10 +70,10 @@ const experiences = [
     skills: ["Python", "SQL", "Power BI", "Pandas", "SciPy", "Statsmodels", "ETL", "EHR Data", "Healthcare Analytics"],
   },
   {
-    title: "Technical Business Analyst - ServiceNow",
+    title: "Business Analyst - Data & Analytics",
     company: "LTIMindtree",
     companyLogo: ltiLogoImage,
-    location: "India",
+    location: "Remote",
     period: "Sept 2022 – June 2024",
     description: [
       "Architected real-time executive dashboards using Power BI and ServiceNow Performance Analytics to visualize real-time operational KPIs, enabling leadership to identify process bottlenecks and expedite strategic decision-making by 3x.",
