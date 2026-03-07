@@ -218,7 +218,7 @@ export default function Hero({ onBookMeeting, onViewWork, isDark = false }: Hero
               data-testid="button-download-resume"
             >
               <a 
-                href="https://drive.google.com/file/d/1cEuFXF9V4iW0W52X6-GHWlH1ULWZ8eqo/view?usp=sharing" 
+                href="https://drive.google.com/file/d/1onFoMkZezvTbvsV8KOeGb7y2X8f5IxuM/view?usp=sharing" 
                 target="_blank"
                 rel="noopener noreferrer"
               >
