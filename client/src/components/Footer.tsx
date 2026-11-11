@@ -16,13 +16,13 @@ export default function Footer() {
               <div>
                 <h3 className="font-semibold text-lg">Aditya Kanbargi</h3>
                 <p className="text-sm text-muted-foreground">
-                  Analytics Engineer & Data Scientist
+                  AI Systems & Data Analytics
                 </p>
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
-              Building scalable data pipelines, analytics dashboards, and predictive models.
-              Available for analytics engineering and data science collaborations.
+              Building agentic AI systems, LLM workflows, and the data pipelines behind them.
+              Available for AI engineering and data analytics collaborations.
             </p>
           </div>
 

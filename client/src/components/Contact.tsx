@@ -127,7 +127,7 @@ export default function Contact() {
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 rounded-full bg-blue-500 mt-2 flex-shrink-0" aria-hidden="true" />
-                  <div className="text-foreground">MS Data Science Student</div>
+                  <div className="text-foreground">MS Data Science, George Washington University</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 rounded-full bg-purple-500 mt-2 flex-shrink-0" aria-hidden="true" />

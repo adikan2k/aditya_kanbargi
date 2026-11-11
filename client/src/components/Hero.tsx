@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles, Brain, Compass, Globe, ChefHat, Mail, Code2, Download, TrendingUp, Microscope, BookOpen } from "lucide-react";
+import { ArrowRight, Sparkles, Compass, Mail, Download, TrendingUp, Microscope, BookOpen, Bot, ShieldCheck, Workflow, Mountain } from "lucide-react";
 import { SiLinkedin, SiGithub, SiGmail } from "react-icons/si";
 import NetworkBackground from "./NetworkBackground";
 
@@ -11,15 +11,15 @@ interface HeroProps {
 }
 
 const typewriterPhrases = [
+  { text: "Agentic AI Builder", icon: Bot, color: "text-purple-400" },
+  { text: "LLM Evaluation Engineer", icon: ShieldCheck, color: "text-pink-400" },
   { text: "Data Alchemist", icon: Sparkles, color: "text-blue-400" },
-  { text: "AI Enthusiast", icon: Brain, color: "text-purple-400" },
-  { text: "Machine Learning Engineer", icon: Code2, color: "text-pink-400" },
+  { text: "Pipeline Architect", icon: Workflow, color: "text-cyan-400" },
   { text: "Metric Maestro", icon: TrendingUp, color: "text-teal-400" },
   { text: "Pattern Detective", icon: Microscope, color: "text-violet-400" },
   { text: "Data Storyteller", icon: BookOpen, color: "text-amber-400" },
   { text: "Curious Voyager", icon: Compass, color: "text-emerald-400" },
-  { text: "Digital Explorer", icon: Globe, color: "text-cyan-400" },
-  { text: "Culinary Creator", icon: ChefHat, color: "text-orange-400" },
+  { text: "Trail Seeker", icon: Mountain, color: "text-orange-400" },
 ];
 
 export default function Hero({ onBookMeeting, onViewWork, isDark = false }: HeroProps) {
@@ -142,7 +142,7 @@ export default function Hero({ onBookMeeting, onViewWork, isDark = false }: Hero
             <p className={`text-xl md:text-2xl font-semibold tracking-wide ${
               isDark ? "text-slate-300" : "text-slate-700"
             }`}>
-              Turning digital chaos into elegant insight.
+              Turning complex, manual work into reliable AI systems.
             </p>
           </div>
 

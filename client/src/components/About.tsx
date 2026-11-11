@@ -9,9 +9,9 @@ import { SiAmazon, SiDatabricks } from "react-icons/si";
 // Helper function to highlight keywords
 function highlightKeywords(text: string) {
   const keywords = [
-    "Machine Learning", "NLP", "Cloud Computing", "Data Science", "TensorFlow", 
-    "PyTorch", "LangChain", "Python", "SQL", "Master's", "GPA 4.0", 
-    "Global Leaders Fellowship", "data scientist", "LLM"
+    "Data & AI", "agentic AI systems", "LLM workflows", "data pipelines",
+    "data and business analytics", "Master's in Data Science", "GPA 4.0",
+    "Global Leaders Fellowship"
   ];
   
   let result: (string | JSX.Element)[] = [text];
@@ -47,7 +47,7 @@ const skills = [
   {
     category: "Core Competencies",
     icon: Brain,
-    items: ["Analytics Engineering & Data Pipelines", "Statistical Modeling & Forecasting", "Data Visualization & BI Dashboards", "Machine Learning & Predictive Analytics"],
+    items: ["Agentic AI & LLM Workflows", "LLM Evaluation & Benchmarking", "RAG, MCP & Knowledge Graphs", "Analytics Engineering & Data Pipelines", "Data Visualization & BI Dashboards", "Machine Learning & Predictive Analytics"],
   },
   {
     category: "Education",
@@ -60,8 +60,8 @@ const skills = [
 const achievements = [
   {
     icon: Briefcase,
-    title: "2+ Years",
-    description: "Professional Experience in Data Science",
+    title: "~3 Years",
+    description: "Professional Experience in Data & AI",
   },
   {
     icon: Award,
@@ -107,23 +107,26 @@ export default function About() {
           </div>
 
           <div className="flex-1 border-2 border-black dark:border-white rounded-md p-6 space-y-4 text-foreground leading-relaxed bg-background/90 backdrop-blur-sm">
-            <p className="text-justify">
-              {highlightKeywords("It all started with me asking too many \"why's\" until I discovered that data had a language for every one of them. What began as curiosity turned into a lifelong fascination with how information shapes the world around us.")}
+            <p className="text-lg font-semibold">
+              I came for the patterns. I stayed for the pipelines. Now I'm building the systems that put both to work.
             </p>
             <p className="text-justify">
-              {highlightKeywords("I'm Aditya Kanbargi, a data scientist who believes the best insights come from combining rigorous analysis with a sense of human context. For me, data isn't just numbers and models; it's a way to understand people, decisions, and the little patterns that make big things happen. It all started with me staring at a dataset like it was a mystery novel, every column a clue and every row a story, and I've been hooked on solving those stories ever since.")}
+              {highlightKeywords("I'm Aditya Kanbargi, and I work in Data & AI, building agentic AI systems, orchestrating LLM workflows, and developing data pipelines to automate research. I enjoy turning complex, manual processes into something reliable, useful, and easier for people to work with.")}
             </p>
             <p className="text-justify">
-              {highlightKeywords("I'm currently pursuing my Master's in Data Science at The George Washington University (GPA 4.0), where I was awarded the Global Leaders Fellowship for academic excellence. Between projects on machine learning, NLP, and cloud computing, I've learned that the magic of data science lies in connecting technical depth with real-world impact.")}
+              {highlightKeywords("My background is in data and business analytics. Some days, that meant building a dashboard someone could open on a Monday morning and know what to act on. Other days, it meant digging into the numbers to understand what was happening and what the team could do about it. I bring that same mindset to AI: ask the right questions, check the answers, and make sure the work solves a real business problem.")}
             </p>
             <p className="text-justify">
-              {highlightKeywords("Over the past few years, I've worked across public health and enterprise analytics, building everything from early-warning prediction systems that help clinicians act faster to dashboards that power smarter business decisions.")}
+              {highlightKeywords("I hold a Master's in Data Science from The George Washington University (GPA 4.0), where I was awarded the Global Leaders Fellowship for academic excellence.")}
             </p>
             <p className="text-justify">
-              {highlightKeywords("I'm fluent in Python, R, and SQL, and love experimenting with TensorFlow, PyTorch, and LangChain. Whether it's designing an LLM-powered research assistant or optimizing a data workflow in the cloud, I enjoy building solutions that feel as good to use as they are to explain.")}
+              {highlightKeywords("I like being the person who gets both sides: comfortable digging into why something isn't working, and just as comfortable explaining it without making it more complicated than it needs to be.")}
             </p>
             <p className="text-justify">
-              {highlightKeywords("Outside the world of code and models, you'll probably find me at the gym, watching football, or diving into a good read. I'm driven by curiosity, caffeine, and the thrill of turning raw data into something that tells a great story — one that actually means something.")}
+              {highlightKeywords("Outside of work, I'm usually lifting, chasing a football, turning pages, or saying \"one more game.\" When the mountains call, I'm already planning the hike.")}
+            </p>
+            <p className="text-justify">
+              {highlightKeywords("Always happy to connect over data, AI, a good game, or a shared interest. Feel free to reach out!")}
             </p>
           </div>
         </div>
