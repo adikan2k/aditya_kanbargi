@@ -118,26 +118,6 @@ export default function Contact() {
           <div className="lg:col-span-2 space-y-6">
             <Card className="p-6">
               <h3 className="font-semibold text-lg mb-4">
-                Current Status
-              </h3>
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-green-500 mt-2 flex-shrink-0" aria-hidden="true" />
-                  <div className="text-foreground">Actively looking for opportunities</div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-blue-500 mt-2 flex-shrink-0" aria-hidden="true" />
-                  <div className="text-foreground">MS Data Science, George Washington University</div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-purple-500 mt-2 flex-shrink-0" aria-hidden="true" />
-                  <div className="text-foreground">Eager to connect and collaborate</div>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="p-6">
-              <h3 className="font-semibold text-lg mb-4">
                 Contact Information
               </h3>
               <div className="space-y-4">

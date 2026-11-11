@@ -218,7 +218,7 @@ export default function Hero({ onBookMeeting, onViewWork, isDark = false }: Hero
               data-testid="button-download-resume"
             >
               <a 
-                href="https://drive.google.com/file/d/1onFoMkZezvTbvsV8KOeGb7y2X8f5IxuM/view?usp=sharing" 
+                href="/Aditya_Kanbargi_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
               >
