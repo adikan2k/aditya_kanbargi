@@ -1,91 +1,82 @@
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Calendar, MapPin, Handshake, Zap, type LucideIcon } from "lucide-react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import gwLogoImage from "@assets/image_1761868019368.png";
-import ltiLogoImage from "@assets/image_1761867956939.png";
+import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { Plus } from "lucide-react";
+import { FadeUp, Lines, SectionHeader } from "./motion/Reveal";
+import { EASE } from "@/lib/motion";
 
-// Helper function to highlight quantitative outcomes with full phrases
+// Phrases with a measurable result. They are shown brighter and underlined in the accent colour.
+const metricPhrases = [
+  /contributing to 10\+ client siting due diligence reports/gi,
+  /reusable agent skills across 3 platforms/gi,
+  /automated by 6 GitHub Actions workflows/gi,
+  /against 4 criteria/gi,
+  /enabled clinical teams to extend early-warning prediction lead times by 6 hours/gi,
+  /slashing data preparation time by 40%/gi,
+  /increasing research throughput by 25%/gi,
+  /optimizing nurse-to-patient allocation by 20%/gi,
+  /cut annual turnover by 8-10%/gi,
+  /Accelerated monthly close and portfolio reporting by 40%/gi,
+  /cutting query latency by 30%/gi,
+  /reconciling 1TB\+ of enterprise data/gi,
+  /Reduced operational turnaround time by 25%/gi,
+  /reducing data availability latency by 40%/gi,
+];
+
 function highlightMetrics(text: string) {
-  // Extended patterns to capture full phrases with quantitative outcomes
-  const phrases = [
-    /contributing to 10\+ client siting due diligence reports/gi,
-    /reusable agent skills across 3 platforms/gi,
-    /automated by 6 GitHub Actions workflows/gi,
-    /against 4 criteria/gi,
-    /enabled clinical teams to extend early-warning prediction lead times by 6 hours/gi,
-    /slashing data preparation time by 40%/gi,
-    /increasing research throughput by 25%/gi,
-    /optimizing nurse-to-patient allocation by 20%/gi,
-    /cut annual turnover by 8-10%/gi,
-    /Accelerated monthly close and portfolio reporting by 40%/gi,
-    /cutting query latency by 30%/gi,
-    /reconciling 1TB\+ of enterprise data/gi,
-    /Reduced operational turnaround time by 25%/gi,
-    /reducing data availability latency by 40%/gi,
-  ];
-
   let result: (string | JSX.Element)[] = [text];
-  let keyCounter = 0;
+  let key = 0;
 
-  phrases.forEach((phrasePattern) => {
-    const newResult: (string | JSX.Element)[] = [];
+  metricPhrases.forEach((pattern) => {
+    const next: (string | JSX.Element)[] = [];
     result.forEach((part) => {
-      if (typeof part === "string") {
-        const parts = part.split(phrasePattern);
-        const matches = part.match(phrasePattern);
-
-        parts.forEach((subPart, subIndex) => {
-          if (subPart) {
-            newResult.push(subPart);
-          }
-          if (matches && subIndex < matches.length) {
-            newResult.push(
-              <span key={`metric-${keyCounter++}`} className="font-bold text-primary bg-primary/10 px-1 rounded">
-                {matches[subIndex]}
-              </span>
-            );
-          }
-        });
-      } else {
-        newResult.push(part);
+      if (typeof part !== "string") {
+        next.push(part);
+        return;
       }
+      const pieces = part.split(pattern);
+      const matches = part.match(pattern);
+      pieces.forEach((piece, i) => {
+        if (piece) next.push(piece);
+        if (matches && i < matches.length) {
+          next.push(
+            <span
+              key={`metric-${key++}`}
+              className="font-medium text-foreground underline decoration-signal decoration-2 underline-offset-4"
+            >
+              {matches[i]}
+            </span>,
+          );
+        }
+      });
     });
-    result = newResult;
+    result = next;
   });
 
   return result;
 }
 
-type ExperienceItem = {
+interface Role {
   title: string;
   company: string;
-  companyLogo?: string;
-  fallbackIcon?: LucideIcon;
-  location: string;
   period: string;
   description: string[];
   skills: string[];
-};
+}
 
-const experiences: ExperienceItem[] = [
+const roles: Role[] = [
   {
     title: "AI Evaluation Engineer (Independent Contractor)",
     company: "Handshake AI",
-    fallbackIcon: Handshake,
-    location: "Remote",
     period: "Nov 2026 – Present",
     description: [
       "Authored containerized agentic benchmark tasks in Docker, each with a reference solution and automated verifier, to test how frontier LLM agents handle multi-step work.",
-      "Formulated domain-specific prompts, then evaluate, grade, and revise model responses and annotate evaluation data to improve large language model training.",
+      "Formulated domain-specific prompts, then evaluated, graded, and revised model responses and annotated evaluation data to improve large language model training.",
     ],
     skills: ["LLM Evaluation", "Agentic Benchmarks", "Docker", "Automated Verifiers", "Prompt Engineering", "Data Annotation"],
   },
   {
     title: "AI Systems Analyst (LLM and Agent Engineering)",
     company: "Flypower",
-    fallbackIcon: Zap,
-    location: "Remote",
     period: "Mar 2026 – Nov 2026",
     description: [
       "Streamlined LLM-orchestrated agentic workflows with both founders of a 6-person team, adding a RAG pipeline that grounds drafts in cited sources and contributing to 10+ client siting due diligence reports for renewable energy and data center developers.",
@@ -100,8 +91,6 @@ const experiences: ExperienceItem[] = [
   {
     title: "Data Analyst (Graduate Assistant)",
     company: "GW School of Nursing",
-    companyLogo: gwLogoImage,
-    location: "Virginia",
     period: "Dec 2024 – May 2025",
     description: [
       "Engineered an automated ETL pipeline for EHR systems using Python (Pandas) scripts to parse and clean JSON/CSV files, replacing manual Excel workflows and slashing data preparation time by 40%.",
@@ -115,8 +104,6 @@ const experiences: ExperienceItem[] = [
   {
     title: "Technical Business Analyst, ServiceNow",
     company: "LTIMindtree",
-    companyLogo: ltiLogoImage,
-    location: "Remote",
     period: "Sep 2022 – Jun 2024",
     description: [
       "Accelerated monthly close and portfolio reporting by 40% by partnering with Finance and 3+ teams to convert business requirements into SQL reporting logic and standardized KPI definitions, creating one agreed source for cost, occupancy, and performance data.",
@@ -129,88 +116,126 @@ const experiences: ExperienceItem[] = [
   },
 ];
 
-export default function Experience() {
-  const { ref, isVisible } = useScrollAnimation();
+const VISIBLE_BULLETS = 3;
+
+function RoleRow({ role, index }: { role: Role; index: number }) {
+  const reduced = useReducedMotion();
+  const [expanded, setExpanded] = useState(false);
+  const first = role.description.slice(0, VISIBLE_BULLETS);
+  const rest = role.description.slice(VISIBLE_BULLETS);
+
+  const bullet = (item: string) => (
+    <div role="listitem" className="grid grid-cols-[1.5rem_1fr] text-base leading-relaxed text-muted-foreground md:text-lg">
+      <span className="pt-[0.7em]">
+        <span className="block h-1.5 w-1.5 rounded-full bg-signal" />
+      </span>
+      <span>{highlightMetrics(item)}</span>
+    </div>
+  );
 
   return (
-    <section
-      ref={ref as React.RefObject<HTMLElement>}
-      id="experience"
-      className={`py-24 bg-muted/30 scroll-animate ${isVisible ? 'visible' : ''}`}
+    <article
+      className="grid gap-8 border-t border-border py-12 grid-cols-1 lg:grid-cols-12 lg:gap-8 lg:py-16"
+      data-testid={`card-experience-${index}`}
     >
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-center">
-          Experience
-        </h2>
-        <p className="text-center text-muted-foreground mb-12">
-          From data pipelines and dashboards to agentic AI systems and LLM
-          evaluation, building work that solves real business problems.
-        </p>
+      <div className="lg:col-span-4">
+        <div className="lg:sticky lg:top-28">
+          <FadeUp className="label-mono mb-4 flex items-center gap-3 text-signal-text">
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <span className="h-px w-6 bg-signal" />
+            <span>{role.period}</span>
+          </FadeUp>
+          <h3 className="display text-4xl md:text-5xl xl:text-6xl">
+            <Lines lines={[role.company]} />
+          </h3>
+          <FadeUp delay={0.15}>
+            <p className="mt-4 max-w-xs text-lg text-muted-foreground">{role.title}</p>
+          </FadeUp>
+        </div>
+      </div>
 
-        <div className="space-y-8">
-          {experiences.map((exp, index) => {
-            const FallbackIcon = exp.fallbackIcon;
-            return (
-            <Card
-              key={index}
-              className="p-6 md:p-8 hover-elevate transition-all duration-300"
-              data-testid={`card-experience-${index}`}
+      <div className="lg:col-span-8">
+        <div role="list" className="space-y-5">
+          {first.map((item, i) => (
+            <FadeUp key={item} delay={i * 0.07}>
+              {bullet(item)}
+            </FadeUp>
+          ))}
+        </div>
+
+        <AnimatePresence initial={false}>
+          {expanded && (
+            <motion.div
+              key="rest"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: reduced ? 0.01 : 0.6, ease: EASE }}
+              className="overflow-hidden"
             >
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                <div className="flex-1">
-                  <h3 className="text-xl md:text-2xl font-semibold mb-2">
-                    {exp.title}
-                  </h3>
-                  <div className="flex items-center gap-3 text-lg font-medium mb-2">
-                    {exp.companyLogo ? (
-                      <img
-                        src={exp.companyLogo}
-                        alt={`${exp.company} logo`}
-                        className="h-6 object-contain"
-                        data-testid={`img-company-logo-${index}`}
-                      />
-                    ) : FallbackIcon ? (
-                      <span
-                        className="flex h-7 w-7 items-center justify-center rounded-md bg-primary/10"
-                        aria-hidden="true"
-                        data-testid={`icon-company-${index}`}
-                      >
-                        <FallbackIcon className="h-4 w-4 text-primary" />
-                      </span>
-                    ) : null}
-                    <span className="text-foreground">{exp.company}</span>
-                  </div>
-                  <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="h-4 w-4" />
-                      <span>{exp.location}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4" />
-                      <span>{exp.period}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <ul className="space-y-2 mb-4 list-disc list-inside">
-                {exp.description.map((item, i) => (
-                  <li key={i} className="text-foreground text-justify">
-                    {highlightMetrics(item)}
-                  </li>
-                ))}
-              </ul>
-
-              <div className="flex flex-wrap gap-2">
-                {exp.skills.map((skill) => (
-                  <Badge key={skill} variant="secondary">
-                    {skill}
-                  </Badge>
+              <div role="list" className="space-y-5 pt-5">
+                {rest.map((item) => (
+                  <div key={item}>{bullet(item)}</div>
                 ))}
               </div>
-            </Card>
-            );
-          })}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {rest.length > 0 && (
+          <button
+            onClick={() => setExpanded((v) => !v)}
+            aria-expanded={expanded}
+            className="label-mono group mt-7 flex items-center gap-3 text-foreground"
+            data-testid={`button-experience-more-${index}`}
+          >
+            <span
+              className={`flex h-8 w-8 items-center justify-center rounded-full border border-border transition-all duration-500 group-hover:border-signal group-hover:bg-signal group-hover:text-[hsl(240_7%_5%)] ${
+                expanded ? "rotate-45" : ""
+              }`}
+            >
+              <Plus className="h-3.5 w-3.5" />
+            </span>
+            {expanded ? "Show less" : `${rest.length} more ${rest.length === 1 ? "result" : "results"}`}
+          </button>
+        )}
+
+        <FadeUp delay={0.2} className="mt-8 flex flex-wrap gap-2">
+          {role.skills.map((skill) => (
+            <span key={skill} className="rounded-full border border-border px-3 py-1.5 text-sm text-muted-foreground">
+              {skill}
+            </span>
+          ))}
+        </FadeUp>
+      </div>
+    </article>
+  );
+}
+
+export default function Experience() {
+  return (
+    <section id="experience" className="pt-28 md:pt-44">
+      <div className="mx-auto max-w-[1600px] px-5 md:px-10">
+        <SectionHeader
+          index="02"
+          label="Experience"
+          lines={[
+            <>From dashboards</>,
+            <>
+              <span className="serif-italic text-signal-text">to agents.</span>
+            </>,
+          ]}
+          aside={
+            <p>
+              About three years across enterprise analytics, healthcare data and AI engineering. The underlined parts
+              are results I can put a number on.
+            </p>
+          }
+        />
+        <div className="border-b border-border">
+          {roles.map((role, i) => (
+            <RoleRow key={role.company} role={role} index={i} />
+          ))}
         </div>
       </div>
     </section>

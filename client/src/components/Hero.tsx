@@ -1,234 +1,162 @@
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles, Compass, Mail, Download, TrendingUp, Microscope, BookOpen, Bot, ShieldCheck, Workflow, Mountain } from "lucide-react";
-import { SiLinkedin, SiGithub, SiGmail } from "react-icons/si";
-import NetworkBackground from "./NetworkBackground";
+import { useRef } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { SiGithub, SiLinkedin } from "react-icons/si";
+import DotField from "./motion/DotField";
+import Magnetic from "./motion/Magnetic";
+import CountUp from "./motion/CountUp";
+import Marquee from "./motion/Marquee";
+import { FadeUp, Lines } from "./motion/Reveal";
+import { scrollToId } from "@/lib/motion";
 
 interface HeroProps {
-  onBookMeeting?: () => void;
-  onViewWork?: () => void;
   isDark?: boolean;
+  /** False while the intro is still covering the page. */
+  ready?: boolean;
 }
 
-const typewriterPhrases = [
-  { text: "Agentic AI Builder", icon: Bot, color: "text-purple-400" },
-  { text: "LLM Evaluation Engineer", icon: ShieldCheck, color: "text-pink-400" },
-  { text: "Data Alchemist", icon: Sparkles, color: "text-blue-400" },
-  { text: "Pipeline Architect", icon: Workflow, color: "text-cyan-400" },
-  { text: "Metric Maestro", icon: TrendingUp, color: "text-teal-400" },
-  { text: "Pattern Detective", icon: Microscope, color: "text-violet-400" },
-  { text: "Data Storyteller", icon: BookOpen, color: "text-amber-400" },
-  { text: "Curious Voyager", icon: Compass, color: "text-emerald-400" },
-  { text: "Trail Seeker", icon: Mountain, color: "text-orange-400" },
+// Each number comes from work shown further down the page.
+const proof = [
+  { to: 985260, label: "US foods made readable in LabelLens", decimals: 0, suffix: "" },
+  { to: 0.98, label: "agent fact score, against 0.26 for search alone", decimals: 2, suffix: "" },
+  { to: 10, label: "client due diligence reports shipped at Flypower", decimals: 0, suffix: "+" },
+  { to: 1, label: "of enterprise data reconciled at LTIMindtree", decimals: 0, suffix: "TB+" },
 ];
 
-export default function Hero({ onBookMeeting, onViewWork, isDark = false }: HeroProps) {
-  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [showCursor, setShowCursor] = useState(true);
+const marqueeWords = [
+  "Tool-using agents",
+  "Retrieval",
+  "Evals",
+  "MCP servers",
+  "Knowledge graphs",
+  "dbt + SQL",
+  "Data pipelines",
+  "Warehouses",
+  "Dashboards",
+];
 
-  useEffect(() => {
-    const cursorInterval = setInterval(() => {
-      setShowCursor((prev) => !prev);
-    }, 300);
-    return () => clearInterval(cursorInterval);
-  }, []);
-
-  useEffect(() => {
-    const currentPhrase = typewriterPhrases[currentPhraseIndex].text;
-    const typingSpeed = isDeleting ? 30 : 50;
-
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        if (displayedText.length < currentPhrase.length) {
-          setDisplayedText(currentPhrase.slice(0, displayedText.length + 1));
-        } else {
-          setTimeout(() => setIsDeleting(true), 1200);
-        }
-      } else {
-        if (displayedText.length > 0) {
-          setDisplayedText(displayedText.slice(0, -1));
-        } else {
-          setIsDeleting(false);
-          setCurrentPhraseIndex((prev) => (prev + 1) % typewriterPhrases.length);
-        }
-      }
-    }, typingSpeed);
-
-    return () => clearTimeout(timeout);
-  }, [displayedText, isDeleting, currentPhraseIndex]);
-
-  const CurrentIcon = typewriterPhrases[currentPhraseIndex].icon;
-  const currentColor = typewriterPhrases[currentPhraseIndex].color;
+export default function Hero({ isDark = true, ready = true }: HeroProps) {
+  const ref = useRef<HTMLElement>(null);
+  const reduced = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  // The headline drifts up and fades as the hero scrolls away.
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", reduced ? "0%" : "22%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
 
   return (
-    <section id="hero" className={`relative min-h-screen flex items-center overflow-hidden ${
-      isDark ? "bg-slate-950" : "bg-slate-50"
-    }`}>
-      <NetworkBackground isDark={isDark} />
+    <>
+      <section id="hero" ref={ref} className="relative flex min-h-[100svh] flex-col overflow-hidden">
+        <DotField isDark={isDark} />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 py-24">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="mb-6 flex items-center justify-center gap-3">
-            <div className="flex gap-1.5">
-              {[0, 1, 2].map((i) => {
-                const colors = isDark 
-                  ? ["bg-blue-500", "bg-violet-500", "bg-pink-500"]
-                  : ["bg-indigo-600", "bg-purple-600", "bg-rose-600"];
-                return (
-                  <div
-                    key={i}
-                    className={`w-2.5 h-2.5 rounded-full animate-pulse ${colors[i]}`}
-                    style={{
-                      animationDelay: `${i * 0.2}s`,
-                    }}
-                  />
-                );
-              })}
-            </div>
-            <span className={`text-sm md:text-base font-semibold tracking-widest uppercase ${
-              isDark ? "text-blue-400" : "text-indigo-700"
-            }`}>
-              Decoding Data With
+        <motion.div
+          className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-1 flex-col justify-end px-5 pb-10 pt-32 md:px-10 md:pb-14 md:pt-40"
+          style={{ y, opacity }}
+        >
+          <FadeUp show={ready} delay={0.1} className="mb-8 flex flex-wrap items-center gap-x-6 gap-y-3 md:mb-10">
+            <span className="label-mono flex items-center gap-2.5 rounded-full border border-border bg-background/60 px-4 py-2 backdrop-blur">
+              <span className="h-1.5 w-1.5 rounded-full bg-signal" />
+              Open to relocation and remote roles
             </span>
-            <div className="flex gap-1.5">
-              {[0, 1, 2].map((i) => {
-                const colors = isDark 
-                  ? ["bg-blue-500", "bg-violet-500", "bg-pink-500"]
-                  : ["bg-indigo-600", "bg-purple-600", "bg-rose-600"];
-                return (
-                  <div
-                    key={i}
-                    className={`w-2.5 h-2.5 rounded-full animate-pulse ${colors[i]}`}
-                    style={{
-                      animationDelay: `${i * 0.2}s`,
-                    }}
-                  />
-                );
-              })}
-            </div>
+            <span className="label-mono text-muted-foreground">AI and Analytics Engineer</span>
+          </FadeUp>
+
+          <h1 className="display text-[clamp(3rem,10.5vw,11rem)]">
+            <span className="sr-only">Aditya Kanbargi, AI and Analytics Engineer. </span>
+            <Lines
+              show={ready}
+              delay={0.15}
+              stagger={0.11}
+              lines={[
+                <>I build AI systems</>,
+                <>
+                  that <span className="serif-italic text-signal-text">show their work.</span>
+                </>,
+              ]}
+            />
+          </h1>
+
+          <div className="mt-10 grid gap-8 md:mt-14 grid-cols-1 lg:grid-cols-12 lg:items-end">
+            <FadeUp show={ready} delay={0.55} className="lg:col-span-6">
+              <p className="max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+                I'm <span className="text-foreground">Aditya Kanbargi</span>. I build LLM applications end to end:
+                tool-using agents, retrieval, and evals that run before a feature ships. Underneath them I build the
+                analytics: tested data pipelines, warehouses and dashboards.
+              </p>
+            </FadeUp>
+
+            <FadeUp show={ready} delay={0.7} className="flex flex-wrap items-center gap-3 lg:col-span-6 lg:justify-end">
+              <Magnetic>
+                <button
+                  onClick={() => scrollToId("projects")}
+                  className="group flex items-center gap-3 rounded-full bg-signal py-2 pl-6 pr-2 text-sm font-medium text-[hsl(240_7%_5%)]"
+                  data-testid="button-view-work"
+                >
+                  See the work
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[hsl(240_7%_5%)] text-signal transition-transform duration-500 group-hover:rotate-[360deg]">
+                    <ArrowDown className="h-4 w-4" />
+                  </span>
+                </button>
+              </Magnetic>
+              <Magnetic>
+                <a
+                  href="/Aditya_Kanbargi_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 rounded-full border border-border bg-background/60 px-6 py-[1.05rem] text-sm font-medium backdrop-blur transition-colors duration-300 hover:border-foreground"
+                  data-testid="button-download-resume"
+                >
+                  Resume
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </Magnetic>
+              <div className="flex items-center gap-2">
+                <a
+                  href="https://github.com/adikan2k"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  className="flex h-[3.25rem] w-[3.25rem] items-center justify-center rounded-full border border-border bg-background/60 backdrop-blur transition-colors duration-300 hover:border-foreground"
+                  data-testid="link-github"
+                >
+                  <SiGithub className="h-4 w-4" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/adikan2k/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="flex h-[3.25rem] w-[3.25rem] items-center justify-center rounded-full border border-border bg-background/60 backdrop-blur transition-colors duration-300 hover:border-foreground"
+                  data-testid="link-linkedin"
+                >
+                  <SiLinkedin className="h-4 w-4" />
+                </a>
+              </div>
+            </FadeUp>
           </div>
 
-          <div className="relative mb-8">
-            {/* Gradient overlay effect behind name */}
-            <div className="absolute inset-0 -z-10 flex items-center justify-center">
-              <div className={`w-[600px] h-[200px] blur-3xl opacity-30 ${
-                isDark 
-                  ? "bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500" 
-                  : "bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400"
-              }`} />
-            </div>
-            <h1 className={`text-5xl md:text-7xl lg:text-8xl font-bold leading-tight ${
-              isDark ? "text-white" : "text-slate-900"
-            }`}>
-              Aditya Kanbargi
-            </h1>
-          </div>
+          <FadeUp show={ready} delay={0.9} className="mt-12 border-t border-border pt-6 md:mt-16">
+            <dl className="grid grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-4">
+              {proof.map((item) => (
+                <div key={item.label}>
+                  <dd className="display text-4xl md:text-5xl xl:text-6xl">
+                    <CountUp to={item.to} decimals={item.decimals} suffix={item.suffix} start={ready} />
+                  </dd>
+                  <dt className="mt-3 max-w-[15rem] text-sm leading-snug text-muted-foreground">{item.label}</dt>
+                </div>
+              ))}
+            </dl>
+          </FadeUp>
+        </motion.div>
+      </section>
 
-          <div className="flex items-center justify-center gap-3 mb-8 min-h-[3.5rem]">
-            <div className={`flex items-center gap-2 text-2xl md:text-3xl lg:text-4xl font-bold ${currentColor}`}>
-              <span>{displayedText}</span>
-              <CurrentIcon className={`w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 ${currentColor} animate-pulse flex-shrink-0`} />
-              <span
-                className={`inline-block w-0.5 h-8 md:h-10 lg:h-12 ${currentColor} ${
-                  showCursor ? "opacity-100" : "opacity-0"
-                }`}
-              />
-            </div>
-          </div>
-
-          <div className="mb-10">
-            <p className={`text-xl md:text-2xl font-semibold tracking-wide ${
-              isDark ? "text-slate-300" : "text-slate-700"
-            }`}>
-              Turning complex, manual work into reliable AI systems.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap gap-4 justify-center items-center mb-8">
-            <a
-              href="https://www.linkedin.com/in/adikan2k/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`group flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 hover:scale-110 hover-elevate active-elevate-2 ${
-                isDark ? "bg-slate-800/50 hover:bg-blue-600" : "bg-white hover:bg-blue-600"
-              }`}
-              data-testid="link-linkedin"
-            >
-              <SiLinkedin className={`h-6 w-6 transition-colors duration-300 ${
-                isDark ? "text-blue-400 group-hover:text-white" : "text-blue-600 group-hover:text-white"
-              }`} />
-            </a>
-            <a
-              href="https://github.com/adikan2k"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`group flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 hover:scale-110 hover-elevate active-elevate-2 ${
-                isDark ? "bg-slate-800/50 hover:bg-slate-700" : "bg-white hover:bg-slate-800"
-              }`}
-              data-testid="link-github"
-            >
-              <SiGithub className={`h-6 w-6 transition-colors duration-300 ${
-                isDark ? "text-slate-300 group-hover:text-white" : "text-slate-700 group-hover:text-white"
-              }`} />
-            </a>
-            <a
-              href="mailto:adityakan2000@gmail.com"
-              className={`group flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 hover:scale-110 hover-elevate active-elevate-2 ${
-                isDark ? "bg-slate-800/50 hover:bg-red-600" : "bg-white hover:bg-red-600"
-              }`}
-              data-testid="link-email"
-            >
-              <SiGmail className={`h-6 w-6 transition-colors duration-300 ${
-                isDark ? "text-red-400 group-hover:text-white" : "text-red-600 group-hover:text-white"
-              }`} />
-            </a>
-          </div>
-
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Button
-              size="lg"
-              className="gap-2 shadow-lg hover:shadow-xl transition-all duration-300"
-              onClick={onBookMeeting}
-              data-testid="button-get-in-touch"
-            >
-              <Mail className="h-5 w-5" />
-              Get In Touch
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className={`gap-2 transition-all duration-300 shadow-lg hover:shadow-xl ${
-                isDark 
-                  ? "bg-slate-800/50 border-slate-600 text-slate-200 hover:bg-slate-700" 
-                  : "bg-white border-slate-300 text-slate-700 hover:bg-slate-100"
-              }`}
-              onClick={onViewWork}
-              data-testid="button-view-work"
-            >
-              View My Work
-              <ArrowRight className="h-5 w-5" />
-            </Button>
-            <Button
-              size="lg"
-              variant="secondary"
-              className="gap-2 shadow-lg hover:shadow-xl transition-all duration-300"
-              asChild
-              data-testid="button-download-resume"
-            >
-              <a 
-                href="/Aditya_Kanbargi_Resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Download className="h-5 w-5" />
-                Resume
-              </a>
-            </Button>
-          </div>
-        </div>
-      </div>
-    </section>
+      <Marquee speed={-3} className="border-y border-border py-5 md:py-7">
+        {marqueeWords.map((word) => (
+          <span key={word} className="flex items-center">
+            <span className="display px-6 text-3xl md:px-10 md:text-5xl">{word}</span>
+            <span className="text-2xl text-signal-text md:text-4xl">✳</span>
+          </span>
+        ))}
+      </Marquee>
+    </>
   );
 }

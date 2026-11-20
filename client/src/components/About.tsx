@@ -1,215 +1,155 @@
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Briefcase, Award, Rocket, BookOpen, Brain, GraduationCap } from "lucide-react";
-import headshotImage from "@assets/profile_1761803769301.png";
-import NeuralNetworkAnimation from "./NeuralNetworkAnimation";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { SiAmazon, SiDatabricks } from "react-icons/si";
+import { useRef } from "react";
+import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { FadeUp, SectionHeader } from "./motion/Reveal";
+import { EASE } from "@/lib/motion";
+import headshotImage from "@assets/web/profile.webp";
 
-// Helper function to highlight keywords
-function highlightKeywords(text: string) {
-  const keywords = [
-    "Data & AI", "agentic AI systems", "LLM workflows", "data pipelines",
-    "data and business analytics", "Master's in Data Science", "GPA 4.0",
-    "Global Leaders Fellowship"
-  ];
-  
-  let result: (string | JSX.Element)[] = [text];
-  let keyCounter = 0;
-  
-  keywords.forEach((keyword) => {
-    const newResult: (string | JSX.Element)[] = [];
-    result.forEach((part) => {
-      if (typeof part === "string") {
-        const parts = part.split(new RegExp(`(${keyword})`, "gi"));
-        parts.forEach((subPart) => {
-          if (subPart.toLowerCase() === keyword.toLowerCase()) {
-            newResult.push(
-              <span key={`kw-${keyCounter++}`} className="text-primary font-semibold">
-                {subPart}
-              </span>
-            );
-          } else if (subPart) {
-            newResult.push(subPart);
-          }
-        });
-      } else {
-        newResult.push(part);
-      }
-    });
-    result = newResult;
-  });
-  
-  return result;
+const statement =
+  "I came for the patterns. I stayed for the pipelines. Now I'm building the systems that put both to work.";
+
+function Word({ children, progress, range }: { children: string; progress: MotionValue<number>; range: [number, number] }) {
+  const opacity = useTransform(progress, range, [0.14, 1]);
+  return (
+    <motion.span style={{ opacity }} className="mr-[0.24em] inline-block">
+      {children}
+    </motion.span>
+  );
 }
 
-const skills = [
-  {
-    category: "Core Competencies",
-    icon: Brain,
-    items: ["Agentic AI & LLM Workflows", "LLM Evaluation & Benchmarking", "RAG, MCP & Knowledge Graphs", "Analytics Engineering & Data Pipelines", "Data Visualization & BI Dashboards", "Machine Learning & Predictive Analytics"],
-  },
-  {
-    category: "Education",
-    icon: GraduationCap,
-    items: ["Master's in Data Science", "George Washington University", "GPA 4.0", "Global Leaders Fellowship"],
-    coursework: ["Visualization of Complex Data", "Data Mining", "Natural Language Processing", "Cloud Computing", "Algorithm Design", "Data Warehousing", "Statistical Modeling", "Machine Learning"],
-  },
-];
+/** Large statement whose words light up one by one as it is scrolled through. */
+function ScrollStatement() {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const reduced = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.85", "end 0.45"] });
+  const words = statement.split(" ");
 
-const achievements = [
+  if (reduced) {
+    return <p className="display text-[clamp(2rem,5.6vw,5.5rem)]">{statement}</p>;
+  }
+
+  return (
+    <p ref={ref} className="display text-[clamp(2rem,5.6vw,5.5rem)]" aria-label={statement}>
+      {words.map((word, i) => (
+        <Word key={i} progress={scrollYProgress} range={[i / words.length, (i + 1) / words.length]}>
+          {word}
+        </Word>
+      ))}
+    </p>
+  );
+}
+
+const facts = [
   {
-    icon: Briefcase,
-    title: "~3 Years",
-    description: "Professional Experience in Data & AI",
+    label: "Education",
+    lines: ["MS, Data Science", "The George Washington University, 2026", "GPA 3.93 · Global Leaders Fellowship"],
   },
   {
-    icon: Award,
-    title: "Global Leaders",
-    description: "Fellowship Recipient recognized for academic excellence @ GW",
+    label: "Certifications",
+    lines: ["AWS Certified AI Practitioner", "Databricks GenAI Accreditation"],
   },
   {
-    icon: Rocket,
-    title: "15+ Projects",
-    description: "End-to-end Deployments",
+    label: "Published",
+    lines: ["Music Genre Classification Using Machine Learning Techniques", "IJSREM, Volume 7, Issue 12 (2023)"],
   },
   {
-    icon: BookOpen,
-    title: "Published",
-    description: "IJSREM Journal on ML",
+    label: "Experience",
+    lines: ["About three years", "Enterprise analytics, healthcare data, AI engineering"],
   },
 ];
 
 export default function About() {
-  const { ref, isVisible } = useScrollAnimation();
-  
+  const imageRef = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: imageRef, offset: ["start end", "end start"] });
+  const imageY = useTransform(scrollYProgress, [0, 1], reduced ? ["0%", "0%"] : ["-8%", "8%"]);
+
   return (
-    <section 
-      ref={ref as React.RefObject<HTMLElement>}
-      id="about" 
-      className={`relative py-24 bg-background overflow-hidden scroll-animate ${isVisible ? 'visible' : ''}`}
-    >
-      <NeuralNetworkAnimation />
-      
-      <div className="relative z-10 max-w-4xl mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-semibold mb-12 text-center">
-          About Me
-        </h2>
+    <section id="about" className="pt-28 md:pt-44">
+      <div className="mx-auto max-w-[1600px] px-5 md:px-10">
+        <SectionHeader
+          index="04"
+          label="About"
+          lines={[
+            <>The person</>,
+            <>
+              <span className="serif-italic text-signal-text">behind the work.</span>
+            </>,
+          ]}
+        />
 
-        <div className="flex flex-col md:flex-row gap-8 mb-16">
-          <div className="flex-shrink-0">
-            <img
-              src={headshotImage}
-              alt="Aditya Kanbargi"
-              className="w-48 h-48 rounded-full object-cover shadow-lg"
-              data-testid="img-headshot"
-            />
+        <ScrollStatement />
+
+        <div className="mt-20 grid gap-12 lg:mt-28 grid-cols-1 lg:grid-cols-12 lg:gap-8">
+          <div className="lg:col-span-4">
+            <motion.div
+              ref={imageRef}
+              className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-border"
+              initial={{ clipPath: reduced ? "inset(0 0 0% 0)" : "inset(0 0 100% 0)" }}
+              whileInView={{ clipPath: "inset(0 0 0% 0)" }}
+              viewport={{ once: true, margin: "0px 0px -15% 0px" }}
+              transition={{ duration: 1.2, ease: EASE }}
+            >
+              <motion.img
+                src={headshotImage}
+                alt="Aditya Kanbargi"
+                width={800}
+                height={800}
+                loading="lazy"
+                className="absolute inset-0 h-[116%] w-full object-cover"
+                style={{ y: imageY }}
+                data-testid="img-headshot"
+              />
+            </motion.div>
           </div>
 
-          <div className="flex-1 border-2 border-black dark:border-white rounded-md p-6 space-y-4 text-foreground leading-relaxed bg-background/90 backdrop-blur-sm">
-            <p className="text-lg font-semibold">
-              I came for the patterns. I stayed for the pipelines. Now I'm building the systems that put both to work.
-            </p>
-            <p className="text-justify">
-              {highlightKeywords("I'm Aditya Kanbargi, and I work in Data & AI, building agentic AI systems, orchestrating LLM workflows, and developing data pipelines to automate research. I enjoy turning complex, manual processes into something reliable, useful, and easier for people to work with.")}
-            </p>
-            <p className="text-justify">
-              {highlightKeywords("My background is in data and business analytics. Some days, that meant building a dashboard someone could open on a Monday morning and know what to act on. Other days, it meant digging into the numbers to understand what was happening and what the team could do about it. I bring that same mindset to AI: ask the right questions, check the answers, and make sure the work solves a real business problem.")}
-            </p>
-            <p className="text-justify">
-              {highlightKeywords("I hold a Master's in Data Science from The George Washington University (GPA 4.0), where I was awarded the Global Leaders Fellowship for academic excellence.")}
-            </p>
-            <p className="text-justify">
-              {highlightKeywords("I like being the person who gets both sides: comfortable digging into why something isn't working, and just as comfortable explaining it without making it more complicated than it needs to be.")}
-            </p>
-            <p className="text-justify">
-              {highlightKeywords("Outside of work, I'm usually lifting, chasing a football, turning pages, or saying \"one more game.\" When the mountains call, I'm already planning the hike.")}
-            </p>
-            <p className="text-justify">
-              {highlightKeywords("Always happy to connect over data, AI, a good game, or a shared interest. Feel free to reach out!")}
-            </p>
+          <div className="space-y-6 text-lg leading-relaxed text-muted-foreground md:text-xl lg:col-span-7 lg:col-start-6">
+            <FadeUp>
+              <p>
+                I'm Aditya, and I work in <span className="text-foreground">data and AI</span>: building agentic AI
+                systems, orchestrating LLM workflows, and developing data pipelines to automate research. I enjoy
+                turning complex, manual processes into something reliable, useful, and easier for people to work with.
+              </p>
+            </FadeUp>
+            <FadeUp delay={0.05}>
+              <p>
+                My background is in data and business analytics. Some days, that meant building a dashboard someone
+                could open on a Monday morning and know what to act on. Other days, it meant digging into the numbers
+                to understand what was happening and what the team could do about it. I bring that same mindset to AI:{" "}
+                <span className="text-foreground">
+                  ask the right questions, check the answers, and make sure the work solves a real business problem.
+                </span>
+              </p>
+            </FadeUp>
+            <FadeUp delay={0.1}>
+              <p>
+                I like being the person who gets both sides: comfortable digging into why something isn't working, and
+                just as comfortable explaining it without making it more complicated than it needs to be.
+              </p>
+            </FadeUp>
+            <FadeUp delay={0.15}>
+              <p>
+                Outside of work, I'm usually lifting, chasing a football, turning pages, or saying "one more game."
+                When the mountains call, I'm already planning the hike.
+              </p>
+            </FadeUp>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-16">
-          {skills.map((skillGroup) => {
-            const SkillIcon = skillGroup.icon;
-            return (
-              <Card key={skillGroup.category} className="p-6 hover-elevate transition-all duration-300">
-                <div className="flex items-center gap-2 mb-4">
-                  <SkillIcon className="h-6 w-6 text-primary" />
-                  <h3 className="font-semibold text-lg">
-                    {skillGroup.category}
-                  </h3>
-                </div>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {skillGroup.items.map((skill) => (
-                    <Badge key={skill} variant="secondary">
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-                {skillGroup.coursework && (
-                  <>
-                    <h4 className="font-medium text-sm mb-2 text-muted-foreground">
-                      Coursework:
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {skillGroup.coursework.map((course) => (
-                        <Badge key={course} variant="outline">
-                          {course}
-                        </Badge>
-                      ))}
-                    </div>
-                  </>
-                )}
-              </Card>
-            );
-          })}
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-          {achievements.map((achievement) => {
-            const Icon = achievement.icon;
-            return (
-              <Card
-                key={achievement.title}
-                className="p-6 text-center hover-elevate"
-              >
-                <Icon className="h-8 w-8 mx-auto mb-3 text-primary" />
-                <div className="font-semibold text-xl mb-1">
-                  {achievement.title}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  {achievement.description}
-                </div>
-              </Card>
-            );
-          })}
-        </div>
-
-        <Card className="p-6 hover-elevate">
-          <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
-            <Award className="h-5 w-5 text-primary" />
-            Professional Certifications
-          </h3>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-              <SiAmazon className="h-8 w-8 text-orange-500 flex-shrink-0" />
-              <div>
-                <div className="font-medium text-sm">AWS Certified</div>
-                <div className="text-xs text-muted-foreground">AI Practitioner</div>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-              <SiDatabricks className="h-8 w-8 text-red-500 flex-shrink-0" />
-              <div>
-                <div className="font-medium text-sm">Databricks Certified</div>
-                <div className="text-xs text-muted-foreground">GenAI Accreditation</div>
-              </div>
-            </div>
-          </div>
-        </Card>
+        <dl className="mt-20 grid border-l border-t border-border sm:grid-cols-2 lg:mt-28 lg:grid-cols-4">
+          {facts.map((fact, i) => (
+            <FadeUp key={fact.label} delay={i * 0.07} className="border-b border-r border-border p-6 md:p-8">
+              <dt className="label-mono mb-5 text-signal-text">{fact.label}</dt>
+              <dd>
+                <div className="text-xl font-medium tracking-tight">{fact.lines[0]}</div>
+                {fact.lines.slice(1).map((line) => (
+                  <div key={line} className="mt-1.5 text-sm text-muted-foreground">
+                    {line}
+                  </div>
+                ))}
+              </dd>
+            </FadeUp>
+          ))}
+        </dl>
       </div>
     </section>
   );

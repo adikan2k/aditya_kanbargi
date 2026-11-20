@@ -1,219 +1,68 @@
-import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { Eye, ExternalLink, BookOpen, Check, Copy, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
+import { ArrowUpRight, Plus } from "lucide-react";
 import { SiGithub } from "react-icons/si";
-import labelLensImage from "@assets/labellens/og.png";
-import project1Image from "@assets/1_1761838910338.jpg";
-import project2Image from "@assets/2_1761838910338.jpg";
-import project3Image from "@assets/3_1761838910338.png";
-import project4Image from "@assets/4_1761838910338.png";
-import project5Image from "@assets/5_1761838910338.png";
-import project6Image from "@assets/6_1761838910339.jpg";
-import project7Image from "@assets/7_1761840145743.png";
-import project8Image from "@assets/8_1761840145744.jpg";
-import project9Image from "@assets/9_1761840145744.png";
-import project10Image from "@assets/10_1761840145744.png";
-import project11Image from "@assets/11_1761840145744.jpg";
-import project13Image from "@assets/image_1763919442225.png";
-import luminaImage from "@assets/lumina_thumbnail.png";
-import nutrimapImage from "@assets/nutrimap_thumbnail.png";
-import riskmetricImage from "@assets/Riskmetric.png";
-import nutritionalArbitrageImage from "@assets/na.jpg";
-import scholarlyImage from "@assets/scholarly.jpg";
+import LabelLensShowcase from "./LabelLensShowcase";
+import { FadeUp, SectionHeader } from "./motion/Reveal";
+import { EASE, useFinePointer } from "@/lib/motion";
+import evidentiaImage from "@assets/web/evidentia.webp";
+import telehealthImage from "@assets/web/telehealth.webp";
+import nutritionalArbitrageImage from "@assets/web/nutritional-arbitrage.webp";
+import scholarlyImage from "@assets/web/scholarly.webp";
+import luminaImage from "@assets/web/lumina.webp";
+import nutrimapImage from "@assets/web/nutrimap.webp";
+import riskmetricImage from "@assets/web/riskmetric.webp";
+import steamImage from "@assets/web/steam.webp";
+import johnLewisImage from "@assets/web/johnlewis.webp";
+import mamlImage from "@assets/web/maml.webp";
+import spotifyImage from "@assets/web/spotify.webp";
+import accidentsImage from "@assets/web/accidents.webp";
+import musicImage from "@assets/web/music.webp";
+import bitcoinImage from "@assets/web/bitcoin.webp";
+import nerveImage from "@assets/web/nerve.webp";
+import faceMaskImage from "@assets/web/facemask.webp";
+import distancingImage from "@assets/web/distancing.webp";
 
-// Lead project, shown as a wide card above the filterable grid.
-// Every number below is backed by a report in the repo's evals/results/.
-const labelLens = {
-  title: "LabelLens",
-  tagline: "What's really in your food?",
-  description:
-    "A million US packaged foods from Open Food Facts, made readable: every label explained, every additive looked up, a better swap for every product, and an AI agent that answers questions from the data and shows its sources.",
-  parts: [
-    "A tested data pipeline: the Open Food Facts export through dbt on DuckDB, with 94 data tests.",
-    "AI enrichment: Claude fills in missing categories and writes additive and ingredient explainers through the Batch API.",
-    "Storage in Neon Postgres with pgvector, plus a Neo4j knowledge graph.",
-    "One FastAPI service on Google Cloud Run behind a Next.js site on Vercel: a tool-using ask agent, a label reader that works from a photo, and an MCP App that renders a label card inside Claude.",
-    "Evals for every AI feature, each with a published report that lists its misses.",
-  ],
-  metrics: [
-    { value: "985,260", label: "named US products" },
-    { value: "0.98", label: "ask agent fact score, vs 0.26 for search alone" },
-    { value: "98%", label: "of nutrient values read correctly from real label photos" },
-    { value: "29 / 30", label: "requests where Claude picks the right tool" },
-    { value: "175 ms", label: "search at the 95th percentile on the live API" },
-    { value: "~$6", label: "model spend for the whole project, on free-tier hosting" },
-  ],
-  stack: ["Claude (Haiku, Sonnet as eval judge)", "MCP", "FastAPI", "dbt", "DuckDB", "Postgres + pgvector", "Neo4j", "Next.js", "Google Cloud Run", "Vercel", "Langfuse"],
-  liveUrl: "https://labellens-beige.vercel.app",
-  howBuiltUrl: "https://labellens-beige.vercel.app/how-its-built",
-  githubUrl: "https://github.com/adikan2k/labellens",
-  buildNoteUrl: "https://github.com/adikan2k/labellens#how-i-built-it",
-  mcpUrl: "https://labellens-api-1036759996795.us-east4.run.app/mcp",
-};
-
-function LabelLensFeature() {
-  const [copied, setCopied] = useState(false);
-
-  const copyMcpUrl = async () => {
-    try {
-      await navigator.clipboard.writeText(labelLens.mcpUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      // Clipboard can be blocked; the address stays visible and selectable.
-    }
-  };
-
-  return (
-    <Card className="overflow-hidden mb-12 border-primary/40" data-testid="card-project-labellens">
-      <div className="grid lg:grid-cols-5">
-        <div className="lg:col-span-2 lg:border-r">
-          <a
-            href={labelLens.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block"
-            data-testid="link-labellens-image"
-          >
-            <img
-              src={labelLensImage}
-              alt="LabelLens: the 'What's in it?' headline beside a Nutrition Facts label"
-              className="w-full h-auto"
-            />
-          </a>
-          <div className="grid grid-cols-2 gap-3 p-6">
-            {labelLens.metrics.map((metric) => (
-              <div key={metric.label} className="rounded-md bg-muted/60 p-3">
-                <div className="text-lg font-bold text-primary">{metric.value}</div>
-                <div className="text-xs text-muted-foreground leading-snug">{metric.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <CardContent className="lg:col-span-3 p-6 md:p-8">
-          <div className="flex flex-wrap items-center gap-2 mb-3">
-            <Badge className="gap-1">
-              <Sparkles className="h-3 w-3" />
-              Latest project
-            </Badge>
-            <Badge variant="outline">Gen AI</Badge>
-            <Badge variant="outline">Analytics Engineering</Badge>
-          </div>
-          <h3 className="text-2xl md:text-3xl font-semibold">{labelLens.title}</h3>
-          <p className="text-primary font-medium mb-3">{labelLens.tagline}</p>
-          <p className="text-foreground mb-4">{labelLens.description}</p>
-
-          <ul className="space-y-1.5 mb-6 list-disc list-inside text-sm text-muted-foreground">
-            {labelLens.parts.map((part) => (
-              <li key={part}>{part}</li>
-            ))}
-          </ul>
-
-          <div className="flex flex-wrap gap-2 mb-6">
-            {labelLens.stack.map((tech) => (
-              <Badge key={tech} variant="secondary">
-                {tech}
-              </Badge>
-            ))}
-          </div>
-
-          <p className="text-sm text-muted-foreground mb-6">
-            Built in four days with Claude Code; I set the direction and made the calls.{" "}
-            <a
-              href={labelLens.buildNoteUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary underline underline-offset-2"
-            >
-              How I built it
-            </a>
-          </p>
-
-          <div className="flex flex-wrap gap-3 mb-5">
-            <Button asChild className="gap-2" data-testid="button-labellens-live">
-              <a href={labelLens.liveUrl} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="h-4 w-4" />
-                Try it live
-              </a>
-            </Button>
-            <Button asChild variant="outline" className="gap-2" data-testid="button-labellens-how-built">
-              <a href={labelLens.howBuiltUrl} target="_blank" rel="noopener noreferrer">
-                <BookOpen className="h-4 w-4" />
-                How it's built
-              </a>
-            </Button>
-            <Button asChild variant="outline" className="gap-2" data-testid="button-labellens-code">
-              <a href={labelLens.githubUrl} target="_blank" rel="noopener noreferrer">
-                <SiGithub className="h-4 w-4" />
-                Code
-              </a>
-            </Button>
-          </div>
-
-          <div className="text-sm">
-            <div className="font-medium mb-1">Use it inside Claude (MCP connector address)</div>
-            <div className="flex items-center gap-2">
-              <code className="flex-1 min-w-0 truncate rounded bg-muted px-2 py-1.5 text-xs" title={labelLens.mcpUrl}>
-                {labelLens.mcpUrl}
-              </code>
-              <Button
-                size="icon"
-                variant="ghost"
-                onClick={copyMcpUrl}
-                aria-label="Copy MCP connector address"
-                data-testid="button-labellens-copy-mcp"
-              >
-                {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
-              </Button>
-            </div>
-          </div>
-
-          <p className="text-xs text-muted-foreground mt-4">
-            Code under the MIT licence; data from Open Food Facts under the ODbL.
-          </p>
-        </CardContent>
-      </div>
-    </Card>
-  );
+interface Project {
+  id: number;
+  name: string;
+  subtitle: string;
+  description: string;
+  image: string;
+  tags: string[];
+  categories: string[];
+  /** Left out when there is no public repository for the project. */
+  githubUrl?: string;
 }
 
-const projects = [
+// AI projects first, then analytics engineering, then earlier ML and deep learning work.
+const projects: Project[] = [
   {
-    id: 14,
-    title: "Lumina: Real-Time U.S. Grid Intelligence & Demand Forecasting",
+    id: 1,
+    name: "Evidentia",
+    subtitle: "Multimodal multi-agent research analyst",
     description:
-      "Scalable energy analytics platform processing 400K+ hourly demand records across 10 U.S. balancing authorities and 50 states, revealing that high-renewable states pay 30% less than the national average - disproving the \"clean energy = expensive\" myth.",
-    image: luminaImage,
-    tags: ["Python", "SQL", "Google BigQuery", "Looker Studio", "EIA API"],
-    categories: ["Analytics Engineering & Forecasting"],
-    githubUrl: "https://github.com/adikan2k/Lumina-Real-Time-U.S.-Grid-Intelligence-Demand-Forecasting",
+      "Agentic AI research framework that transforms messy, multimodal data into clear, citation-rich insights. AI-powered research analyst that plans, navigates, verifies, and synthesizes.",
+    image: evidentiaImage,
+    tags: ["LangGraph", "FastAPI", "Next.js", "Qdrant", "Postgres", "LLM Agents"],
+    categories: ["Gen AI"],
+    githubUrl: "https://github.com/adikan2k/Evidentia---Multimodal-Multi-Agent-Research-Analyst",
   },
   {
-    id: 15,
-    title: "NutriMap: Geospatial Food Analytics & Inflation Forecasting",
+    id: 2,
+    name: "Telehealth Compass",
+    subtitle: "AI-powered telehealth policy intelligence platform",
     description:
-      "Real-time geospatial analytics quantifying the 2.5\u00D7 grocery affordability gap between food deserts and high-access areas across 13.6M Americans.",
-    image: nutrimapImage,
-    tags: ["Power BI", "PostgreSQL", "dbt", "Prophet", "Python", "Kroger & USDA Data"],
-    categories: ["Analytics Engineering & Forecasting"],
-    githubUrl: "https://github.com/adikan2k/NutriMap-Geospatial-Food-Analytics-Inflation-Forecasting",
-  },
-  {
-    id: 16,
-    title: "RiskMetric: Fraud Detection & Spatial-Temporal Risk Scoring",
-    description:
-      "A zero-cost, high-performance Trust Engine that identifies complex fraud archetypes across 1M+ synthetic banking transactions with sub-second inference speed.",
-    image: riskmetricImage,
-    tags: ["Python", "SQL", "DuckDB", "dbt", "Streamlit", "Plotly"],
-    categories: ["Analytics Engineering & Forecasting"],
-    githubUrl: "https://github.com/adikan2k/RiskMetric---Algorithmic-Fraud-Detection-Spatial-Temporal-Risk-Modeling",
+      "End-to-end platform using Llama-3.1-70B and BGE-large embeddings within a RAG pipeline, enabling natural-language Q&A with citations, automated multi-state policy comparisons, and structured regulatory insights. Improved policy analysis efficiency by >50% with sub-5s response latency across 100+ documents.",
+    image: telehealthImage,
+    tags: ["Llama-3.1-70B", "RAG", "BGE Embeddings", "LLMs", "Python", "NLP"],
+    categories: ["Gen AI"],
+    githubUrl: "https://github.com/adikan2k/TeleCompass-AI-Powered-Telehealth-Policy-Intelligence-Platform",
   },
   {
     id: 17,
-    title: "Nutritional Arbitrage: AI-Powered Grocery Optimization",
+    name: "Nutritional Arbitrage",
+    subtitle: "AI-powered grocery optimization",
     description:
       "An intelligent web application that uses linear programming to optimize grocery shopping. It finds the perfect combination of foods to meet your nutrition goals at the lowest possible cost.",
     image: nutritionalArbitrageImage,
@@ -223,7 +72,8 @@ const projects = [
   },
   {
     id: 18,
-    title: "Scholarly Topic Navigator - Explainable Research Digest Pipeline",
+    name: "Scholarly Topic Navigator",
+    subtitle: "Explainable research digest pipeline",
     description:
       "This project tackles the surge of NLP publications (arXiv, ACL, EMNLP, etc.) by building an automated pipeline that surfaces timely, relevant papers with transparent recommendation logic. It combines modern neural methods with standard NLP preprocessing to enable clustering, classification, retrieval, and summarization, while incorporating faculty feedback for continuous improvement.",
     image: scholarlyImage,
@@ -232,251 +82,379 @@ const projects = [
     githubUrl: "https://github.com/adikan2k/Scholarly-Topic-Navigator---Explainable-Research-Digest-Pipeline",
   },
   {
+    id: 14,
+    name: "Lumina",
+    subtitle: "Real-time U.S. grid intelligence and demand forecasting",
+    description:
+      "Scalable energy analytics platform processing 400K+ hourly demand records across 10 U.S. balancing authorities and 50 states, revealing that high-renewable states pay 30% less than the national average - disproving the \"clean energy = expensive\" myth.",
+    image: luminaImage,
+    tags: ["Python", "SQL", "Google BigQuery", "Looker Studio", "EIA API"],
+    categories: ["Analytics Engineering & Forecasting"],
+    githubUrl: "https://github.com/adikan2k/Lumina-Real-Time-U.S.-Grid-Intelligence-Demand-Forecasting",
+  },
+  {
+    id: 15,
+    name: "NutriMap",
+    subtitle: "Geospatial food analytics and inflation forecasting",
+    description:
+      "Real-time geospatial analytics quantifying the 2.5× grocery affordability gap between food deserts and high-access areas across 13.6M Americans.",
+    image: nutrimapImage,
+    tags: ["Power BI", "PostgreSQL", "dbt", "Prophet", "Python", "Kroger & USDA Data"],
+    categories: ["Analytics Engineering & Forecasting"],
+    githubUrl: "https://github.com/adikan2k/NutriMap-Geospatial-Food-Analytics-Inflation-Forecasting",
+  },
+  {
+    id: 16,
+    name: "RiskMetric",
+    subtitle: "Fraud detection and spatial-temporal risk scoring",
+    description:
+      "A zero-cost, high-performance Trust Engine that identifies complex fraud archetypes across 1M+ synthetic banking transactions with sub-second inference speed.",
+    image: riskmetricImage,
+    tags: ["Python", "SQL", "DuckDB", "dbt", "Streamlit", "Plotly"],
+    categories: ["Analytics Engineering & Forecasting"],
+    githubUrl: "https://github.com/adikan2k/RiskMetric---Algorithmic-Fraud-Detection-Spatial-Temporal-Risk-Modeling",
+  },
+  {
     id: 3,
-    title: "Steam Market Trends & Customer Segmentation",
+    name: "Steam Market Trends",
+    subtitle: "Customer segmentation and ownership forecasting",
     description:
       "Built an end-to-end analytics pipeline combining EDA, regression, clustering, statistical testing, and ML models (XGBoost, LightGBM, LSTMs) to analyze 100k+ Steam game records with 92% forecast accuracy. Designed & deployed interactive visualizations and dashboards (Plotly, Tableau) to communicate market trends, ownership forecasting, and player behavior insights.",
-    image: project3Image,
+    image: steamImage,
     tags: ["XGBoost", "LightGBM", "LSTM", "EDA", "Plotly", "Tableau", "Python"],
     categories: ["Machine Learning", "Analytics Engineering & Forecasting"],
     githubUrl: "https://github.com/adikan2k/Steam-Market-Trends-and-Customer-Segmentation",
   },
   {
-    id: 1,
-    title: "Evidentia - Multimodal Multiagent Research Analyst",
+    id: 13,
+    name: "John Lewis Christmas Ad",
+    subtitle: "Sentiment and topic modeling",
     description:
-      "Agentic AI research framework that transforms messy, multimodal data into clear, citation-rich insights. AI-powered research analyst that plans, navigates, verifies, and synthesizes.",
-    image: project1Image,
-    tags: ["LangGraph", "FastAPI", "Next.js", "Qdrant", "Postgres", "LLM Agents"],
-    categories: ["Gen AI"],
-    githubUrl: "https://github.com/adikan2k/Evidentia---Multimodal-Multi-Agent-Research-Analyst",
-  },
-  {
-    id: 2,
-    title: "Telehealth Compass: AI-Powered Telehealth Policy Intelligence Platform",
-    description:
-      "End-to-end platform using Llama-3.1-70B and BGE-large embeddings within a RAG pipeline, enabling natural-language Q&A with citations, automated multi-state policy comparisons, and structured regulatory insights. Improved policy analysis efficiency by >50% with sub-5s response latency across 100+ documents.",
-    image: project2Image,
-    tags: ["Llama-3.1-70B", "RAG", "BGE Embeddings", "LLMs", "Python", "NLP"],
-    categories: ["Gen AI"],
-    githubUrl: "https://github.com/adikan2k/TeleCompass-AI-Powered-Telehealth-Policy-Intelligence-Platform",
+      "This project investigates audience sentiment and topic patterns in YouTube comments about the John Lewis 2025 Christmas advertisement. The ad's portrayal of masculinity and gender roles generated significant online discussion, making it an interesting case study for sentiment analysis and topic modeling.",
+    image: johnLewisImage,
+    tags: ["Python", "NLP", "Sentiment Analysis", "Topic Modeling", "YouTube API", "NLTK", "Transformers"],
+    categories: ["Natural Language Processing"],
   },
   {
     id: 4,
-    title: "Few-shot Image Classification on AWS using Meta-Learning (MAML)",
+    name: "Few-shot Image Classification",
+    subtitle: "Meta-learning (MAML) on AWS",
     description:
       "Designed and deployed a cloud-native few-shot image classification system on AWS using MAML, building a full-stack pipeline with Python, Flask, S3, SageMaker, and EC2 to deliver real-time inference with end-to-end scalability, automation, and cloud integration.",
-    image: project4Image,
+    image: mamlImage,
     tags: ["MAML", "AWS", "SageMaker", "Flask", "S3", "EC2", "Meta-Learning"],
     categories: ["Machine Learning"],
-    githubUrl: "https://github.com/adikan2k",
-  },
-  {
-    id: 5,
-    title: "Music Genre Classification Using Machine Learning Techniques",
-    description:
-      "Performed comparative study to detect and classify music files automatically based on genre using various classification algorithms including SVM, K-Nearest Neighbors, CNN, RNN, Random Forest and Decision trees. Published in International Journal of Science Research and Management (IJSREM) Volume 7, Issue 12 on December 14, 2023.",
-    image: project5Image,
-    tags: ["SVM", "CNN", "RNN", "Random Forest", "K-Nearest Neighbors", "Python"],
-    categories: ["Machine Learning"],
-    githubUrl: "https://github.com/adikan2k",
-  },
-  {
-    id: 6,
-    title: "Detection of Face Mask using Keras and TensorFlow",
-    description:
-      "Real-time face mask detection system using deep learning. Built with OpenCV, Keras, and TensorFlow to detect face masks in real-time video streams, enabling automated compliance monitoring for safety protocols.",
-    image: project6Image,
-    tags: ["Keras", "TensorFlow", "OpenCV", "Deep Learning", "Computer Vision"],
-    categories: ["Deep Learning and Computer Vision"],
-    githubUrl: "https://github.com/adikan2k",
-  },
-  {
-    id: 7,
-    title: "Social Distancing Detector using YOLO and OpenCV",
-    description:
-      "Social distancing detector built using YOLO (COCO Model) along with OpenCV. Applies object detection to detect all people in video streams, computes pairwise distances between detected people, and checks if any two people are less than N pixels apart for social distancing compliance.",
-    image: project7Image,
-    tags: ["YOLO", "OpenCV", "Computer Vision", "Deep Learning", "Object Detection"],
-    categories: ["Deep Learning and Computer Vision"],
-    githubUrl: "https://github.com/adikan2k",
-  },
-  {
-    id: 9,
-    title: "Dead Ends and Data Trends: A Journey Through America's Recent Accident Stats",
-    description:
-      "Insightful journey into understanding the patterns behind road fatalities in the U.S. and creating actionable insights for a safer future. Analysis of 36,891 observations with 83 features from FARS 2022 Dataset using R programming language for comprehensive statistical analysis and visualization.",
-    image: project9Image,
-    tags: ["R", "Statistical Analysis", "Data Visualization", "FARS Dataset", "Public Health"],
-    categories: ["Analytics Engineering & Forecasting"],
-    githubUrl: "https://github.com/adikan2k",
   },
   {
     id: 10,
-    title: "Predictive Analytics & Acoustic Typologies: Clustering Ensemble Classification of Global Spotify Data",
+    name: "Spotify Acoustic Typologies",
+    subtitle: "Clustering ensemble classification of global Spotify data",
     description:
       "Delves into the top-ranking songs on Spotify, exploring the intricate dynamics behind global and regional music trends. Using data on track features like danceability, energy, tempo, and popularity, uncovers what makes a song a chart-topper. By examining patterns in explicit content, album releases, and listener preferences across countries, this exploratory analysis offers valuable insights into the evolving world of music streaming.",
-    image: project10Image,
+    image: spotifyImage,
     tags: ["Python", "Spotify API", "Data Analysis", "Music Analytics", "Statistical Analysis"],
     categories: ["Analytics Engineering & Forecasting"],
-    githubUrl: "https://github.com/adikan2k/Predictive-Analytics-Acoustic-Typologies-Clustering-Ensemble-Classification-of-Global-Spotify-Data",
+    githubUrl:
+      "https://github.com/adikan2k/Predictive-Analytics-Acoustic-Typologies-Clustering-Ensemble-Classification-of-Global-Spotify-Data",
+  },
+  {
+    id: 9,
+    name: "Dead Ends and Data Trends",
+    subtitle: "A journey through America's recent accident stats",
+    description:
+      "Insightful journey into understanding the patterns behind road fatalities in the U.S. and creating actionable insights for a safer future. Analysis of 36,891 observations with 83 features from FARS 2022 Dataset using R programming language for comprehensive statistical analysis and visualization.",
+    image: accidentsImage,
+    tags: ["R", "Statistical Analysis", "Data Visualization", "FARS Dataset", "Public Health"],
+    categories: ["Analytics Engineering & Forecasting"],
+  },
+  {
+    id: 5,
+    name: "Music Genre Classification",
+    subtitle: "A comparative study of machine learning techniques",
+    description:
+      "Performed comparative study to detect and classify music files automatically based on genre using various classification algorithms including SVM, K-Nearest Neighbors, CNN, RNN, Random Forest and Decision trees. Published in International Journal of Science Research and Management (IJSREM) Volume 7, Issue 12 on December 14, 2023.",
+    image: musicImage,
+    tags: ["SVM", "CNN", "RNN", "Random Forest", "K-Nearest Neighbors", "Python"],
+    categories: ["Machine Learning"],
   },
   {
     id: 8,
-    title: "Bitcoin Price Prediction using LSTM and Google Trends",
+    name: "Bitcoin Price Prediction",
+    subtitle: "LSTM and Google Trends",
     description:
       "LSTM-based Bitcoin price prediction project using Google Trend keywords. Determines if LSTM algorithm can predict Bitcoin close price by analyzing keyword volume from Google Trends. Bitcoin price dataset downloaded hourly using coinapi.io API, and Google Trends keywords downloaded using Python pytrend library. Predicted Bitcoin close prices better than expected by improving learning in every epoch.",
-    image: project8Image,
+    image: bitcoinImage,
     tags: ["LSTM", "RNN", "Deep Learning", "Bitcoin", "Google Trends", "Python", "Time Series"],
     categories: ["Deep Learning and Computer Vision", "Analytics Engineering & Forecasting"],
-    githubUrl: "https://github.com/adikan2k",
   },
   {
     id: 11,
-    title: "PNB Nerve Segmentation from Ultrasound Images using Deep Learning",
+    name: "PNB Nerve Segmentation",
+    subtitle: "Deep learning on ultrasound images",
     description:
       "Deep learning model built to detect the precise location of the Brachial Plexus nerve that is present near the shoulder from ultrasound images. Implements advanced image segmentation techniques to aid in medical diagnostics and improve accuracy in nerve block procedures.",
-    image: project11Image,
+    image: nerveImage,
     tags: ["Deep Learning", "Medical Imaging", "Ultrasound", "Image Segmentation", "Computer Vision", "Healthcare"],
     categories: ["Deep Learning and Computer Vision"],
-    githubUrl: "https://github.com/adikan2k",
   },
   {
-    id: 13,
-    title: "John Lewis Christmas Ad Sentiment and Topic Modeling",
+    id: 6,
+    name: "Face Mask Detection",
+    subtitle: "Keras and TensorFlow",
     description:
-      "This project investigates audience sentiment and topic patterns in YouTube comments about the John Lewis 2025 Christmas advertisement. The ad's portrayal of masculinity and gender roles generated significant online discussion, making it an interesting case study for sentiment analysis and topic modeling.",
-    image: project13Image,
-    tags: ["Python", "NLP", "Sentiment Analysis", "Topic Modeling", "YouTube API", "NLTK", "Transformers"],
-    categories: ["Natural Language Processing"],
-    githubUrl: "https://github.com/adikan2k",
+      "Real-time face mask detection system using deep learning. Built with OpenCV, Keras, and TensorFlow to detect face masks in real-time video streams, enabling automated compliance monitoring for safety protocols.",
+    image: faceMaskImage,
+    tags: ["Keras", "TensorFlow", "OpenCV", "Deep Learning", "Computer Vision"],
+    categories: ["Deep Learning and Computer Vision"],
+  },
+  {
+    id: 7,
+    name: "Social Distancing Detector",
+    subtitle: "YOLO and OpenCV",
+    description:
+      "Social distancing detector built using YOLO (COCO Model) along with OpenCV. Applies object detection to detect all people in video streams, computes pairwise distances between detected people, and checks if any two people are less than N pixels apart for social distancing compliance.",
+    image: distancingImage,
+    tags: ["YOLO", "OpenCV", "Computer Vision", "Deep Learning", "Object Detection"],
+    categories: ["Deep Learning and Computer Vision"],
   },
 ];
 
-const categories = ["All", "Analytics Engineering & Forecasting", "Gen AI", "Natural Language Processing", "Machine Learning", "Deep Learning and Computer Vision"];
+const categories = [
+  "All",
+  "Gen AI",
+  "Natural Language Processing",
+  "Analytics Engineering & Forecasting",
+  "Machine Learning",
+  "Deep Learning and Computer Vision",
+];
 
-export default function Projects() {
-  const { ref, isVisible } = useScrollAnimation();
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
-  const [showAllProjects, setShowAllProjects] = useState(false);
+const shortCategory: Record<string, string> = {
+  "Gen AI": "Gen AI",
+  "Natural Language Processing": "NLP",
+  "Analytics Engineering & Forecasting": "Analytics Eng",
+  "Machine Learning": "ML",
+  "Deep Learning and Computer Vision": "Deep Learning / CV",
+};
 
-  const filteredProjects =
-    activeCategory === "All"
-      ? projects
-      : projects.filter((p) => p.categories.includes(activeCategory));
+/** Image that trails the mouse while a project row is hovered. */
+function HoverPreview({ project }: { project: Project | null }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const sx = useSpring(x, { stiffness: 180, damping: 22, mass: 0.6 });
+  const sy = useSpring(y, { stiffness: 180, damping: 22, mass: 0.6 });
 
-  const displayedProjects =
-    activeCategory === "All" && !showAllProjects
-      ? filteredProjects.slice(0, 6)
-      : filteredProjects;
-
-  const handleCategoryChange = (category: string) => {
-    setActiveCategory(category);
-    setShowAllProjects(false);
-  };
-
-  const getTagline = () => {
-    const taglines: Record<string, string> = {
-      "All": "A comprehensive showcase of my work across Analytics Engineering, Gen AI, Machine Learning, Deep Learning, Computer Vision, and NLP projects.",
-      "Analytics Engineering & Forecasting": "End-to-end data pipelines, warehousing, and forecasting dashboards that drive strategic decision-making.",
-      "Gen AI": "Intelligent systems leveraging LLMs, agentic frameworks, and advanced AI architectures.",
-      "Natural Language Processing": "Advanced NLP systems for language understanding, generation, and semantic analysis.",
-      "Machine Learning": "Predictive models and ML systems tackling real-world challenges with advanced algorithms.",
-      "Deep Learning and Computer Vision": "Neural networks and visual intelligence systems for pattern recognition, image analysis, and object detection.",
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      x.set(e.clientX);
+      y.set(e.clientY);
     };
-    return taglines[activeCategory] || taglines["All"];
-  };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => window.removeEventListener("mousemove", onMove);
+  }, [x, y]);
 
   return (
-    <section 
-      ref={ref as React.RefObject<HTMLElement>}
-      id="projects" 
-      className={`py-24 bg-muted/30 scroll-animate ${isVisible ? 'visible' : ''}`}
+    <motion.div
+      aria-hidden="true"
+      className="pointer-events-none fixed left-0 top-0 z-30 hidden lg:block"
+      style={{ x: sx, y: sy }}
     >
-      <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-center">
-          Featured Projects
-        </h2>
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          {getTagline()}
-        </p>
-
-        <LabelLensFeature />
-
-        <div className="flex justify-center gap-2 mb-12 flex-wrap">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={activeCategory === category ? "default" : "outline"}
-              onClick={() => handleCategoryChange(category)}
-              data-testid={`button-filter-${category.toLowerCase()}`}
-            >
-              {category}
-            </Button>
-          ))}
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {displayedProjects.map((project) => (
-            <a
-              key={project.id}
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-              data-testid={`link-project-${project.id}`}
-            >
-              <Card
-                className="overflow-hidden hover-elevate cursor-pointer group h-full"
-                onMouseEnter={() => setHoveredProject(project.id)}
-                onMouseLeave={() => setHoveredProject(null)}
-                data-testid={`card-project-${project.id}`}
-              >
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                  {hoveredProject === project.id && (
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center transition-all duration-300">
-                      <div className="bg-white/90 dark:bg-gray-800/90 p-4 rounded-full shadow-lg backdrop-blur-sm">
-                        <Eye className="h-8 w-8 text-foreground" />
-                      </div>
-                    </div>
-                  )}
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="font-semibold text-xl mb-2">{project.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-4">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </a>
-          ))}
-        </div>
-
-        {activeCategory === "All" && !showAllProjects && projects.length > 6 && (
-          <div className="flex justify-center mt-12">
-            <Button
-              size="lg"
-              onClick={() => setShowAllProjects(true)}
-              data-testid="button-view-all-projects"
-            >
-              View All Projects ({projects.length})
-            </Button>
-          </div>
+      <AnimatePresence>
+        {project && (
+          <motion.div
+            key={project.id}
+            className="absolute left-10 top-[-7rem] w-[22rem] overflow-hidden rounded-xl border border-border bg-card shadow-2xl"
+            initial={{ opacity: 0, scale: 0.85, rotate: -4 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            exit={{ opacity: 0, scale: 0.9, rotate: 3 }}
+            transition={{ duration: 0.35, ease: EASE }}
+          >
+            <img src={project.image} alt="" className="aspect-[16/10] w-full object-cover" />
+          </motion.div>
         )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
+export default function Projects() {
+  const fine = useFinePointer();
+  const reduced = useReducedMotion();
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [openId, setOpenId] = useState<number | null>(null);
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
+
+  const filtered =
+    activeCategory === "All" ? projects : projects.filter((p) => p.categories.includes(activeCategory));
+  const hovered = projects.find((p) => p.id === hoveredId) ?? null;
+  const showPreview = fine && !reduced && hovered !== null && hovered.id !== openId;
+
+  return (
+    <section id="projects" className="relative pt-24 md:pt-36">
+      <div className="mx-auto max-w-[1600px] px-5 md:px-10">
+        <SectionHeader
+          index="01"
+          label="Work"
+          lines={[
+            <>Built, shipped</>,
+            <>
+              <span className="serif-italic text-signal-text">and measured.</span>
+            </>,
+          ]}
+          aside={
+            <p>
+              One lead project with its evals published, then seventeen more across Gen AI, analytics engineering,
+              NLP and machine learning.
+            </p>
+          }
+        />
       </div>
+
+      <LabelLensShowcase />
+
+      <div className="mx-auto mt-28 max-w-[1600px] px-5 md:mt-40 md:px-10">
+        <div className="mb-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <FadeUp>
+            <h3 className="display text-[clamp(2rem,5vw,4.5rem)]">
+              More projects <span className="serif-italic text-muted-foreground">({projects.length})</span>
+            </h3>
+          </FadeUp>
+          <FadeUp delay={0.1} className="flex flex-wrap gap-2">
+            {categories.map((category) => {
+              const count =
+                category === "All" ? projects.length : projects.filter((p) => p.categories.includes(category)).length;
+              const active = activeCategory === category;
+              return (
+                <button
+                  key={category}
+                  onClick={() => {
+                    setActiveCategory(category);
+                    setOpenId(null);
+                  }}
+                  data-testid={`button-filter-${category.toLowerCase()}`}
+                  className={`label-mono rounded-full border px-4 py-2.5 transition-colors duration-300 ${
+                    active
+                      ? "border-signal bg-signal text-[hsl(240_7%_5%)]"
+                      : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
+                  }`}
+                >
+                  {category === "All" ? "All" : shortCategory[category]} {count}
+                </button>
+              );
+            })}
+          </FadeUp>
+        </div>
+
+        <ul className="border-t border-border" onMouseLeave={() => setHoveredId(null)}>
+          <AnimatePresence initial={false}>
+            {filtered.map((project, i) => {
+              const open = openId === project.id;
+              const dimmed = fine && hoveredId !== null && hoveredId !== project.id;
+              return (
+                <motion.li
+                  key={project.id}
+                  className="border-b border-border"
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "0px 0px -6% 0px" }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.6, ease: EASE, delay: Math.min(i, 6) * 0.04 }}
+                  data-testid={`card-project-${project.id}`}
+                >
+                  <button
+                    onClick={() => setOpenId(open ? null : project.id)}
+                    onMouseEnter={() => setHoveredId(project.id)}
+                    aria-expanded={open}
+                    data-cursor={open ? "Close" : "Open"}
+                    className={`group grid w-full grid-cols-[2.5rem_1fr_auto] items-baseline gap-x-4 py-6 text-left transition-opacity duration-300 md:grid-cols-[4rem_1fr_14rem_auto] md:py-8 ${
+                      dimmed ? "opacity-35" : "opacity-100"
+                    }`}
+                  >
+                    <span className="label-mono text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="transition-transform duration-500 ease-out group-hover:translate-x-3">
+                      <span
+                        className={`display block text-2xl transition-colors duration-300 md:text-4xl xl:text-5xl ${
+                          open ? "text-signal-text" : "group-hover:text-signal-text"
+                        }`}
+                      >
+                        {project.name}
+                      </span>
+                      <span className="mt-2 block text-sm text-muted-foreground md:text-base">{project.subtitle}</span>
+                    </span>
+                    <span className="label-mono hidden text-muted-foreground md:block">
+                      {project.categories.map((c) => shortCategory[c]).join(" · ")}
+                    </span>
+                    <span
+                      className={`flex h-10 w-10 items-center justify-center self-center rounded-full border transition-all duration-500 ${
+                        open
+                          ? "rotate-45 border-signal bg-signal text-[hsl(240_7%_5%)]"
+                          : "border-border group-hover:border-foreground"
+                      }`}
+                    >
+                      <Plus className="h-4 w-4" />
+                    </span>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {open && (
+                      <motion.div
+                        key="details"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: reduced ? 0.01 : 0.6, ease: EASE }}
+                        className="overflow-hidden"
+                      >
+                        <div className="grid gap-8 pb-10 md:grid-cols-12 md:pl-[5rem]">
+                          <motion.div
+                            className="overflow-hidden rounded-xl border border-border md:col-span-5"
+                            initial={{ clipPath: "inset(0 0 100% 0)" }}
+                            animate={{ clipPath: "inset(0 0 0% 0)" }}
+                            transition={{ duration: reduced ? 0.01 : 0.8, ease: EASE, delay: 0.1 }}
+                          >
+                            <img
+                              src={project.image}
+                              alt={`${project.name} preview`}
+                              loading="lazy"
+                              className="aspect-[16/10] w-full object-cover"
+                            />
+                          </motion.div>
+                          <div className="flex flex-col gap-6 md:col-span-7">
+                            <p className="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                              {project.description}
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                              {project.tags.map((tag) => (
+                                <span key={tag} className="rounded-full border border-border px-3 py-1.5 text-sm">
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                            {project.githubUrl && (
+                              <a
+                                href={project.githubUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex w-fit items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium transition-colors duration-300 hover:border-signal hover:bg-signal hover:text-[hsl(240_7%_5%)]"
+                                data-testid={`link-project-${project.id}`}
+                              >
+                                <SiGithub className="h-4 w-4" />
+                                View the code
+                                <ArrowUpRight className="h-4 w-4" />
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.li>
+              );
+            })}
+          </AnimatePresence>
+        </ul>
+      </div>
+
+      {fine && !reduced && <HoverPreview project={showPreview ? hovered : null} />}
     </section>
   );
 }
