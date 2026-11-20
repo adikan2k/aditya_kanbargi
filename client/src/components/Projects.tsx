@@ -3,7 +3,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { Eye } from "lucide-react";
+import { Eye, ExternalLink, BookOpen, Check, Copy, Sparkles } from "lucide-react";
+import { SiGithub } from "react-icons/si";
+import labelLensImage from "@assets/labellens/og.png";
 import project1Image from "@assets/1_1761838910338.jpg";
 import project2Image from "@assets/2_1761838910338.jpg";
 import project3Image from "@assets/3_1761838910338.png";
@@ -21,6 +23,162 @@ import nutrimapImage from "@assets/nutrimap_thumbnail.png";
 import riskmetricImage from "@assets/Riskmetric.png";
 import nutritionalArbitrageImage from "@assets/na.jpg";
 import scholarlyImage from "@assets/scholarly.jpg";
+
+// Lead project, shown as a wide card above the filterable grid.
+// Every number below is backed by a report in the repo's evals/results/.
+const labelLens = {
+  title: "LabelLens",
+  tagline: "What's really in your food?",
+  description:
+    "A million US packaged foods from Open Food Facts, made readable: every label explained, every additive looked up, a better swap for every product, and an AI agent that answers questions from the data and shows its sources.",
+  parts: [
+    "A tested data pipeline: the Open Food Facts export through dbt on DuckDB, with 94 data tests.",
+    "AI enrichment: Claude fills in missing categories and writes additive and ingredient explainers through the Batch API.",
+    "Storage in Neon Postgres with pgvector, plus a Neo4j knowledge graph.",
+    "One FastAPI service on Google Cloud Run behind a Next.js site on Vercel: a tool-using ask agent, a label reader that works from a photo, and an MCP App that renders a label card inside Claude.",
+    "Evals for every AI feature, each with a published report that lists its misses.",
+  ],
+  metrics: [
+    { value: "985,260", label: "named US products" },
+    { value: "0.98", label: "ask agent fact score, vs 0.26 for search alone" },
+    { value: "98%", label: "of nutrient values read correctly from real label photos" },
+    { value: "29 / 30", label: "requests where Claude picks the right tool" },
+    { value: "175 ms", label: "search at the 95th percentile on the live API" },
+    { value: "~$6", label: "model spend for the whole project, on free-tier hosting" },
+  ],
+  stack: ["Claude (Haiku, Sonnet as eval judge)", "MCP", "FastAPI", "dbt", "DuckDB", "Postgres + pgvector", "Neo4j", "Next.js", "Google Cloud Run", "Vercel", "Langfuse"],
+  liveUrl: "https://labellens-beige.vercel.app",
+  howBuiltUrl: "https://labellens-beige.vercel.app/how-its-built",
+  githubUrl: "https://github.com/adikan2k/labellens",
+  buildNoteUrl: "https://github.com/adikan2k/labellens#how-i-built-it",
+  mcpUrl: "https://labellens-api-1036759996795.us-east4.run.app/mcp",
+};
+
+function LabelLensFeature() {
+  const [copied, setCopied] = useState(false);
+
+  const copyMcpUrl = async () => {
+    try {
+      await navigator.clipboard.writeText(labelLens.mcpUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard can be blocked; the address stays visible and selectable.
+    }
+  };
+
+  return (
+    <Card className="overflow-hidden mb-12 border-primary/40" data-testid="card-project-labellens">
+      <div className="grid lg:grid-cols-5">
+        <div className="lg:col-span-2 lg:border-r">
+          <a
+            href={labelLens.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block"
+            data-testid="link-labellens-image"
+          >
+            <img
+              src={labelLensImage}
+              alt="LabelLens: the 'What's in it?' headline beside a Nutrition Facts label"
+              className="w-full h-auto"
+            />
+          </a>
+          <div className="grid grid-cols-2 gap-3 p-6">
+            {labelLens.metrics.map((metric) => (
+              <div key={metric.label} className="rounded-md bg-muted/60 p-3">
+                <div className="text-lg font-bold text-primary">{metric.value}</div>
+                <div className="text-xs text-muted-foreground leading-snug">{metric.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <CardContent className="lg:col-span-3 p-6 md:p-8">
+          <div className="flex flex-wrap items-center gap-2 mb-3">
+            <Badge className="gap-1">
+              <Sparkles className="h-3 w-3" />
+              Latest project
+            </Badge>
+            <Badge variant="outline">Gen AI</Badge>
+            <Badge variant="outline">Analytics Engineering</Badge>
+          </div>
+          <h3 className="text-2xl md:text-3xl font-semibold">{labelLens.title}</h3>
+          <p className="text-primary font-medium mb-3">{labelLens.tagline}</p>
+          <p className="text-foreground mb-4">{labelLens.description}</p>
+
+          <ul className="space-y-1.5 mb-6 list-disc list-inside text-sm text-muted-foreground">
+            {labelLens.parts.map((part) => (
+              <li key={part}>{part}</li>
+            ))}
+          </ul>
+
+          <div className="flex flex-wrap gap-2 mb-6">
+            {labelLens.stack.map((tech) => (
+              <Badge key={tech} variant="secondary">
+                {tech}
+              </Badge>
+            ))}
+          </div>
+
+          <p className="text-sm text-muted-foreground mb-6">
+            Built in four days with Claude Code; I set the direction and made the calls.{" "}
+            <a
+              href={labelLens.buildNoteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary underline underline-offset-2"
+            >
+              How I built it
+            </a>
+          </p>
+
+          <div className="flex flex-wrap gap-3 mb-5">
+            <Button asChild className="gap-2" data-testid="button-labellens-live">
+              <a href={labelLens.liveUrl} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="h-4 w-4" />
+                Try it live
+              </a>
+            </Button>
+            <Button asChild variant="outline" className="gap-2" data-testid="button-labellens-how-built">
+              <a href={labelLens.howBuiltUrl} target="_blank" rel="noopener noreferrer">
+                <BookOpen className="h-4 w-4" />
+                How it's built
+              </a>
+            </Button>
+            <Button asChild variant="outline" className="gap-2" data-testid="button-labellens-code">
+              <a href={labelLens.githubUrl} target="_blank" rel="noopener noreferrer">
+                <SiGithub className="h-4 w-4" />
+                Code
+              </a>
+            </Button>
+          </div>
+
+          <div className="text-sm">
+            <div className="font-medium mb-1">Use it inside Claude (MCP connector address)</div>
+            <div className="flex items-center gap-2">
+              <code className="flex-1 min-w-0 truncate rounded bg-muted px-2 py-1.5 text-xs" title={labelLens.mcpUrl}>
+                {labelLens.mcpUrl}
+              </code>
+              <Button
+                size="icon"
+                variant="ghost"
+                onClick={copyMcpUrl}
+                aria-label="Copy MCP connector address"
+                data-testid="button-labellens-copy-mcp"
+              >
+                {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+              </Button>
+            </div>
+          </div>
+
+          <p className="text-xs text-muted-foreground mt-4">
+            Code under the MIT licence; data from Open Food Facts under the ODbL.
+          </p>
+        </CardContent>
+      </div>
+    </Card>
+  );
+}
 
 const projects = [
   {
@@ -243,6 +401,8 @@ export default function Projects() {
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
           {getTagline()}
         </p>
+
+        <LabelLensFeature />
 
         <div className="flex justify-center gap-2 mb-12 flex-wrap">
           {categories.map((category) => (
