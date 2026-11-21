@@ -18,7 +18,7 @@ interface HeroProps {
 // Career numbers, each one backed by a section further down the page.
 const proof = [
   { to: 3, label: "years of experience across analytics and AI engineering", decimals: 0, suffix: "+" },
-  { to: 18, label: "projects built, from tool-using agents to dashboards", decimals: 0, suffix: "" },
+  { to: 19, label: "projects built, from tool-using agents to dashboards", decimals: 0, suffix: "" },
   { to: 1, label: "research paper published (IJSREM, 2023)", decimals: 0, suffix: "" },
   { to: 2, label: "AI credentials: AWS Certified AI Practitioner and Databricks GenAI", decimals: 0, suffix: "" },
 ];

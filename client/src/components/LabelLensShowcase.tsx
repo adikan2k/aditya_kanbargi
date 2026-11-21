@@ -1,33 +1,16 @@
-import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useState } from "react";
 import { ArrowUpRight, Check, Copy } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import CountUp from "./motion/CountUp";
-import Magnetic from "./motion/Magnetic";
+import LayeredShots from "./motion/LayeredShots";
 import { FadeUp, Lines } from "./motion/Reveal";
-import { useIsDesktop } from "@/lib/motion";
 import homeShot from "@assets/labellens/hero.webp";
-import productShot from "@assets/labellens/product.webp";
 import askShot from "@assets/labellens/ask.webp";
-import labelReadShot from "@assets/labellens/label-read.webp";
-import mcpShot from "@assets/labellens/mcp-in-claude.webp";
-import dashboardShot from "@assets/labellens/dashboard.webp";
-import graphShot from "@assets/labellens/graph.webp";
 
 const LIVE_URL = "https://labellens-beige.vercel.app";
 const HOW_BUILT_URL = "https://labellens-beige.vercel.app/how-its-built";
 const CODE_URL = "https://github.com/adikan2k/labellens";
 const MCP_URL = "https://labellens-api-1036759996795.us-east4.run.app/mcp";
-
-const shots = [
-  { src: homeShot, w: 1280, h: 1160, title: "Search", caption: "985,260 named US products, searchable by name, brand or barcode." },
-  { src: productShot, w: 1280, h: 1000, title: "Product page", caption: "The label explained, every additive looked up, and a better swap." },
-  { src: askShot, w: 1280, h: 1250, title: "Ask agent", caption: "A tool-using agent that answers from the data and shows its steps and sources." },
-  { src: labelReadShot, w: 1280, h: 1250, title: "Label reader", caption: "Photograph a label and get the Nutrition Facts read back." },
-  { src: mcpShot, w: 1137, h: 961, title: "Inside Claude", caption: "An MCP App that renders a label card in the conversation." },
-  { src: dashboardShot, w: 1280, h: 1000, title: "Dashboard", caption: "The US label landscape, from 1,002,769 products in the pipeline." },
-  { src: graphShot, w: 1280, h: 1250, title: "Food graph", caption: "A Neo4j knowledge graph of products, brands, additives and ingredients." },
-];
 
 // Every number is backed by a report in the repo's evals/results/.
 const metrics = [
@@ -61,115 +44,6 @@ const parts = [
 ];
 
 const stack = ["Claude (Haiku, Sonnet as eval judge)", "MCP", "FastAPI", "dbt", "DuckDB", "Postgres + pgvector", "Neo4j", "Next.js", "Google Cloud Run", "Vercel", "Langfuse"];
-
-function ShotPanel({ shot, index, className }: { shot: (typeof shots)[number]; index: number; className: string }) {
-  return (
-    <figure className="shrink-0">
-      <a href={LIVE_URL} target="_blank" rel="noopener noreferrer" data-cursor="Open" className="block">
-        <img
-          src={shot.src}
-          alt={`LabelLens ${shot.title.toLowerCase()} screen`}
-          width={shot.w}
-          height={shot.h}
-          loading="lazy"
-          decoding="async"
-          draggable={false}
-          className={`rounded-xl border border-border object-cover object-top ${className}`}
-          style={{ aspectRatio: `${shot.w} / ${shot.h}` }}
-        />
-      </a>
-      <figcaption className="mt-4 flex max-w-md items-baseline gap-4">
-        <span className="label-mono whitespace-nowrap text-signal-text">
-          {String(index + 1).padStart(2, "0")} / {String(shots.length).padStart(2, "0")}
-        </span>
-        <span className="text-sm text-muted-foreground">
-          <span className="font-medium text-foreground">{shot.title}.</span> {shot.caption}
-        </span>
-      </figcaption>
-    </figure>
-  );
-}
-
-/** Screenshots that travel sideways while the page is pinned (desktop), or a swipe row (touch). */
-function Gallery() {
-  const desktop = useIsDesktop();
-  const reduced = useReducedMotion();
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const distanceRef = useRef(0);
-  const [distance, setDistance] = useState(0);
-  const pinned = desktop && !reduced;
-
-  useEffect(() => {
-    if (!pinned) return;
-    const track = trackRef.current;
-    if (!track) return;
-    const measure = () => {
-      const next = Math.max(0, track.scrollWidth - window.innerWidth);
-      distanceRef.current = next;
-      setDistance(next);
-    };
-    measure();
-    const observer = new ResizeObserver(measure);
-    observer.observe(track);
-    window.addEventListener("resize", measure);
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("resize", measure);
-    };
-  }, [pinned]);
-
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
-  const x = useTransform(scrollYProgress, (v) => -v * distanceRef.current);
-  const progress = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
-  if (!pinned) {
-    return (
-      <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 md:-mx-10 md:px-10">
-        {shots.map((shot, i) => (
-          <div key={shot.title} className="w-[82vw] max-w-xl shrink-0 snap-center">
-            <ShotPanel shot={shot} index={i} className="h-auto w-full" />
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  return (
-    <div ref={sectionRef} className="relative" style={{ height: `calc(100vh + ${distance}px)` }}>
-      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
-        <motion.div ref={trackRef} className="flex w-max items-start gap-10 px-10 will-change-transform" style={{ x }}>
-          <div className="flex h-[62vh] w-[26vw] shrink-0 flex-col justify-between">
-            <span className="label-mono text-muted-foreground">Keep scrolling: a tour of the product</span>
-            <p className="display text-[clamp(2.5rem,4.2vw,4.5rem)]">
-              Seven screens, <span className="serif-italic text-signal-text">one API.</span>
-            </p>
-          </div>
-          {shots.map((shot, i) => (
-            <ShotPanel key={shot.title} shot={shot} index={i} className="h-[62vh] w-auto max-w-none" />
-          ))}
-          <div className="flex h-[62vh] w-[30vw] shrink-0 items-center justify-center">
-            <Magnetic strength={0.25}>
-              <a
-                href={LIVE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="display flex h-56 w-56 flex-col items-center justify-center rounded-full bg-signal text-center text-2xl text-[hsl(240_7%_5%)] transition-transform duration-500 hover:scale-105"
-                data-testid="link-labellens-gallery-live"
-              >
-                Try it live
-                <ArrowUpRight className="mt-2 h-6 w-6" />
-              </a>
-            </Magnetic>
-          </div>
-        </motion.div>
-        <div className="mx-10 mt-10 h-px bg-border">
-          <motion.div className="h-px bg-signal" style={{ width: progress }} />
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function McpAddress() {
   const [copied, setCopied] = useState(false);
@@ -263,14 +137,14 @@ export default function LabelLensShowcase() {
         </div>
       </div>
 
-      <div className="mt-14 lg:mt-0">
-        <div className="mx-auto max-w-[1600px] px-5 md:px-10 lg:max-w-none lg:px-0">
-          <Gallery />
-        </div>
-      </div>
+      <div className="mx-auto max-w-[1600px] px-5 md:px-10">
+        <LayeredShots
+          className="mt-14 md:mt-20"
+          back={{ src: homeShot, alt: "LabelLens search across 985,260 US products", href: LIVE_URL }}
+          front={{ src: askShot, alt: "LabelLens ask agent answering with its steps and sources", href: LIVE_URL }}
+        />
 
-      <div className="mx-auto mt-16 max-w-[1600px] px-5 md:px-10 lg:mt-4">
-        <dl className="grid grid-cols-2 border-l border-t border-border lg:grid-cols-4">
+        <dl className="mt-16 md:mt-24 grid grid-cols-2 border-l border-t border-border lg:grid-cols-4">
           {metrics.map((metric, i) => (
             <FadeUp key={metric.label} delay={i * 0.08} className="border-b border-r border-border p-5 md:p-8">
               <dd className="display text-4xl md:text-5xl xl:text-6xl">

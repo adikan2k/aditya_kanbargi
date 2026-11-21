@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } 
 import { ArrowUpRight, Plus } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import LabelLensShowcase from "./LabelLensShowcase";
+import OrbitGlassFeature from "./OrbitGlassFeature";
 import { FadeUp, SectionHeader } from "./motion/Reveal";
 import { EASE, useFinePointer } from "@/lib/motion";
 import evidentiaImage from "@assets/web/evidentia.webp";
@@ -310,14 +311,16 @@ export default function Projects() {
           ]}
           aside={
             <p>
-              One lead project with its evals published, then seventeen more across Gen AI, analytics engineering,
-              NLP and machine learning.
+              Two featured AI projects, a shipped product and an LLM research lab, then seventeen more across Gen
+              AI, analytics engineering, NLP and machine learning.
             </p>
           }
         />
       </div>
 
       <LabelLensShowcase />
+
+      <OrbitGlassFeature />
 
       <div className="mx-auto mt-28 max-w-[1600px] px-5 md:mt-40 md:px-10">
         <div className="mb-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
