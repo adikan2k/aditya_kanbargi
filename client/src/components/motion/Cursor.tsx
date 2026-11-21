@@ -5,9 +5,9 @@ import { useFinePointer } from "@/lib/motion";
 type CursorState = { mode: "default" | "link" | "label"; label: string };
 
 /**
- * A ring that trails the mouse. It grows over links and buttons, and turns into
+ * Shows only over something you can act on: a ring around links and buttons, and
  * a labelled disc over any element with a `data-cursor="Some label"` attribute.
- * The native cursor stays visible.
+ * Over plain page content nothing extra is drawn; the native cursor stays visible.
  */
 export default function Cursor() {
   const fine = useFinePointer();
@@ -71,6 +71,8 @@ export default function Cursor() {
   if (!enabled) return null;
 
   const size = state.mode === "label" ? 92 : state.mode === "link" ? 52 : 14;
+  // No trailing dot over plain content: it read as a stray mark next to the arrow.
+  const shown = visible && state.mode !== "default";
 
   return (
     <motion.div
@@ -86,10 +88,10 @@ export default function Cursor() {
             ? "bg-signal text-[hsl(240_7%_5%)]"
             : state.mode === "link"
               ? "border border-white bg-transparent"
-              : "bg-white"
+              : "border border-white bg-transparent"
         }`}
         style={{ translateX: "-50%", translateY: "-50%" }}
-        animate={{ width: size, height: size, opacity: visible ? 1 : 0 }}
+        animate={{ width: size, height: size, opacity: shown ? 1 : 0 }}
         transition={{ type: "spring", stiffness: 380, damping: 30 }}
       >
         {state.mode === "label" && (

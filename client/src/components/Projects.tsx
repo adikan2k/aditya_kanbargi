@@ -134,6 +134,7 @@ const projects: Project[] = [
     image: johnLewisImage,
     tags: ["Python", "NLP", "Sentiment Analysis", "Topic Modeling", "YouTube API", "NLTK", "Transformers"],
     categories: ["Natural Language Processing"],
+    githubUrl: "https://github.com/adikan2k/NLP-Topic-Modeling-Sentiment-Analysis",
   },
   {
     id: 4,
@@ -144,6 +145,7 @@ const projects: Project[] = [
     image: mamlImage,
     tags: ["MAML", "AWS", "SageMaker", "Flask", "S3", "EC2", "Meta-Learning"],
     categories: ["Machine Learning"],
+    githubUrl: "https://github.com/adikan2k/AWS_META_LEARNING",
   },
   {
     id: 10,
@@ -166,6 +168,7 @@ const projects: Project[] = [
     image: accidentsImage,
     tags: ["R", "Statistical Analysis", "Data Visualization", "FARS Dataset", "Public Health"],
     categories: ["Analytics Engineering & Forecasting"],
+    githubUrl: "https://github.com/adikan2k/Dead-Ends-and-Data-Trends-A-Journey-Through-America-s-Recent-Accident-Stats",
   },
   {
     id: 5,
@@ -176,6 +179,7 @@ const projects: Project[] = [
     image: musicImage,
     tags: ["SVM", "CNN", "RNN", "Random Forest", "K-Nearest Neighbors", "Python"],
     categories: ["Machine Learning"],
+    githubUrl: "https://github.com/adikan2k/MUSIC-GENRE-CLASSIFICATION-USING-MACHINE-LEARNING-TECHNIQUES",
   },
   {
     id: 8,
@@ -186,6 +190,7 @@ const projects: Project[] = [
     image: bitcoinImage,
     tags: ["LSTM", "RNN", "Deep Learning", "Bitcoin", "Google Trends", "Python", "Time Series"],
     categories: ["Deep Learning and Computer Vision", "Analytics Engineering & Forecasting"],
+    githubUrl: "https://github.com/adikan2k/Bitcoin-price-prediction",
   },
   {
     id: 11,
@@ -196,6 +201,7 @@ const projects: Project[] = [
     image: nerveImage,
     tags: ["Deep Learning", "Medical Imaging", "Ultrasound", "Image Segmentation", "Computer Vision", "Healthcare"],
     categories: ["Deep Learning and Computer Vision"],
+    githubUrl: "https://github.com/adikan2k/PNB-Nerve-Segmentation-from-Ultrasound-images-using-DL-techniques",
   },
   {
     id: 6,
@@ -206,6 +212,7 @@ const projects: Project[] = [
     image: faceMaskImage,
     tags: ["Keras", "TensorFlow", "OpenCV", "Deep Learning", "Computer Vision"],
     categories: ["Deep Learning and Computer Vision"],
+    githubUrl: "https://github.com/adikan2k/MASK-DETECTION-TSF-21",
   },
   {
     id: 7,
@@ -216,6 +223,7 @@ const projects: Project[] = [
     image: distancingImage,
     tags: ["YOLO", "OpenCV", "Computer Vision", "Deep Learning", "Object Detection"],
     categories: ["Deep Learning and Computer Vision"],
+    githubUrl: "https://github.com/adikan2k/social-distancing-detector-TSF-GRIP-21",
   },
 ];
 

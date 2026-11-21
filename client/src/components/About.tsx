@@ -41,7 +41,7 @@ function ScrollStatement() {
 const facts = [
   {
     label: "Education",
-    lines: ["MS, Data Science", "The George Washington University, 2026", "GPA 3.93 · Global Leaders Fellowship"],
+    lines: ["MS, Data Science", "The George Washington University, 2026", "Global Leaders Fellowship"],
   },
   {
     label: "Certifications",
