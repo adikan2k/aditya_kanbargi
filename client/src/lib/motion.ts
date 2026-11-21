@@ -59,3 +59,8 @@ export function useFinePointer(): boolean {
 export function useIsDesktop(): boolean {
   return useMediaQuery("(min-width: 1024px)");
 }
+
+/** True at the md breakpoint and up. */
+export function useIsTablet(): boolean {
+  return useMediaQuery("(min-width: 768px)");
+}

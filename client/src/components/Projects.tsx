@@ -425,7 +425,6 @@ export default function Projects() {
                             <img
                               src={project.image}
                               alt={`${project.name} preview`}
-                              loading="lazy"
                               className="aspect-[16/10] w-full object-cover"
                             />
                           </motion.div>

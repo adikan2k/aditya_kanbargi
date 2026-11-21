@@ -84,10 +84,9 @@ export default function About() {
             <motion.div
               ref={imageRef}
               className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-border"
-              initial={{ clipPath: reduced ? "inset(0 0 0% 0)" : "inset(0 0 100% 0)" }}
-              whileInView={{ clipPath: "inset(0 0 0% 0)" }}
-              viewport={{ once: true, margin: "0px 0px -15% 0px" }}
-              transition={{ duration: 1.2, ease: EASE }}
+              initial="hidden"
+              whileInView="shown"
+              viewport={{ once: true, amount: 0.05 }}
             >
               <motion.img
                 src={headshotImage}
@@ -98,6 +97,15 @@ export default function About() {
                 className="absolute inset-0 h-[116%] w-full object-cover"
                 style={{ y: imageY }}
                 data-testid="img-headshot"
+              />
+              {/* A cover slides off the photo; clipping the photo itself would delay its download. */}
+              <motion.span
+                aria-hidden="true"
+                className="absolute inset-0 origin-bottom bg-background"
+                variants={{
+                  hidden: { scaleY: reduced ? 0 : 1 },
+                  shown: { scaleY: 0, transition: { duration: reduced ? 0.01 : 1, ease: EASE } },
+                }}
               />
             </motion.div>
           </div>
