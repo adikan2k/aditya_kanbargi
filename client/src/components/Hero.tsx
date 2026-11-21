@@ -15,12 +15,12 @@ interface HeroProps {
   ready?: boolean;
 }
 
-// Each number comes from work shown further down the page.
+// Career numbers, each one backed by a section further down the page.
 const proof = [
-  { to: 985260, label: "US foods made readable in LabelLens", decimals: 0, suffix: "" },
-  { to: 0.98, label: "agent fact score, against 0.26 for search alone", decimals: 2, suffix: "" },
-  { to: 10, label: "client due diligence reports shipped at Flypower", decimals: 0, suffix: "+" },
-  { to: 1, label: "of enterprise data reconciled at LTIMindtree", decimals: 0, suffix: "TB+" },
+  { to: 3, label: "years of experience across analytics and AI engineering", decimals: 0, suffix: "+" },
+  { to: 18, label: "projects built, from tool-using agents to dashboards", decimals: 0, suffix: "" },
+  { to: 1, label: "research paper published (IJSREM, 2023)", decimals: 0, suffix: "" },
+  { to: 3.93, label: "GPA, MS in Data Science at George Washington University", decimals: 2, suffix: "" },
 ];
 
 const marqueeWords = [

@@ -17,7 +17,6 @@ import graphShot from "@assets/labellens/graph.webp";
 const LIVE_URL = "https://labellens-beige.vercel.app";
 const HOW_BUILT_URL = "https://labellens-beige.vercel.app/how-its-built";
 const CODE_URL = "https://github.com/adikan2k/labellens";
-const BUILD_NOTE_URL = "https://github.com/adikan2k/labellens#how-i-built-it";
 const MCP_URL = "https://labellens-api-1036759996795.us-east4.run.app/mcp";
 
 const shots = [
@@ -32,20 +31,33 @@ const shots = [
 
 // Every number is backed by a report in the repo's evals/results/.
 const metrics = [
-  { to: 985260, decimals: 0, prefix: "", suffix: "", label: "named US products" },
+  { to: 985260, decimals: 0, prefix: "", suffix: "", label: "US products searchable, from a pipeline of 1,002,769" },
   { to: 0.98, decimals: 2, prefix: "", suffix: "", label: "ask agent fact score, against 0.26 for search alone" },
   { to: 98, decimals: 0, prefix: "", suffix: "%", label: "of nutrient values read correctly from real label photos" },
-  { to: 29, decimals: 0, prefix: "", suffix: " / 30", label: "requests where Claude picks the right tool" },
   { to: 175, decimals: 0, prefix: "", suffix: " ms", label: "search at the 95th percentile on the live API" },
-  { to: 6, decimals: 0, prefix: "~$", suffix: "", label: "model spend for the whole project, on free-tier hosting" },
 ];
 
 const parts = [
-  { title: "Tested data pipeline", body: "The Open Food Facts export through dbt on DuckDB, with 94 data tests." },
-  { title: "AI enrichment", body: "Claude fills in missing categories and writes additive and ingredient explainers through the Batch API." },
-  { title: "Storage", body: "Neon Postgres with pgvector, plus a Neo4j knowledge graph." },
-  { title: "One API, four surfaces", body: "A FastAPI service on Google Cloud Run behind a Next.js site on Vercel: a tool-using ask agent, a label reader that works from a photo, and an MCP App that renders a label card inside Claude." },
-  { title: "Evals for every AI feature", body: "Each one has a published report that lists its misses." },
+  {
+    title: "A tested pipeline over a million products",
+    body: "Took the Open Food Facts export of 1,002,769 US products through dbt on DuckDB, with 94 data tests guarding it. 985,260 clean, named products come out the other side.",
+  },
+  {
+    title: "LLM enrichment at batch scale",
+    body: "Used Claude through the Batch API to fill in missing categories and write the additive and ingredient explainers, and kept model spend for the whole project to about $6.",
+  },
+  {
+    title: "Search that stays fast",
+    body: "Neon Postgres with pgvector for search, plus a Neo4j knowledge graph of products, brands, additives and ingredients. Search answers in 175 ms at the 95th percentile on the live API.",
+  },
+  {
+    title: "One API, four surfaces",
+    body: "A FastAPI service on Google Cloud Run behind a Next.js site: a tool-using ask agent, a label reader that works from a photo, and an MCP App that renders a label card inside Claude.",
+  },
+  {
+    title: "An eval behind every AI feature",
+    body: "The ask agent scores 0.98 on facts against 0.26 for search alone, the label reader gets 98% of nutrient values right from real photos, and Claude picks the right tool in 29 of 30 requests. Each report is published with its misses.",
+  },
 ];
 
 const stack = ["Claude (Haiku, Sonnet as eval judge)", "MCP", "FastAPI", "dbt", "DuckDB", "Postgres + pgvector", "Neo4j", "Next.js", "Google Cloud Run", "Vercel", "Langfuse"];
@@ -211,9 +223,9 @@ export default function LabelLensShowcase() {
           </div>
           <FadeUp delay={0.25} className="flex flex-col justify-end gap-8 lg:col-span-5">
             <p className="text-lg leading-relaxed text-muted-foreground md:text-xl">
-              A million US packaged foods from Open Food Facts, made readable: every label explained, every additive
-              looked up, a better swap for every product, and an AI agent that answers questions from the data and
-              shows its sources.
+              I designed and shipped LabelLens end to end: a tested data pipeline over a million US packaged foods,
+              one API, and four AI features that each had to pass an eval. It explains every label, looks up every
+              additive, suggests a better swap, and answers questions from the data with its sources shown.
             </p>
             <div className="flex flex-wrap gap-3">
               <a
@@ -258,10 +270,10 @@ export default function LabelLensShowcase() {
       </div>
 
       <div className="mx-auto mt-16 max-w-[1600px] px-5 md:px-10 lg:mt-4">
-        <dl className="grid grid-cols-2 border-l border-t border-border lg:grid-cols-3">
+        <dl className="grid grid-cols-2 border-l border-t border-border lg:grid-cols-4">
           {metrics.map((metric, i) => (
-            <FadeUp key={metric.label} delay={(i % 3) * 0.08} className="border-b border-r border-border p-5 md:p-8">
-              <dd className="display text-4xl md:text-6xl">
+            <FadeUp key={metric.label} delay={i * 0.08} className="border-b border-r border-border p-5 md:p-8">
+              <dd className="display text-4xl md:text-5xl xl:text-6xl">
                 <CountUp to={metric.to} decimals={metric.decimals} prefix={metric.prefix} suffix={metric.suffix} />
               </dd>
               <dt className="mt-3 max-w-[16rem] text-sm leading-snug text-muted-foreground">{metric.label}</dt>
@@ -271,7 +283,11 @@ export default function LabelLensShowcase() {
 
         <div className="mt-16 grid gap-12 grid-cols-1 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-7">
-            <div className="label-mono mb-6 text-muted-foreground">How it's built</div>
+            <div className="label-mono mb-4 text-muted-foreground">What I built</div>
+            <p className="mb-8 max-w-2xl text-lg leading-relaxed md:text-xl">
+              The spec, the design and every call on scope, hosting and cost are mine. I built it with
+              Claude Code as my coding partner and reviewed and approved each change before it merged.
+            </p>
             <ol>
               {parts.map((part, i) => (
                 <FadeUp key={part.title} delay={i * 0.05}>
@@ -299,20 +315,9 @@ export default function LabelLensShowcase() {
               </div>
             </div>
             <McpAddress />
-            <div className="space-y-3 text-sm text-muted-foreground">
-              <p>
-                Built in four days with Claude Code; I set the direction and made the calls.{" "}
-                <a
-                  href={BUILD_NOTE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="link-wipe text-signal-text"
-                >
-                  How I built it
-                </a>
-              </p>
-              <p>Code under the MIT licence; data from Open Food Facts under the ODbL.</p>
-            </div>
+            <p className="text-sm text-muted-foreground">
+              Code under the MIT licence; data from Open Food Facts under the ODbL.
+            </p>
           </FadeUp>
         </div>
       </div>

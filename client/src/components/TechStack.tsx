@@ -125,7 +125,7 @@ export default function TechStack() {
     <section id="tech-stack" className="pt-28 md:pt-44">
       <div className="mx-auto max-w-[1600px] px-5 md:px-10">
         <SectionHeader
-          index="03"
+          index="04"
           label="Stack"
           lines={[
             <>Tools I</>,

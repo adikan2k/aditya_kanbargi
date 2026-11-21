@@ -13,8 +13,8 @@ const RESUME_URL = "/Aditya_Kanbargi_Resume.pdf";
 const navLinks = [
   { label: "Work", id: "projects" },
   { label: "Experience", id: "experience" },
-  { label: "Stack", id: "tech-stack" },
   { label: "About", id: "about" },
+  { label: "Stack", id: "tech-stack" },
   { label: "Contact", id: "contact" },
 ];
 
@@ -34,13 +34,14 @@ export default function Navigation({ onThemeToggle, isDark = true }: NavigationP
   });
 
   useEffect(() => {
-    const sections = navLinks
-      .map((link) => document.getElementById(link.id))
+    // The hero is watched too, so no link stays marked once the page is back at the top.
+    const sections = ["hero", ...navLinks.map((link) => link.id)]
+      .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
+          if (entry.isIntersecting) setActive(entry.target.id === "hero" ? "" : entry.target.id);
         });
       },
       { rootMargin: "-45% 0px -50% 0px" },
@@ -85,22 +86,33 @@ export default function Navigation({ onThemeToggle, isDark = true }: NavigationP
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-signal opacity-60" />
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-signal" />
             </span>
-            <span className="text-sm font-medium tracking-tight">Aditya Kanbargi</span>
+            <span className="text-base font-semibold tracking-tight md:text-lg">Aditya Kanbargi</span>
           </button>
 
-          <div className="hidden items-center gap-8 md:flex">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => go(link.id)}
-                data-testid={`link-nav-${link.label.toLowerCase()}`}
-                className={`label-mono link-wipe pb-1 transition-colors duration-300 ${
-                  active === link.id ? "text-signal-text" : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {link.label}
-              </button>
-            ))}
+          <div className="hidden items-center gap-1 rounded-full border border-border bg-background/80 p-1.5 shadow-lg shadow-black/20 backdrop-blur-xl md:flex">
+            {navLinks.map((link) => {
+              const isActive = active === link.id;
+              return (
+                <button
+                  key={link.id}
+                  onClick={() => go(link.id)}
+                  data-testid={`link-nav-${link.label.toLowerCase()}`}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`relative rounded-full px-4 py-2.5 font-mono text-[13px] font-medium uppercase tracking-[0.12em] transition-colors duration-300 lg:px-5 ${
+                    isActive ? "text-[hsl(240_7%_5%)]" : "text-foreground/85 hover:bg-foreground/10 hover:text-foreground"
+                  }`}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active"
+                      className="absolute inset-0 rounded-full bg-signal"
+                      transition={{ duration: 0.5, ease: EASE }}
+                    />
+                  )}
+                  <span className="relative">{link.label}</span>
+                </button>
+              );
+            })}
           </div>
 
           <div className="flex items-center gap-2">
@@ -108,17 +120,17 @@ export default function Navigation({ onThemeToggle, isDark = true }: NavigationP
               href={RESUME_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="label-mono hidden items-center gap-1.5 rounded-full border border-border px-4 py-2.5 transition-colors duration-300 hover:border-signal hover:bg-signal hover:text-[hsl(240_7%_5%)] sm:flex"
+              className="hidden items-center gap-1.5 rounded-full bg-signal px-5 py-3 font-mono text-[13px] font-medium uppercase tracking-[0.12em] text-[hsl(240_7%_5%)] transition-transform duration-300 hover:scale-[1.04] sm:flex"
               data-testid="link-nav-resume"
             >
               Resume
-              <ArrowUpRight className="h-3.5 w-3.5" />
+              <ArrowUpRight className="h-4 w-4" />
             </a>
             <button
               onClick={onThemeToggle}
               data-testid="button-theme-toggle"
               aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-border transition-colors duration-300 hover:border-foreground"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background/80 backdrop-blur-xl transition-colors duration-300 hover:border-foreground"
             >
               {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>

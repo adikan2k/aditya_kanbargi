@@ -65,8 +65,8 @@ export default function Home() {
         <Hero isDark={isDark} ready={ready} />
         <Projects />
         <Experience />
-        <TechStack />
         <About />
+        <TechStack />
         <Contact />
       </main>
       <Footer />

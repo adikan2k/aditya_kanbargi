@@ -53,7 +53,7 @@ const facts = [
   },
   {
     label: "Experience",
-    lines: ["About three years", "Enterprise analytics, healthcare data, AI engineering"],
+    lines: ["About three years", "Analytics, data and AI engineering"],
   },
 ];
 
@@ -67,7 +67,7 @@ export default function About() {
     <section id="about" className="pt-28 md:pt-44">
       <div className="mx-auto max-w-[1600px] px-5 md:px-10">
         <SectionHeader
-          index="04"
+          index="03"
           label="About"
           lines={[
             <>The person</>,

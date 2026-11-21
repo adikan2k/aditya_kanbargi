@@ -227,7 +227,7 @@ export default function Experience() {
           ]}
           aside={
             <p>
-              About three years across enterprise analytics, healthcare data and AI engineering. The underlined parts
+              About three years across analytics and AI engineering. The underlined parts
               are results I can put a number on.
             </p>
           }
