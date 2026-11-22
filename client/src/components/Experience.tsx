@@ -65,16 +65,6 @@ interface Role {
 
 const roles: Role[] = [
   {
-    title: "AI Evaluation Engineer (Independent Contractor)",
-    company: "Handshake AI",
-    period: "Nov 2026 – Present",
-    description: [
-      "Authored containerized agentic benchmark tasks in Docker, each with a reference solution and automated verifier, to test how frontier LLM agents handle multi-step work.",
-      "Formulated domain-specific prompts, then evaluated, graded, and revised model responses and annotated evaluation data to improve large language model training.",
-    ],
-    skills: ["LLM Evaluation", "Agentic Benchmarks", "Docker", "Automated Verifiers", "Prompt Engineering", "Data Annotation"],
-  },
-  {
     title: "AI Systems Analyst (LLM and Agent Engineering)",
     company: "Flypower",
     period: "Mar 2026 – Nov 2026",
@@ -102,7 +92,7 @@ const roles: Role[] = [
     skills: ["Python", "SQL", "Power BI", "Pandas", "SciPy", "Statsmodels", "ETL", "EHR Data", "Healthcare Analytics"],
   },
   {
-    title: "Technical Business Analyst, ServiceNow",
+    title: "Analytics Engineer",
     company: "LTIMindtree",
     period: "Sep 2022 – Jun 2024",
     description: [
