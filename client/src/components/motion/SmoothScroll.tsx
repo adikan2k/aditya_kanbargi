@@ -9,7 +9,7 @@ export default function SmoothScroll() {
   useEffect(() => {
     if (reduced) return;
 
-    const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+    const lenis = new Lenis({ lerp: 0.12, smoothWheel: true });
     (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
 
     let frame = requestAnimationFrame(function loop(time) {

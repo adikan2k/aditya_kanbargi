@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Plus } from "lucide-react";
-import { FadeUp, Lines, SectionHeader } from "./motion/Reveal";
+import SectionHead from "./site/SectionHead";
+import { Cite } from "./cite/Cite";
 import { EASE } from "@/lib/motion";
 
-// Phrases with a measurable result. They are shown brighter and underlined in the accent colour.
+// Phrases with a measurable result, set in the foreground colour. The figures come from the
+// resume, which the section heading cites.
 const metricPhrases = [
   /contributing to 10\+ client siting due diligence reports/gi,
   /reusable agent skills across 3 platforms/gi,
@@ -39,10 +41,7 @@ function highlightMetrics(text: string) {
         if (piece) next.push(piece);
         if (matches && i < matches.length) {
           next.push(
-            <span
-              key={`metric-${key++}`}
-              className="font-medium text-foreground underline decoration-signal decoration-2 underline-offset-4"
-            >
+            <span key={`metric-${key++}`} className="metric-mark font-semibold text-foreground">
               {matches[i]}
             </span>,
           );
@@ -58,7 +57,11 @@ function highlightMetrics(text: string) {
 interface Role {
   title: string;
   company: string;
+  /** A shorter name for the timeline on phones. */
+  short?: string;
   period: string;
+  /** First and last month, as [year, month] with January = 1. */
+  span: [[number, number], [number, number]];
   description: string[];
   skills: string[];
 }
@@ -68,6 +71,7 @@ const roles: Role[] = [
     title: "AI Systems Analyst (LLM and Agent Engineering)",
     company: "Flypower",
     period: "Mar 2026 – Nov 2026",
+    span: [[2026, 3], [2026, 11]],
     description: [
       "Streamlined LLM-orchestrated agentic workflows with both founders of a 6-person team, adding a RAG pipeline that grounds drafts in cited sources and contributing to 10+ client siting due diligence reports for renewable energy and data center developers.",
       "Led development of reusable agent skills across 3 platforms (Claude Code, Codex, Perplexity) for social media intelligence, community sentiment analysis, stakeholder profiling, and extraction from government portals, meeting records, and audio.",
@@ -81,7 +85,9 @@ const roles: Role[] = [
   {
     title: "Data Analyst (Graduate Assistant)",
     company: "GW School of Nursing",
+    short: "GW Nursing",
     period: "Dec 2024 – May 2025",
+    span: [[2024, 12], [2025, 5]],
     description: [
       "Engineered an automated ETL pipeline for EHR systems using Python (Pandas) scripts to parse and clean JSON/CSV files, replacing manual Excel workflows and slashing data preparation time by 40%.",
       "Developed interactive Power BI dashboards to visualize clinical KPIs (patient recovery rates, vitals trends), streamlining data access for faculty and increasing research throughput by 25%.",
@@ -95,6 +101,7 @@ const roles: Role[] = [
     title: "Analytics Engineer",
     company: "LTIMindtree",
     period: "Sep 2022 – Jun 2024",
+    span: [[2022, 9], [2024, 6]],
     description: [
       "Accelerated monthly close and portfolio reporting by 40% by partnering with Finance and 3+ teams to convert business requirements into SQL reporting logic and standardized KPI definitions, creating one agreed source for cost, occupancy, and performance data.",
       "Consolidated ServiceNow and AWS datasets into one Snowflake warehouse by migrating enterprise reporting pipelines, cutting query latency by 30% and enabling self-serve analytics across 3+ business units.",
@@ -108,95 +115,161 @@ const roles: Role[] = [
 
 const VISIBLE_BULLETS = 3;
 
-function RoleRow({ role, index }: { role: Role; index: number }) {
+// The timeline runs from July 2022 to the start of 2027, in months.
+const AXIS_START = 2022 * 12 + 6;
+const AXIS_END = 2027 * 12;
+const month = (y: number, m: number) => y * 12 + (m - 1);
+const at = (t: number) => ((t - AXIS_START) / (AXIS_END - AXIS_START)) * 100;
+
+function months(role: Role) {
+  const [[y1, m1], [y2, m2]] = role.span;
+  return month(y2, m2) - month(y1, m1) + 1;
+}
+
+function duration(n: number) {
+  const years = Math.floor(n / 12);
+  const rest = n % 12;
+  return [years ? `${years} yr` : "", rest ? `${rest} mo` : ""].filter(Boolean).join(" ");
+}
+
+// Milestones with a known month, each with its source.
+const milestones = [
+  { label: "Paper published", when: month(2023, 12), cite: "paper" as const },
+  { label: "MS Data Science, GWU", when: month(2026, 5), cite: "resume" as const },
+];
+
+/** Where the time went: each role as a bar on one line, milestones as marks below it. */
+function Timeline() {
+  const reduced = useReducedMotion();
+  const ordered = [...roles].reverse();
+  return (
+    <motion.figure
+      className="mt-12 md:mt-16"
+      aria-label="Timeline of roles from 2022 to 2026"
+      initial={reduced ? false : "hidden"}
+      whileInView="shown"
+      viewport={{ once: true, amount: 0.4 }}
+    >
+      <div className="relative h-[10.5rem] md:h-[9.5rem]">
+        {/* Years */}
+        {[2023, 2024, 2025, 2026].map((y) => (
+          <span key={y} className="absolute inset-y-0 border-l border-dashed border-border" style={{ left: `${at(month(y, 1))}%` }}>
+            <span className="figure-nums absolute -bottom-0.5 left-1.5 font-sans text-[12.5px] font-medium text-faint">{y}</span>
+          </span>
+        ))}
+
+        {/* Roles */}
+        {ordered.map((role, i) => {
+          const [[y1, m1], [y2, m2]] = role.span;
+          const left = at(month(y1, m1));
+          const width = at(month(y2, m2) + 1) - left;
+          const newest = i === ordered.length - 1;
+          return (
+            <div key={role.company} className="absolute top-3" style={{ left: `${left}%`, width: `${width}%` }}>
+              <p className={`whitespace-nowrap font-sans text-[12.5px] font-semibold md:text-[14px] ${newest ? "text-cite" : "text-foreground"}`}>
+                <span className="md:hidden">{role.short ?? role.company}</span>
+                <span className="hidden md:inline">{role.company}</span>
+              </p>
+              <motion.span
+                className={`mt-1.5 block h-7 rounded-md md:h-9 ${newest ? "bg-cite" : "bg-foreground/80"}`}
+                style={{ transformOrigin: "left" }}
+                variants={{
+                  hidden: { scaleX: 0 },
+                  shown: { scaleX: 1, transition: { duration: 0.9, delay: 0.15 + i * 0.18, ease: [0.16, 1, 0.3, 1] } },
+                }}
+              />
+              <p className="figure-nums mt-1.5 whitespace-nowrap font-sans text-[12px] text-muted-foreground">{duration(months(role))}</p>
+            </div>
+          );
+        })}
+
+        {/* Milestones */}
+        {milestones.map((m) => (
+          <div key={m.label} className="absolute bottom-6 -translate-x-1/2 md:bottom-7" style={{ left: `${at(m.when) + 0.8}%` }}>
+            <span className="mx-auto block h-2.5 w-2.5 rotate-45 bg-foreground" aria-hidden="true" />
+            <span className="mt-1 hidden whitespace-nowrap font-sans text-[12px] font-medium text-muted-foreground sm:block">
+              <Cite id={m.cite} before={m.label} />
+            </span>
+          </div>
+        ))}
+      </div>
+    </motion.figure>
+  );
+}
+
+function RoleRow({ role }: { role: Role }) {
   const reduced = useReducedMotion();
   const [expanded, setExpanded] = useState(false);
+  const restId = useId();
   const first = role.description.slice(0, VISIBLE_BULLETS);
   const rest = role.description.slice(VISIBLE_BULLETS);
 
   const bullet = (item: string) => (
-    <div role="listitem" className="grid grid-cols-[1.5rem_1fr] text-base leading-relaxed text-muted-foreground md:text-lg">
-      <span className="pt-[0.7em]">
-        <span className="block h-1.5 w-1.5 rounded-full bg-signal" />
-      </span>
+    <li key={item} className="grid grid-cols-[1.25rem_1fr] font-sans text-[16.5px] leading-relaxed text-muted-foreground md:text-[18px]">
+      <span aria-hidden="true" className="mt-[0.62em] block h-1.5 w-1.5 rounded-full bg-cite" />
       <span>{highlightMetrics(item)}</span>
-    </div>
+    </li>
   );
 
   return (
-    <article
-      className="grid gap-8 border-t border-border py-12 grid-cols-1 lg:grid-cols-12 lg:gap-8 lg:py-16"
-      data-testid={`card-experience-${index}`}
-    >
-      <div className="lg:col-span-4">
+    <article className="grid grid-cols-1 gap-6 border-t border-border py-10 lg:grid-cols-12 lg:gap-10 lg:py-16">
+      <div className="lg:col-span-5">
         <div className="lg:sticky lg:top-28">
-          <FadeUp className="label-mono mb-4 flex items-center gap-3 text-signal-text">
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <span className="h-px w-6 bg-signal" />
-            <span>{role.period}</span>
-          </FadeUp>
-          <h3 className="display text-4xl md:text-5xl xl:text-6xl">
-            <Lines lines={[role.company]} />
+          <p className="figure-nums font-sans text-[15px] font-medium text-faint">
+            {role.period} · {duration(months(role))}
+          </p>
+          <h3 className="display mt-3 text-[clamp(2.75rem,5.5vw,5rem)]" style={{ lineHeight: 0.92 }}>
+            {role.company}
           </h3>
-          <FadeUp delay={0.15}>
-            <p className="mt-4 max-w-xs text-lg text-muted-foreground">{role.title}</p>
-          </FadeUp>
+          <p className="mt-3 max-w-sm font-sans text-[17px] font-medium text-foreground/85">{role.title}</p>
         </div>
       </div>
 
-      <div className="lg:col-span-8">
-        <div role="list" className="space-y-5">
-          {first.map((item, i) => (
-            <FadeUp key={item} delay={i * 0.07}>
-              {bullet(item)}
-            </FadeUp>
-          ))}
-        </div>
+      <div className="lg:col-span-7">
+        <ul className="max-w-[64ch] space-y-4">{first.map(bullet)}</ul>
 
         <AnimatePresence initial={false}>
           {expanded && (
             <motion.div
+              id={restId}
               key="rest"
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: reduced ? 0.01 : 0.6, ease: EASE }}
+              transition={{ duration: reduced ? 0.01 : 0.35, ease: EASE }}
               className="overflow-hidden"
             >
-              <div role="list" className="space-y-5 pt-5">
-                {rest.map((item) => (
-                  <div key={item}>{bullet(item)}</div>
-                ))}
-              </div>
+              <ul className="max-w-[64ch] space-y-4 pt-4">{rest.map(bullet)}</ul>
             </motion.div>
           )}
         </AnimatePresence>
 
         {rest.length > 0 && (
           <button
+            type="button"
             onClick={() => setExpanded((v) => !v)}
             aria-expanded={expanded}
-            className="label-mono group mt-7 flex items-center gap-3 text-foreground"
-            data-testid={`button-experience-more-${index}`}
+            aria-controls={restId}
+            className="press group mt-6 inline-flex items-center gap-2.5 font-sans text-[15px] font-semibold text-foreground"
           >
-            <span
-              className={`flex h-8 w-8 items-center justify-center rounded-full border border-border transition-all duration-500 group-hover:border-signal group-hover:bg-signal group-hover:text-[hsl(240_7%_5%)] ${
-                expanded ? "rotate-45" : ""
-              }`}
-            >
-              <Plus className="h-3.5 w-3.5" />
+            <span className="flex h-11 w-11 items-center justify-center rounded-full border border-border transition-colors duration-200 group-hover:border-foreground">
+              <Plus
+                className={`h-4 w-4 transition-transform duration-300 ${expanded ? "rotate-45" : ""}`}
+                style={{ transitionTimingFunction: "var(--ease-out)" }}
+                aria-hidden="true"
+              />
             </span>
-            {expanded ? "Show less" : `${rest.length} more ${rest.length === 1 ? "result" : "results"}`}
+            {expanded ? "Show fewer" : `${rest.length} more`}
           </button>
         )}
 
-        <FadeUp delay={0.2} className="mt-8 flex flex-wrap gap-2">
-          {role.skills.map((skill) => (
-            <span key={skill} className="rounded-full border border-border px-3 py-1.5 text-sm text-muted-foreground">
-              {skill}
-            </span>
+        <ul className="mt-8 flex flex-wrap gap-1.5" aria-label="Tools">
+          {role.skills.map((t) => (
+            <li key={t} className="rounded-full border border-border px-3 py-1.5 font-sans text-[13px] font-medium text-muted-foreground">
+              {t}
+            </li>
           ))}
-        </FadeUp>
+        </ul>
       </div>
     </article>
   );
@@ -204,27 +277,16 @@ function RoleRow({ role, index }: { role: Role; index: number }) {
 
 export default function Experience() {
   return (
-    <section id="experience" className="pt-28 md:pt-44">
-      <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-        <SectionHeader
-          index="02"
-          label="Experience"
-          lines={[
-            <>From dashboards</>,
-            <>
-              <span className="serif-italic text-signal-text">to agents.</span>
-            </>,
-          ]}
-          aside={
-            <p>
-              About three years across analytics and AI engineering. The underlined parts
-              are results I can put a number on.
-            </p>
-          }
-        />
-        <div className="border-b border-border">
-          {roles.map((role, i) => (
-            <RoleRow key={role.company} role={role} index={i} />
+    <section id="experience" aria-labelledby="experience-title" className="scroll-mt-20 pt-32 md:pt-48">
+      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
+        <SectionHead id="experience-title" title="Experience">
+          About three years across analytics and AI engineering, newest first. Figures as on my{" "}
+          <Cite id="resume" before="resume" after="." />
+        </SectionHead>
+        <Timeline />
+        <div className="mt-10 border-b border-border md:mt-14">
+          {roles.map((role) => (
+            <RoleRow key={role.company} role={role} />
           ))}
         </div>
       </div>

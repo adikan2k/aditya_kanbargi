@@ -1,24 +1,21 @@
-import { motion, useReducedMotion } from "framer-motion";
-import { FadeUp, SectionHeader } from "./motion/Reveal";
-import { EASE } from "@/lib/motion";
+import SectionHead from "./site/SectionHead";
 
-interface StackGroup {
+interface MethodGroup {
   title: string;
-  note: string;
   items: string[];
 }
 
-const groups: StackGroup[] = [
+// Grouped by the job they do, AI and data engineering first.
+const groups: MethodGroup[] = [
   {
-    title: "AI & LLM Engineering",
-    note: "Building, grounding and evaluating agentic systems.",
+    title: "AI and LLM engineering",
     items: [
       "Agentic workflows",
       "Multi-agent systems",
       "MCP",
       "RAG",
       "LLM evals",
-      "Prompt & context engineering",
+      "Prompt and context engineering",
       "Agent skills (Claude Code, Codex, Perplexity)",
       "LangGraph",
       "LangChain",
@@ -32,8 +29,7 @@ const groups: StackGroup[] = [
     ],
   },
   {
-    title: "Data & Analytics Engineering",
-    note: "Warehouses, orchestration and modeling, plus vector and graph stores for retrieval.",
+    title: "Data and analytics engineering",
     items: [
       "Snowflake",
       "BigQuery",
@@ -43,43 +39,38 @@ const groups: StackGroup[] = [
       "dbt",
       "Airflow",
       "Prefect",
-      "ETL/ELT",
-      "Data modeling",
+      "ETL and ELT",
+      "Data modelling",
       "Data reconciliation",
       "REST APIs",
       "FastAPI",
-      "Vector DBs (Qdrant, Pinecone, FAISS)",
-      "Graph DBs (Neo4j, Memgraph)",
+      "Vector databases (Qdrant, Pinecone, FAISS)",
+      "Graph databases (Neo4j, Memgraph)",
     ],
   },
   {
-    title: "Cloud & DevOps",
-    note: "Taking pipelines and agents from prototype to something a team can rely on.",
+    title: "Cloud and DevOps",
     items: ["AWS (Bedrock, SageMaker, S3, EC2)", "GCP", "Docker", "GitHub Actions", "CI/CD", "Git"],
   },
   {
-    title: "Programming",
-    note: "The languages underneath all of it.",
-    items: ["Python (Pandas, scikit-learn, PyTorch, XGBoost)", "SQL (CTEs, window functions)", "R", "MySQL"],
+    title: "Languages",
+    items: ["Python (pandas, scikit-learn, PyTorch, XGBoost)", "SQL (CTEs, window functions)", "R", "MySQL"],
   },
   {
-    title: "BI & Reporting",
-    note: "Dashboards and KPI reporting someone can act on Monday morning.",
+    title: "BI and reporting",
     items: [
       "Power BI (DAX)",
       "Tableau",
       "Looker Studio",
-      "Excel (Power Query, Pivot Tables, VLOOKUP, VBA)",
+      "Excel (Power Query, pivot tables, VBA)",
       "Amazon QuickSight",
       "Plotly",
       "Streamlit",
       "KPI reporting",
-      "Data storytelling",
     ],
   },
   {
-    title: "ML & Statistics",
-    note: "Classical ML, deep learning and the statistics behind a forecast.",
+    title: "Machine learning and statistics",
     items: [
       "scikit-learn",
       "PyTorch",
@@ -87,93 +78,39 @@ const groups: StackGroup[] = [
       "XGBoost",
       "LightGBM",
       "PySpark",
-      "Pandas",
       "NumPy",
       "SciPy",
-      "Matplotlib",
-      "Seaborn",
       "Time series (ARIMA, Prophet)",
       "A/B testing",
       "Hypothesis testing",
-      "Regression analysis",
+      "Regression",
       "Anomaly detection",
       "PCA",
-    ],
-  },
-  {
-    title: "Collaboration",
-    note: "How the work gets shared and shipped with other people.",
-    items: [
-      "GitHub",
-      "Jira",
-      "Confluence",
-      "Slack",
-      "Notion",
-      "Google Workspace",
-      "Microsoft 365",
-      "Stakeholder communication",
-      "Cross-functional collaboration",
-      "Documentation",
     ],
   },
 ];
 
 export default function TechStack() {
-  const reduced = useReducedMotion();
-
   return (
-    <section id="tech-stack" className="pt-28 md:pt-44">
-      <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-        <SectionHeader
-          index="04"
-          label="Stack"
-          lines={[
-            <>Tools I</>,
-            <>
-              <span className="serif-italic text-signal-text">reach for.</span>
-            </>,
-          ]}
-          aside={<p>Grouped by the job they do, with the AI and data engineering work first.</p>}
-        />
+    <section id="methods" aria-labelledby="methods-title" className="scroll-mt-20 pt-32 md:pt-48">
+      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
+        <SectionHead id="methods-title" title="What I work with" size="lg">
+          Languages, frameworks and platforms, AI and data engineering first.
+        </SectionHead>
 
-        <div className="border-b border-border">
-          {groups.map((group, groupIndex) => (
-            <div
-              key={group.title}
-              className="group/row grid gap-6 border-t border-border py-9 grid-cols-1 lg:grid-cols-12 lg:gap-8 lg:py-12"
-              data-testid={`card-tech-${groupIndex}`}
-            >
-              <FadeUp className="lg:col-span-4">
-                <div className="flex items-baseline gap-4">
-                  <span className="label-mono text-signal-text">{String(groupIndex + 1).padStart(2, "0")}</span>
-                  <div>
-                    <h3 className="text-2xl font-medium tracking-tight md:text-3xl">{group.title}</h3>
-                    <p className="mt-2 max-w-xs text-sm text-muted-foreground">{group.note}</p>
-                  </div>
-                </div>
-              </FadeUp>
-
-              <motion.ul
-                className="flex flex-wrap gap-x-2 gap-y-2.5 lg:col-span-8"
-                initial="hidden"
-                whileInView="shown"
-                viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-                variants={{ shown: { transition: { staggerChildren: reduced ? 0 : 0.025 } } }}
-              >
+        <div className="mt-12 grid grid-cols-1 gap-3 md:mt-16 md:grid-cols-2 xl:grid-cols-3">
+          {groups.map((group, i) => (
+            <div key={group.title} className={`rounded-xl border p-5 md:p-6 ${i < 2 ? "border-foreground/40" : "border-border"}`}>
+              <h3 className="display text-[22px] md:text-[24px]" style={{ fontWeight: 700, fontStretch: "100%", letterSpacing: "-0.02em", lineHeight: 1.1 }}>
+                {group.title}
+              </h3>
+              <ul className="mt-4 flex flex-wrap gap-1.5">
                 {group.items.map((item) => (
-                  <motion.li
-                    key={item}
-                    variants={{
-                      hidden: { opacity: 0, y: reduced ? 0 : 14 },
-                      shown: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
-                    }}
-                    className="rounded-full border border-border px-4 py-2 text-sm transition-colors duration-300 hover:border-signal hover:bg-signal hover:text-[hsl(240_7%_5%)] md:text-base"
-                    data-testid={`tech-${item.toLowerCase().replace(/\s+/g, "-")}`}
-                  >
+                  <li key={item} className="rounded-full bg-foreground/[0.07] px-3 py-1.5 font-sans text-[13.5px] font-medium text-foreground/85">
                     {item}
-                  </motion.li>
+                  </li>
                 ))}
-              </motion.ul>
+              </ul>
             </div>
           ))}
         </div>

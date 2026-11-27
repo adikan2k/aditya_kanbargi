@@ -52,10 +52,11 @@ export default {
           border: "var(--destructive-border)",
         },
         ring: "hsl(var(--ring) / <alpha-value>)",
-        signal: {
-          DEFAULT: "hsl(var(--signal) / <alpha-value>)",
-          text: "hsl(var(--signal-text) / <alpha-value>)",
+        cite: {
+          DEFAULT: "hsl(var(--cite) / <alpha-value>)",
+          ink: "hsl(var(--cite-ink) / <alpha-value>)",
         },
+        faint: "hsl(var(--faint) / <alpha-value>)",
         chart: {
           "1": "hsl(var(--chart-1) / <alpha-value>)",
           "2": "hsl(var(--chart-2) / <alpha-value>)",

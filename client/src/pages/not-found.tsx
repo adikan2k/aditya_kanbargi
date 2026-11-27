@@ -1,21 +1,27 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { useEffect } from "react";
 
 export default function NotFound() {
-  return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4">
-        <CardContent className="pt-6">
-          <div className="flex mb-4 gap-2">
-            <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">404 Page Not Found</h1>
-          </div>
+  useEffect(() => {
+    document.documentElement.classList.add("dark");
+  }, []);
 
-          <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
-          </p>
-        </CardContent>
-      </Card>
-    </div>
+  return (
+    <main className="flex min-h-screen items-center bg-background px-5 text-foreground md:px-10">
+      <div className="mx-auto w-full max-w-[1440px]">
+        <p className="figure-nums font-sans text-[15px] font-semibold text-cite">404</p>
+        <h1 className="display mt-3 max-w-[14ch] text-[clamp(3rem,8vw,7.5rem)]" style={{ lineHeight: 0.92 }}>
+          Nothing lives at this address.
+        </h1>
+        <p className="mt-6 max-w-[46ch] font-sans text-[18px] leading-snug text-muted-foreground md:text-[20px]">
+          The address may have a typo, or the page has moved. Everything on the site starts from the front page.
+        </p>
+        <a
+          href="/"
+          className="press mt-8 inline-flex items-center rounded-full bg-foreground px-5 py-3 font-sans text-[15px] font-semibold text-background"
+        >
+          Go to the front page
+        </a>
+      </div>
+    </main>
   );
 }

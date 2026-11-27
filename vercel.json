@@ -2,7 +2,14 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist/public",
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index.ts" }
+    {
+      "source": "/labellens-api/:path*",
+      "destination": "https://labellens-api-1036759996795.us-east4.run.app/:path*"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.ts"
+    }
   ],
   "cleanUrls": true
 }

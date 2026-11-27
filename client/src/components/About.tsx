@@ -1,102 +1,47 @@
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
-import { FadeUp, SectionHeader } from "./motion/Reveal";
+import { motion, useReducedMotion } from "framer-motion";
+import SectionHead from "./site/SectionHead";
+import { Cite } from "./cite/Cite";
 import { EASE } from "@/lib/motion";
 import headshotImage from "@assets/web/profile.webp";
 
-const statement =
-  "I came for the patterns. I stayed for the pipelines. Now I'm building the systems that put both to work.";
-
-function Word({ children, progress, range }: { children: string; progress: MotionValue<number>; range: [number, number] }) {
-  const opacity = useTransform(progress, range, [0.14, 1]);
-  return (
-    <motion.span style={{ opacity }} className="mr-[0.24em] inline-block">
-      {children}
-    </motion.span>
-  );
-}
-
-/** Large statement whose words light up one by one as it is scrolled through. */
-function ScrollStatement() {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const reduced = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.85", "end 0.45"] });
-  const words = statement.split(" ");
-
-  if (reduced) {
-    return <p className="display text-[clamp(2rem,5.6vw,5.5rem)]">{statement}</p>;
-  }
-
-  return (
-    <p ref={ref} className="display text-[clamp(2rem,5.6vw,5.5rem)]" aria-label={statement}>
-      {words.map((word, i) => (
-        <Word key={i} progress={scrollYProgress} range={[i / words.length, (i + 1) / words.length]}>
-          {word}
-        </Word>
-      ))}
-    </p>
-  );
-}
-
 const facts = [
+  { title: "Education", body: <>MS in Data Science, The George Washington University, 2026. Global Leaders Fellowship.</> },
+  { title: "Certifications", body: <>AWS Certified AI Practitioner. Databricks Generative AI accreditation.</> },
   {
-    label: "Education",
-    lines: ["MS, Data Science", "The George Washington University, 2026", "Global Leaders Fellowship"],
+    title: "Published",
+    body: (
+      <>
+        Music Genre Classification Using Machine Learning Techniques. IJSREM, Volume 7, Issue 12, <Cite id="paper" before="2023" after="." />
+      </>
+    ),
   },
-  {
-    label: "Certifications",
-    lines: ["AWS Certified AI Practitioner", "Databricks GenAI Accreditation"],
-  },
-  {
-    label: "Published",
-    lines: ["Music Genre Classification Using Machine Learning Techniques", "IJSREM, Volume 7, Issue 12 (2023)"],
-  },
-  {
-    label: "Experience",
-    lines: ["About three years", "Analytics, data and AI engineering"],
-  },
+  { title: "Looking for", body: <>AI and analytics engineering roles. Open to relocation and remote roles.</> },
 ];
 
 export default function About() {
-  const imageRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: imageRef, offset: ["start end", "end start"] });
-  const imageY = useTransform(scrollYProgress, [0, 1], reduced ? ["0%", "0%"] : ["-8%", "8%"]);
 
   return (
-    <section id="about" className="pt-28 md:pt-44">
-      <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-        <SectionHeader
-          index="03"
-          label="About"
-          lines={[
-            <>The person</>,
-            <>
-              <span className="serif-italic text-signal-text">behind the work.</span>
-            </>,
-          ]}
-        />
+    <section id="about" aria-labelledby="about-title" className="scroll-mt-20 pt-32 md:pt-48">
+      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
+        <SectionHead id="about-title" title="About" />
 
-        <ScrollStatement />
-
-        <div className="mt-20 grid gap-12 lg:mt-28 grid-cols-1 lg:grid-cols-12 lg:gap-8">
-          <div className="lg:col-span-4">
+        <div className="mt-12 grid grid-cols-1 gap-12 md:mt-16 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
             <motion.div
-              ref={imageRef}
-              className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-border"
+              className="relative aspect-[4/5] w-full max-w-[460px] overflow-hidden rounded-2xl border border-border"
               initial="hidden"
               whileInView="shown"
               viewport={{ once: true, amount: 0.05 }}
             >
-              <motion.img
+              <img
                 src={headshotImage}
                 alt="Aditya Kanbargi"
                 width={800}
                 height={800}
                 loading="lazy"
-                className="absolute inset-0 h-[116%] w-full object-cover"
-                style={{ y: imageY }}
-                data-testid="img-headshot"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover [filter:saturate(0.9)_contrast(1.03)]"
               />
               {/* A cover slides off the photo; clipping the photo itself would delay its download. */}
               <motion.span
@@ -104,58 +49,41 @@ export default function About() {
                 className="absolute inset-0 origin-bottom bg-background"
                 variants={{
                   hidden: { scaleY: reduced ? 0 : 1 },
-                  shown: { scaleY: 0, transition: { duration: reduced ? 0.01 : 1, ease: EASE } },
+                  shown: { scaleY: 0, transition: { duration: reduced ? 0.01 : 0.9, ease: EASE } },
                 }}
               />
             </motion.div>
           </div>
 
-          <div className="space-y-6 text-lg leading-relaxed text-muted-foreground md:text-xl lg:col-span-7 lg:col-start-6">
-            <FadeUp>
-              <p>
-                I'm Aditya, and I work in <span className="text-foreground">data and AI</span>: building agentic AI
-                systems, orchestrating LLM workflows, and developing data pipelines to automate research. I enjoy
-                turning complex, manual processes into something reliable, useful, and easier for people to work with.
-              </p>
-            </FadeUp>
-            <FadeUp delay={0.05}>
-              <p>
-                My background is in data and business analytics. Some days, that meant building a dashboard someone
-                could open on a Monday morning and know what to act on. Other days, it meant digging into the numbers
-                to understand what was happening and what the team could do about it. I bring that same mindset to AI:{" "}
-                <span className="text-foreground">
-                  ask the right questions, check the answers, and make sure the work solves a real business problem.
-                </span>
-              </p>
-            </FadeUp>
-            <FadeUp delay={0.1}>
-              <p>
-                I like being the person who gets both sides: comfortable digging into why something isn't working, and
-                just as comfortable explaining it without making it more complicated than it needs to be.
-              </p>
-            </FadeUp>
-            <FadeUp delay={0.15}>
-              <p>
-                Outside of work, I'm usually lifting, chasing a football, turning pages, or saying "one more game."
-                When the mountains call, I'm already planning the hike.
-              </p>
-            </FadeUp>
+          <div className="space-y-6 font-sans text-[19px] leading-relaxed text-foreground/90 md:text-[22px] lg:col-span-7">
+            <p>
+              I&rsquo;m Aditya, and I work in data and AI: building agentic AI systems, orchestrating LLM workflows, and
+              developing data pipelines to automate research. I enjoy turning complex, manual processes into something
+              reliable, useful, and easier for people to work with.
+            </p>
+            <p>
+              My background is in data and business analytics. Some days, that meant building a dashboard someone could
+              open on a Monday morning and know what to act on. Other days, it meant digging into the numbers to
+              understand what was happening and what the team could do about it. I bring that same mindset to AI: ask
+              the right questions, check the answers, and make sure the work solves a real business problem.
+            </p>
+            <p>
+              I like being the person who gets both sides: comfortable digging into why something isn&rsquo;t working,
+              and just as comfortable explaining it without making it more complicated than it needs to be.
+            </p>
+            <p>
+              Outside of work, I&rsquo;m usually lifting, chasing a football, turning pages, or saying &ldquo;one more
+              game.&rdquo; When the mountains call, I&rsquo;m already planning the hike.
+            </p>
           </div>
         </div>
 
-        <dl className="mt-20 grid border-l border-t border-border sm:grid-cols-2 lg:mt-28 lg:grid-cols-4">
-          {facts.map((fact, i) => (
-            <FadeUp key={fact.label} delay={i * 0.07} className="border-b border-r border-border p-6 md:p-8">
-              <dt className="label-mono mb-5 text-signal-text">{fact.label}</dt>
-              <dd>
-                <div className="text-xl font-medium tracking-tight">{fact.lines[0]}</div>
-                {fact.lines.slice(1).map((line) => (
-                  <div key={line} className="mt-1.5 text-sm text-muted-foreground">
-                    {line}
-                  </div>
-                ))}
-              </dd>
-            </FadeUp>
+        <dl className="mt-16 grid grid-cols-1 gap-3 font-sans sm:grid-cols-2 lg:mt-24 lg:grid-cols-4">
+          {facts.map((fact) => (
+            <div key={fact.title} className="rounded-xl border border-border p-5">
+              <dt className="text-[12.5px] font-semibold uppercase tracking-[0.1em] text-faint">{fact.title}</dt>
+              <dd className="mt-2.5 text-[16px] leading-snug text-foreground">{fact.body}</dd>
+            </div>
           ))}
         </dl>
       </div>

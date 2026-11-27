@@ -1,38 +1,42 @@
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, ArrowUpRight } from "lucide-react";
 import { scrollToTop } from "@/lib/motion";
 
-export default function Footer() {
-  const ref = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end end"] });
-  // The name rises into place as the footer comes into view.
-  const y = useTransform(scrollYProgress, [0, 1], reduced ? ["0%", "0%"] : ["45%", "0%"]);
+const EMAIL = "adityakan2000@gmail.com";
 
+export default function Footer() {
+  const year = new Date().getFullYear();
   return (
-    <footer ref={ref} className="mt-28 overflow-hidden border-t border-border md:mt-40">
-      <div className="mx-auto flex max-w-[1600px] flex-col gap-4 px-5 py-8 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between md:px-10">
-        <p>© 2026 Aditya Kanbargi. AI and Analytics Engineer.</p>
-        <p>Built with React, TypeScript, Tailwind CSS and Framer Motion.</p>
+    <footer className="mt-24 border-t border-border md:mt-36">
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-4 px-5 py-8 font-sans text-[13px] text-faint md:flex-row md:items-center md:justify-between md:px-10">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-1 text-[14px] font-medium">
+          <a href={`mailto:${EMAIL}`} className="ref-link py-3 text-foreground">
+            {EMAIL}
+          </a>
+          <a
+            href="/Aditya_Kanbargi_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ref-link inline-flex items-center gap-1 py-3 text-foreground"
+          >
+            Resume (PDF)
+            <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+          </a>
+        </div>
+        <p>
+          © {year} Aditya Kanbargi. Set in Archivo and Hanken Grotesk.{" "}
+          <span className="figure-nums">
+            Revised {__BUILD_DATE__}, build {__BUILD_SHA__}.
+          </span>
+        </p>
         <button
+          type="button"
           onClick={scrollToTop}
-          className="label-mono group flex w-fit items-center gap-3 text-foreground"
-          data-testid="button-back-to-top"
+          className="press inline-flex w-fit items-center gap-1.5 py-3 font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground"
         >
           Back to top
-          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-border transition-colors duration-300 group-hover:border-signal group-hover:bg-signal group-hover:text-[hsl(240_7%_5%)]">
-            <ArrowUp className="h-4 w-4" />
-          </span>
+          <ArrowUp className="h-3.5 w-3.5" aria-hidden="true" />
         </button>
       </div>
-      <motion.div
-        aria-hidden="true"
-        className="display select-none whitespace-nowrap px-3 pb-[0.12em] text-center text-[13.2vw] leading-none text-foreground"
-        style={{ y }}
-      >
-        Aditya Kanbargi
-      </motion.div>
     </footer>
   );
 }
