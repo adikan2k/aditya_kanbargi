@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from "framer-motion";
-import { ArrowUpRight, Moon, Sun } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, Moon, Sun } from "lucide-react";
 import { EASE, scrollToId, scrollToTop } from "@/lib/motion";
 
 interface NavigationProps {
@@ -9,6 +9,10 @@ interface NavigationProps {
 }
 
 const RESUME_URL = "/Aditya_Kanbargi_Resume.pdf";
+const PROFILES = [
+  { label: "GitHub", href: "https://github.com/adikan2k", Icon: Github },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/adikan2k/", Icon: Linkedin },
+];
 
 const navLinks = [
   { label: "Try it", id: "try" },
@@ -107,8 +111,8 @@ export default function Navigation({ onThemeToggle, isDark = true }: NavigationP
                       href={`#${link.id}`}
                       onClick={(e) => go(e, link.id)}
                       aria-current={isActive ? "location" : undefined}
-                      className={`relative rounded-md px-3.5 py-2.5 font-sans text-[15px] font-medium transition-colors duration-200 lg:px-4 ${
-                        isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                      className={`relative rounded-md px-3.5 py-2.5 font-sans text-[16.5px] font-semibold transition-colors duration-200 lg:px-4 ${
+                        isActive ? "text-foreground" : "text-foreground/75 hover:text-foreground"
                       }`}
                     >
                       {link.label}
@@ -127,11 +131,24 @@ export default function Navigation({ onThemeToggle, isDark = true }: NavigationP
           </nav>
 
           <div className="flex items-center gap-2">
+            {PROFILES.map(({ label, href, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${label} profile`}
+                title={label}
+                className="press hidden h-11 w-11 items-center justify-center rounded-md border border-border text-foreground transition-colors duration-200 hover:border-foreground hover:bg-foreground/[0.06] sm:flex"
+              >
+                <Icon className="h-[18px] w-[18px]" aria-hidden="true" />
+              </a>
+            ))}
             <a
               href={RESUME_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="press hidden items-center gap-1.5 rounded-md bg-foreground px-4 py-2.5 font-sans text-[15px] font-medium text-background transition-colors duration-200 hover:bg-foreground/90 sm:inline-flex"
+              className="press hidden h-11 items-center gap-1.5 rounded-md bg-foreground px-4 font-sans text-[15.5px] font-semibold text-background transition-colors duration-200 hover:bg-foreground/90 sm:inline-flex"
             >
               Resume
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
@@ -179,15 +196,31 @@ export default function Navigation({ onThemeToggle, isDark = true }: NavigationP
                 ))}
               </ul>
             </nav>
-            <a
-              href={RESUME_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="press flex items-center justify-center gap-2 rounded-md bg-foreground py-4 font-sans text-base font-semibold text-background"
-            >
-              Resume (PDF)
-              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-            </a>
+            <div className="space-y-2">
+              <div className="grid grid-cols-2 gap-2">
+                {PROFILES.map(({ label, href, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="press flex items-center justify-center gap-2 rounded-md border border-border py-4 font-sans text-base font-semibold text-foreground"
+                  >
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                    {label}
+                  </a>
+                ))}
+              </div>
+              <a
+                href={RESUME_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="press flex items-center justify-center gap-2 rounded-md bg-foreground py-4 font-sans text-base font-semibold text-background"
+              >
+                Resume (PDF)
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -57,8 +57,6 @@ function highlightMetrics(text: string) {
 interface Role {
   title: string;
   company: string;
-  /** A shorter name for the timeline on phones. */
-  short?: string;
   period: string;
   /** First and last month, as [year, month] with January = 1. */
   span: [[number, number], [number, number]];
@@ -85,7 +83,6 @@ const roles: Role[] = [
   {
     title: "Data Analyst (Graduate Assistant)",
     company: "GW School of Nursing",
-    short: "GW Nursing",
     period: "Dec 2024 – May 2025",
     span: [[2024, 12], [2025, 5]],
     description: [
@@ -115,86 +112,15 @@ const roles: Role[] = [
 
 const VISIBLE_BULLETS = 3;
 
-// The timeline runs from July 2022 to the start of 2027, in months.
-const AXIS_START = 2022 * 12 + 6;
-const AXIS_END = 2027 * 12;
-const month = (y: number, m: number) => y * 12 + (m - 1);
-const at = (t: number) => ((t - AXIS_START) / (AXIS_END - AXIS_START)) * 100;
-
 function months(role: Role) {
   const [[y1, m1], [y2, m2]] = role.span;
-  return month(y2, m2) - month(y1, m1) + 1;
+  return y2 * 12 + m2 - (y1 * 12 + m1) + 1;
 }
 
 function duration(n: number) {
   const years = Math.floor(n / 12);
   const rest = n % 12;
   return [years ? `${years} yr` : "", rest ? `${rest} mo` : ""].filter(Boolean).join(" ");
-}
-
-// Milestones with a known month, each with its source.
-const milestones = [
-  { label: "Paper published", when: month(2023, 12), cite: "paper" as const },
-  { label: "MS Data Science, GWU", when: month(2026, 5), cite: "resume" as const },
-];
-
-/** Where the time went: each role as a bar on one line, milestones as marks below it. */
-function Timeline() {
-  const reduced = useReducedMotion();
-  const ordered = [...roles].reverse();
-  return (
-    <motion.figure
-      className="mt-12 md:mt-16"
-      aria-label="Timeline of roles from 2022 to 2026"
-      initial={reduced ? false : "hidden"}
-      whileInView="shown"
-      viewport={{ once: true, amount: 0.4 }}
-    >
-      <div className="relative h-[10.5rem] md:h-[9.5rem]">
-        {/* Years */}
-        {[2023, 2024, 2025, 2026].map((y) => (
-          <span key={y} className="absolute inset-y-0 border-l border-dashed border-border" style={{ left: `${at(month(y, 1))}%` }}>
-            <span className="figure-nums absolute -bottom-0.5 left-1.5 font-sans text-[12.5px] font-medium text-faint">{y}</span>
-          </span>
-        ))}
-
-        {/* Roles */}
-        {ordered.map((role, i) => {
-          const [[y1, m1], [y2, m2]] = role.span;
-          const left = at(month(y1, m1));
-          const width = at(month(y2, m2) + 1) - left;
-          const newest = i === ordered.length - 1;
-          return (
-            <div key={role.company} className="absolute top-3" style={{ left: `${left}%`, width: `${width}%` }}>
-              <p className={`whitespace-nowrap font-sans text-[12.5px] font-semibold md:text-[14px] ${newest ? "text-cite" : "text-foreground"}`}>
-                <span className="md:hidden">{role.short ?? role.company}</span>
-                <span className="hidden md:inline">{role.company}</span>
-              </p>
-              <motion.span
-                className={`mt-1.5 block h-7 rounded-md md:h-9 ${newest ? "bg-cite" : "bg-foreground/80"}`}
-                style={{ transformOrigin: "left" }}
-                variants={{
-                  hidden: { scaleX: 0 },
-                  shown: { scaleX: 1, transition: { duration: 0.9, delay: 0.15 + i * 0.18, ease: [0.16, 1, 0.3, 1] } },
-                }}
-              />
-              <p className="figure-nums mt-1.5 whitespace-nowrap font-sans text-[12px] text-muted-foreground">{duration(months(role))}</p>
-            </div>
-          );
-        })}
-
-        {/* Milestones */}
-        {milestones.map((m) => (
-          <div key={m.label} className="absolute bottom-6 -translate-x-1/2 md:bottom-7" style={{ left: `${at(m.when) + 0.8}%` }}>
-            <span className="mx-auto block h-2.5 w-2.5 rotate-45 bg-foreground" aria-hidden="true" />
-            <span className="mt-1 hidden whitespace-nowrap font-sans text-[12px] font-medium text-muted-foreground sm:block">
-              <Cite id={m.cite} before={m.label} />
-            </span>
-          </div>
-        ))}
-      </div>
-    </motion.figure>
-  );
 }
 
 function RoleRow({ role }: { role: Role }) {
@@ -283,7 +209,6 @@ export default function Experience() {
           About three years across analytics and AI engineering, newest first. Figures as on my{" "}
           <Cite id="resume" before="resume" after="." />
         </SectionHead>
-        <Timeline />
         <div className="mt-10 border-b border-border md:mt-14">
           {roles.map((role) => (
             <RoleRow key={role.company} role={role} />

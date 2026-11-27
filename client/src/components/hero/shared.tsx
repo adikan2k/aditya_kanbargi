@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Github, Linkedin } from "lucide-react";
 import { scrollToId } from "@/lib/motion";
 
 export const TITLE = "AI and Analytics Engineer";
@@ -69,23 +69,31 @@ export function FitName({ stacked = false, className = "" }: { stacked?: boolean
 /** See the work, plus the two profiles. */
 export function HeroActions({ className = "" }: { className?: string }) {
   return (
-    <div className={`flex flex-wrap items-center gap-x-6 gap-y-1 font-sans text-[15px] font-medium ${className}`}>
+    <div className={`grid grid-cols-2 gap-2.5 font-sans text-[16px] font-semibold sm:flex sm:flex-wrap sm:items-center ${className}`}>
       <button
         type="button"
         onClick={() => scrollToId("work")}
-        className="press inline-flex items-center gap-2 rounded-md bg-foreground px-5 py-3 font-semibold text-background transition-colors duration-200 hover:bg-foreground/90"
+        className="press col-span-2 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-foreground px-6 text-background transition-colors duration-200 hover:bg-foreground/90 sm:col-span-1"
       >
         See the work
         <ArrowDown className="h-4 w-4" aria-hidden="true" />
       </button>
-      <a href="https://github.com/adikan2k" target="_blank" rel="noopener noreferrer" className="ref-link inline-flex items-center gap-1.5 py-3 text-foreground">
-        GitHub
-        <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-      </a>
-      <a href="https://www.linkedin.com/in/adikan2k/" target="_blank" rel="noopener noreferrer" className="ref-link inline-flex items-center gap-1.5 py-3 text-foreground">
-        LinkedIn
-        <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-      </a>
+      {[
+        { label: "GitHub", href: "https://github.com/adikan2k", Icon: Github },
+        { label: "LinkedIn", href: "https://www.linkedin.com/in/adikan2k/", Icon: Linkedin },
+      ].map(({ label, href, Icon }) => (
+        <a
+          key={label}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="press group inline-flex h-12 items-center justify-center gap-2 rounded-full border-2 border-foreground/30 px-5 text-foreground transition-colors duration-200 hover:border-foreground hover:bg-foreground/[0.06]"
+        >
+          <Icon className="h-[18px] w-[18px]" aria-hidden="true" />
+          {label}
+          <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground" aria-hidden="true" />
+        </a>
+      ))}
     </div>
   );
 }

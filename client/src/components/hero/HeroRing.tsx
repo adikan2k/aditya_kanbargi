@@ -326,27 +326,27 @@ export default function HeroRing() {
               }}
               className="group flex items-baseline gap-2"
             >
-              <span className="display text-[22px] md:text-[26px]">{project.name}</span>
+              <span className="display text-[24px] md:text-[30px]">{project.name}</span>
               <ArrowDown className="h-4 w-4 shrink-0 translate-y-0.5 text-cite transition-transform duration-200 group-hover:translate-y-1.5" aria-hidden="true" />
               <span className="sr-only">Go to this project</span>
             </a>
-            <span className="text-[14px] font-medium text-faint md:text-[15px]">{card.view}</span>
-            <span className="hidden text-[15px] text-muted-foreground md:inline md:text-[16px]">{project.line}</span>
+            <span className="rounded-full border border-border px-2.5 py-0.5 text-[13px] font-semibold text-foreground/80 md:text-[14px]">{card.view}</span>
+            <span className="hidden text-[16px] text-foreground/80 md:inline md:text-[17px]">{project.line}</span>
             {paper && (
-              <span className="hidden text-[15px] text-muted-foreground xl:inline">
+              <span className="hidden text-[16px] text-foreground/80 xl:inline">
                 <span className="figure-nums mx-1 font-semibold text-cite">{paper.headline.value}</span>
                 <Cite id={paper.headline.cite} before={paper.headline.note} />
               </span>
             )}
           </motion.div>
           <div className="flex shrink-0 items-center gap-3">
-            <span className="figure-nums hidden font-sans text-[13px] text-faint sm:inline" aria-hidden="true">
+            <span className="figure-nums hidden font-sans text-[14px] font-semibold text-muted-foreground sm:inline" aria-hidden="true">
               {String(front + 1).padStart(2, "0")} / {String(COUNT).padStart(2, "0")}
             </span>
-            <button type="button" onClick={() => step(-1)} aria-label="Previous screen" className="press grid h-11 w-11 place-items-center rounded-full border border-border text-foreground transition-colors duration-200 hover:border-foreground">
+            <button type="button" onClick={() => step(-1)} aria-label="Previous screen" className="press grid h-12 w-12 place-items-center rounded-full border-2 border-foreground/30 text-foreground transition-colors duration-200 hover:border-foreground hover:bg-foreground/[0.06]">
               <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             </button>
-            <button type="button" onClick={() => step(1)} aria-label="Next screen" className="press grid h-11 w-11 place-items-center rounded-full border border-border text-foreground transition-colors duration-200 hover:border-foreground">
+            <button type="button" onClick={() => step(1)} aria-label="Next screen" className="press grid h-12 w-12 place-items-center rounded-full border-2 border-foreground/30 text-foreground transition-colors duration-200 hover:border-foreground hover:bg-foreground/[0.06]">
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </button>
           </div>
@@ -356,7 +356,7 @@ export default function HeroRing() {
           <p className="display text-[22px] md:text-[27px]" style={{ fontStretch: "105%", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.1 }}>
             {TITLE}
           </p>
-          <p className="font-sans text-[15px] leading-snug text-muted-foreground md:text-[17px]">{LINE}</p>
+          <p className="font-sans text-[16px] leading-snug text-foreground/80 md:text-[18px]">{LINE}</p>
           <HeroActions />
         </div>
 
