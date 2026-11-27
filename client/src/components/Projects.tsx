@@ -7,7 +7,7 @@ import { featured } from "@/content/featured";
 export default function Projects() {
   return (
     <section id="work" aria-labelledby="work-title" className="scroll-mt-20 pt-28 md:pt-40">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
+      <div className="mx-auto max-w-[1920px] px-5 md:px-10 2xl:px-16">
         <SectionHead id="work-title" title="Selected work">
           Three systems I built and measured, with every number linked to where it came from. Then sixteen earlier projects.
         </SectionHead>

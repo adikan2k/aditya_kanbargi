@@ -24,7 +24,7 @@ export default function EarlierProjects() {
   const count = (f: "All" | Category) => (f === "All" ? projects.length : projects.filter((p) => p.categories.includes(f)).length);
 
   return (
-    <div id="index" className="mx-auto mt-28 max-w-[1440px] scroll-mt-24 px-5 md:mt-40 md:px-10">
+    <div id="index" className="mx-auto mt-28 max-w-[1920px] scroll-mt-24 px-5 md:mt-40 md:px-10 2xl:px-16">
       <div className="flex flex-col gap-x-10 gap-y-5 border-t border-border pt-8 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <h3 className="display text-[clamp(2.5rem,6vw,5.5rem)]" style={{ lineHeight: 0.92 }}>

@@ -93,7 +93,7 @@ const groups: MethodGroup[] = [
 export default function TechStack() {
   return (
     <section id="methods" aria-labelledby="methods-title" className="scroll-mt-20 pt-32 md:pt-48">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
+      <div className="mx-auto max-w-[1920px] px-5 md:px-10 2xl:px-16">
         <SectionHead id="methods-title" title="What I work with" size="lg">
           Languages, frameworks and platforms, AI and data engineering first.
         </SectionHead>

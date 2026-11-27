@@ -37,7 +37,7 @@ export default function TryIt() {
 
   return (
     <section id="try" aria-labelledby="try-title" className="relative scroll-mt-20 border-t border-border py-16 md:py-24">
-      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-x-12 gap-y-8 px-5 md:px-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,8fr)]">
+      <div className="mx-auto grid max-w-[1920px] grid-cols-1 gap-x-12 gap-y-8 px-5 md:px-10 2xl:px-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,8fr)]">
         <div>
           <h2 id="try-title" className="display text-[clamp(2.4rem,5vw,4.5rem)]" style={{ lineHeight: 0.92 }}>
             Don&rsquo;t read about my work. <span className="text-cite">Use it.</span>

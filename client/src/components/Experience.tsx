@@ -278,7 +278,7 @@ function RoleRow({ role }: { role: Role }) {
 export default function Experience() {
   return (
     <section id="experience" aria-labelledby="experience-title" className="scroll-mt-20 pt-32 md:pt-48">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
+      <div className="mx-auto max-w-[1920px] px-5 md:px-10 2xl:px-16">
         <SectionHead id="experience-title" title="Experience">
           About three years across analytics and AI engineering, newest first. Figures as on my{" "}
           <Cite id="resume" before="resume" after="." />

@@ -33,7 +33,7 @@ export default function Contact() {
           WebkitMaskImage: "radial-gradient(60% 70% at 50% 75%, black, transparent 75%)",
         }}
       />
-      <div className="relative mx-auto max-w-[1440px] px-5 md:px-10">
+      <div className="relative mx-auto max-w-[1920px] px-5 md:px-10 2xl:px-16">
         <p className="font-sans text-[15px] font-semibold text-faint">Contact</p>
         <h2 id="contact-title" className="display mt-4 max-w-[14ch] text-[clamp(3rem,8vw,7.5rem)]" style={{ lineHeight: 0.92 }}>
           Hiring for AI or analytics engineering? <span className="text-cite">Let&rsquo;s talk.</span>

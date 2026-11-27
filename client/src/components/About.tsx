@@ -23,7 +23,7 @@ export default function About() {
 
   return (
     <section id="about" aria-labelledby="about-title" className="scroll-mt-20 pt-32 md:pt-48">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
+      <div className="mx-auto max-w-[1920px] px-5 md:px-10 2xl:px-16">
         <SectionHead id="about-title" title="About" />
 
         <div className="mt-12 grid grid-cols-1 gap-12 md:mt-16 lg:grid-cols-12 lg:gap-10">

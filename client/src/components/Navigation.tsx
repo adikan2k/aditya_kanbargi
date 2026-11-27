@@ -84,7 +84,7 @@ export default function Navigation({ onThemeToggle, isDark = true }: NavigationP
         onFocusCapture={() => setHidden(false)}
         transition={{ duration: reduced ? 0 : 0.35, ease: EASE }}
       >
-        <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-6 px-5 md:h-[4.5rem] md:px-10">
+        <div className="mx-auto flex h-16 max-w-[1920px] items-center justify-between gap-6 px-5 md:h-[4.5rem] md:px-10 2xl:px-16">
           <a
             href="#top"
             onClick={(e) => {

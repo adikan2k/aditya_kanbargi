@@ -7,7 +7,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="mt-24 border-t border-border md:mt-36">
-      <div className="mx-auto flex max-w-[1440px] flex-col gap-4 px-5 py-8 font-sans text-[13px] text-faint md:flex-row md:items-center md:justify-between md:px-10">
+      <div className="mx-auto flex max-w-[1920px] flex-col gap-4 px-5 py-8 font-sans text-[13px] text-faint md:flex-row md:items-center md:justify-between md:px-10 2xl:px-16">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-1 text-[14px] font-medium">
           <a href={`mailto:${EMAIL}`} className="ref-link py-3 text-foreground">
             {EMAIL}

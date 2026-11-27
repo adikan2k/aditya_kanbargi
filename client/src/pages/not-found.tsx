@@ -7,7 +7,7 @@ export default function NotFound() {
 
   return (
     <main className="flex min-h-screen items-center bg-background px-5 text-foreground md:px-10">
-      <div className="mx-auto w-full max-w-[1440px]">
+      <div className="mx-auto w-full max-w-[1920px]">
         <p className="figure-nums font-sans text-[15px] font-semibold text-cite">404</p>
         <h1 className="display mt-3 max-w-[14ch] text-[clamp(3rem,8vw,7.5rem)]" style={{ lineHeight: 0.92 }}>
           Nothing lives at this address.

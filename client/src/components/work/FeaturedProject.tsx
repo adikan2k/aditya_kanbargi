@@ -28,7 +28,7 @@ export default function FeaturedProject({ project, index, total }: { project: Fe
         style={{ backgroundColor: `hsl(${project.glow} / 0.42)`, maskImage: glow, WebkitMaskImage: glow }}
       />
 
-      <div className="relative mx-auto max-w-[1440px] px-5 md:px-10">
+      <div className="relative mx-auto max-w-[1920px] px-5 md:px-10 2xl:px-16">
         <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-t border-border pt-5 font-sans text-[14px] font-medium text-faint">
           <span className="figure-nums">
             {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}

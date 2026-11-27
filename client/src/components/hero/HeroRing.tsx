@@ -77,6 +77,8 @@ const CARDS = SCREENS;
 const COUNT = CARDS.length;
 const STEP = 360 / COUNT;
 const BAR = 30;
+/** Height over width of a screen on the ring. */
+const ASPECT = 0.56;
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
 /** Smallest signed angle, in degrees, between a card and the front of the ring. */
@@ -129,9 +131,10 @@ export default function HeroRing() {
     if (!el) return;
     const measure = () => {
       const narrow = el.clientWidth < 640;
-      const byHeight = (el.clientHeight - BAR - 30) / (0.625 * 1.2);
-      const w = Math.round(Math.max(220, Math.min(780, el.clientWidth * (narrow ? 0.86 : 0.74), byHeight)));
-      const h = Math.round(w * 0.625);
+      // Screens are a little wider than 16:10, and grow with the window up to 1100 px.
+      const byHeight = (el.clientHeight - BAR - 30) / (ASPECT * 1.2);
+      const w = Math.round(Math.max(220, Math.min(1100, el.clientWidth * (narrow ? 0.86 : 0.6), byHeight)));
+      const h = Math.round(w * ASPECT);
       const r = Math.round((w * 1.08) / (2 * Math.sin((STEP * Math.PI) / 360)));
       // Sit the screen in the middle of the room left once its reflection is counted.
       setSize({ w, h, r, cy: Math.round(Math.max(10 + (BAR + h) / 2, (el.clientHeight - h * 0.2) / 2)) });
@@ -269,7 +272,7 @@ export default function HeroRing() {
           tiltY.set(0);
         }}
       >
-        <motion.div className="absolute inset-0" style={{ perspective: "1700px", perspectiveOrigin: `50% ${size.cy}px`, scale: stageScale, opacity: stageOpacity }}>
+        <motion.div className="absolute inset-0" style={{ perspective: `${Math.max(1700, Math.round(size.r * 1.05))}px`, perspectiveOrigin: `50% ${size.cy}px`, scale: stageScale, opacity: stageOpacity }}>
           <motion.div className="absolute left-1/2 h-0 w-0" style={{ top: size.cy, transformStyle: "preserve-3d", transform: ringTransform }}>
             {CARDS.map((c, i) => (
               <RingCard
@@ -306,7 +309,7 @@ export default function HeroRing() {
         )}
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1440px] px-5 md:px-10">
+      <div className="relative z-10 mx-auto w-full max-w-[1920px] px-5 md:px-10 2xl:px-16">
         <div className="flex items-center justify-between gap-4 pb-3 md:pb-4">
           <motion.div
             key={card.src}
