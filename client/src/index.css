@@ -184,8 +184,14 @@ html.lenis body {
     animation: ring-pan var(--pan-time, 12s) cubic-bezier(0.45, 0, 0.55, 1) 0.9s infinite alternate;
   }
 
+  /* Paused on hover: from the bottom, where the quick flick left it, slowly up and down. */
+  .ring-pan-back {
+    animation: ring-pan-back var(--pan-time, 12s) cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .ring-pan {
+    .ring-pan,
+    .ring-pan-back {
       animation: none;
     }
   }
@@ -522,6 +528,15 @@ html.lenis body {
   }
   to {
     opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ring-pan-back {
+  from {
+    transform: translateY(var(--pan, 0px));
+  }
+  to {
     transform: translateY(0);
   }
 }

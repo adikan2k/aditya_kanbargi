@@ -81,7 +81,7 @@ export const featured: Featured[] = [
     screens: [
       { label: "Home", src: llHome, alt: "LabelLens home page with product search", bar: "labellens-beige.vercel.app", href: LABELLENS, tall: 1.5455 },
       { label: "Ask agent", src: llAsk, alt: "LabelLens ask agent answering a question step by step", bar: "labellens-beige.vercel.app/ask", href: `${LABELLENS}/ask`, tall: 1.15 },
-      { label: "Dashboard", src: llDashboard, alt: "LabelLens dashboard of the US label landscape", bar: "labellens-beige.vercel.app/dashboard", href: `${LABELLENS}/dashboard`, tall: 1.2364 },
+      { label: "Dashboard", src: llDashboard, alt: "LabelLens dashboard of the US label landscape", bar: "labellens-beige.vercel.app/dashboard", href: `${LABELLENS}/dashboard`, tall: 1.2409 },
       { label: "Product", src: llProduct, alt: "LabelLens product page with additives and better swaps", bar: "labellens-beige.vercel.app/product", href: `${LABELLENS}/product/0016000169685`, tall: 1.4082 },
     ],
     results: [

@@ -25,6 +25,8 @@ import ogTrace from "@assets/ring/orbitglass-trace.webp";
 import lumina from "@assets/ring/lumina.webp";
 import riskmetric from "@assets/ring/riskmetric.webp";
 import nutrimap from "@assets/ring/nutrimap.webp";
+import tcCheck from "@assets/ring/telecompass-check.webp";
+import evSearch from "@assets/ring/evidentia-search-evals.webp";
 import { featured } from "@/content/featured";
 import { Cite } from "../cite/Cite";
 import { scrollToId, useFinePointer } from "@/lib/motion";
@@ -38,6 +40,7 @@ const PROJECTS = {
   lumina: { anchor: "index", name: "Lumina", line: "US grid demand and what renewables cost", glow: "190 72% 24%" },
   riskmetric: { anchor: "index", name: "RiskMetric", line: "Fraud detection with spatial and temporal risk", glow: "352 62% 28%" },
   nutrimap: { anchor: "index", name: "NutriMap", line: "Food deserts and grocery inflation", glow: "30 82% 27%" },
+  telecompass: { anchor: "index", name: "TeleCompass", line: "Is this telehealth visit allowed, and will it be paid?", glow: "174 52% 20%" },
 } as const;
 
 interface Screen {
@@ -57,21 +60,25 @@ interface Screen {
 const LL = "labellens-beige.vercel.app";
 const EV = "evidentia-green.vercel.app";
 const OG = "adikan2k.github.io/orbitglass";
+const TC = "telecompass.vercel.app";
 
-// Twelve screens, one per place on the ring. Neighbours are always different projects.
+// Fourteen screens, one per place on the ring: one from each of the seven projects first,
+// then more pages from the main ones. Neighbours are always different projects.
 const SCREENS: Screen[] = [
   { project: "labellens", view: "Home and search", bar: LL, site: true, src: llHome, alt: "LabelLens home page with product search", tall: 1.5455 },
+  { project: "telecompass", view: "Visit check", bar: TC, site: true, src: tcCheck, alt: "TeleCompass checking whether a telehealth visit is allowed and paid, with the law behind each answer", tall: 1.7364 },
   { project: "evidentia", view: "Auditing an answer", bar: EV, site: true, src: evAudit, alt: "Evidentia auditing an AI answer sentence by sentence", tall: 1.7364 },
   { project: "orbitglass", view: "The lab", bar: OG, site: true, src: ogLab, alt: "OrbitGlass lab home", tall: 1.1055 },
   { project: "lumina", view: "Looker Studio dashboards", bar: "Lumina · Looker Studio", site: false, src: lumina, alt: "Lumina dashboards of US grid demand and renewable prices", tall: 1.6964 },
+  { project: "riskmetric", view: "Streamlit app", bar: "RiskMetric · Streamlit", site: false, src: riskmetric, alt: "RiskMetric fraud detection app with a triage queue", tall: 1.4818 },
+  { project: "nutrimap", view: "Power BI report", bar: "NutriMap · Power BI", site: false, src: nutrimap, alt: "NutriMap report on food deserts and grocery prices", tall: 1.6882 },
   { project: "labellens", view: "Ask agent", bar: `${LL}/ask`, site: true, src: llAsk, alt: "LabelLens ask agent answering a question step by step", tall: 1.15 },
   { project: "evidentia", view: "Research agent", bar: `${EV}/research`, site: true, src: evResearch, alt: "Evidentia research run with a quote for every claim", tall: 1.7364 },
-  { project: "riskmetric", view: "Streamlit app", bar: "RiskMetric · Streamlit", site: false, src: riskmetric, alt: "RiskMetric fraud detection app with a triage queue", tall: 1.4818 },
-  { project: "labellens", view: "Dashboard", bar: `${LL}/dashboard`, site: true, src: llDashboard, alt: "LabelLens dashboard of the US label landscape", tall: 1.2364 },
+  { project: "labellens", view: "Dashboard", bar: `${LL}/dashboard`, site: true, src: llDashboard, alt: "LabelLens dashboard of the US label landscape", tall: 1.2409 },
+  { project: "evidentia", view: "Search evals", bar: `${EV}/evals`, site: true, src: evSearch, alt: "Evidentia search evals: which search works, questions the pages cannot answer, and the recall at k chart", tall: 1.5273 },
   { project: "orbitglass", view: "Experiments", bar: `${OG}/#lab`, site: true, src: ogTrace, alt: "OrbitGlass experiments: repetition atlas, logistic map and toy transformer", tall: 1.5973 },
-  { project: "evidentia", view: "Evals", bar: `${EV}/evals`, site: true, src: evEvals, alt: "Evidentia evaluation results", tall: 1.7364 },
   { project: "labellens", view: "A product page", bar: `${LL}/product`, site: true, src: llProduct, alt: "LabelLens product page for a breakfast cereal", tall: 1.4082 },
-  { project: "nutrimap", view: "Power BI report", bar: "NutriMap · Power BI", site: false, src: nutrimap, alt: "NutriMap report on food deserts and grocery prices", tall: 1.6882 },
+  { project: "evidentia", view: "Evals", bar: `${EV}/evals`, site: true, src: evEvals, alt: "Evidentia evaluation results", tall: 1.7364 },
 ];
 const CARDS = SCREENS;
 const COUNT = CARDS.length;
@@ -80,6 +87,11 @@ const BAR = 30;
 /** Height over width of a screen on the ring. */
 const ASPECT = 0.56;
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
+/** The ring moves on every STEP_MS: all seven projects in about 14 s, all 14 screens in about 28 s. */
+const STEP_MS = 2000;
+const TURN_S = 0.65;
+/** After someone drags or clicks, the ring waits this long before moving on by itself. */
+const RESUME_MS = 4000;
 
 /** Smallest signed angle, in degrees, between a card and the front of the ring. */
 function fromFront(index: number, rot: number) {
@@ -88,7 +100,7 @@ function fromFront(index: number, rot: number) {
 }
 
 /**
- * The first screen is the work: twelve real screens from six projects on a ring that
+ * The first screen is the work: fourteen real screens from seven projects on a ring that
  * turns when dragged. The screen in front scrolls through its own page, and clicking
  * it goes to the project.
  */
@@ -102,6 +114,9 @@ export default function HeroRing() {
   const [taught, setTaught] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [dragging, setDragging] = useState(false);
+  // Someone is moving the pointer over the ring: it stops until the pointer rests for 2 s.
+  const [inspecting, setInspecting] = useState(false);
+  const inspectTimer = useRef<number>();
 
   const rot = useMotionValue(reduced ? 0 : 64);
   const intro = useMotionValue(reduced ? 1 : 0);
@@ -122,7 +137,8 @@ export default function HeroRing() {
   const stageOpacity = useTransform(intro, [0, 0.5], [0, 1]);
 
   const drag = useRef({ active: false, moved: false, startX: 0, startRot: 0, lastX: 0, lastT: 0, velocity: 0 });
-  const lastTouch = useRef(0);
+  const lastTouch = useRef(-1e9);
+  const lastStep = useRef(0);
   const stop = useRef<{ stop: () => void } | null>(null);
 
   // Card size follows the room there is; the ring's radius follows the card.
@@ -151,7 +167,7 @@ export default function HeroRing() {
     stop.current = animate(
       rot,
       Math.round(target / STEP) * STEP,
-      slow ? { duration: 1.5, ease: [0.65, 0, 0.35, 1] } : { type: "spring", stiffness: 70, damping: 18, mass: 1 },
+      slow ? { duration: TURN_S, ease: [0.65, 0, 0.35, 1] } : { type: "spring", stiffness: 90, damping: 18, mass: 1 },
     );
   };
   const step = (dir: 1 | -1) => {
@@ -166,9 +182,10 @@ export default function HeroRing() {
   // On open the ring swings round into place.
   useEffect(() => {
     if (reduced) return;
-    lastTouch.current = performance.now();
-    const a = animate(intro, 1, { duration: 1.5, ease: EASE_OUT });
-    const b = animate(rot, 0, { duration: 1.9, ease: EASE_OUT });
+    // The first screen holds a little longer while the ring swings in.
+    lastStep.current = performance.now() + 900;
+    const a = animate(intro, 1, { duration: 1.2, ease: EASE_OUT });
+    const b = animate(rot, 0, { duration: 1.4, ease: EASE_OUT });
     stop.current = b;
     return () => {
       a.stop();
@@ -182,12 +199,13 @@ export default function HeroRing() {
     setFront((prev) => (prev === i ? prev : i));
   });
 
-  // Left alone, the ring moves on to the next screen every few seconds.
+  // Left alone, the ring moves on briskly. It stops while someone moves the pointer over
+  // it, and waits a few seconds after a drag or a click.
   useAnimationFrame(() => {
-    if (reduced || drag.current.active || hovering) return;
+    if (reduced || drag.current.active || inspecting) return;
     const now = performance.now();
-    if (now - lastTouch.current < 8000) return;
-    lastTouch.current = now;
+    if (now - lastTouch.current < RESUME_MS || now - lastStep.current < STEP_MS) return;
+    lastStep.current = now;
     settle(Math.round(rot.get() / STEP) * STEP - STEP, true);
   });
 
@@ -232,6 +250,9 @@ export default function HeroRing() {
   const onPointerMove = (e: React.PointerEvent) => {
     const el = stage.current;
     if (!el || !fine) return;
+    setInspecting(true);
+    window.clearTimeout(inspectTimer.current);
+    inspectTimer.current = window.setTimeout(() => setInspecting(false), 2000);
     const box = el.getBoundingClientRect();
     const x = e.clientX - box.left;
     const y = e.clientY - box.top;
@@ -268,6 +289,8 @@ export default function HeroRing() {
         onPointerEnter={() => setHovering(true)}
         onPointerLeave={() => {
           setHovering(false);
+          setInspecting(false);
+          window.clearTimeout(inspectTimer.current);
           tiltX.set(0);
           tiltY.set(0);
         }}
@@ -283,6 +306,7 @@ export default function HeroRing() {
                 screen={c}
                 isFront={i === front}
                 live={i === front && !dragging && !reduced}
+                paused={inspecting}
                 glare={i === front && hovering && fine}
                 eager={i < 2 || i === COUNT - 1}
                 onPick={() => {
@@ -374,6 +398,8 @@ interface RingCardProps {
   isFront: boolean;
   /** In front and at rest: the page inside scrolls. */
   live: boolean;
+  /** Someone is pointing at the ring: scroll slowly so the page can be read. */
+  paused: boolean;
   glare: boolean;
   eager: boolean;
   onPick: () => void;
@@ -383,7 +409,7 @@ interface RingCardProps {
  * One screen on the ring, in a browser frame, with its reflection on the floor. It
  * dims as it turns away and disappears round the back.
  */
-function RingCard({ index, rot, size, screen, isFront, live, glare, eager, onPick }: RingCardProps) {
+function RingCard({ index, rot, size, screen, isFront, live, paused, glare, eager, onPick }: RingCardProps) {
   const { w, h, r } = size;
   const shade = useTransform(rot, (v) => Math.min(0.8, (Math.abs(fromFront(index, v)) / 70) * 0.66));
   const visibility = useTransform(rot, (v) => (Math.abs(fromFront(index, v)) > 95 ? "hidden" : "visible"));
@@ -423,8 +449,14 @@ function RingCard({ index, rot, size, screen, isFront, live, glare, eager, onPic
             draggable={false}
             loading={eager ? "eager" : "lazy"}
             decoding="async"
-            className={`block w-full ${live && travel > 0 ? "ring-pan" : ""}`}
-            style={{ ["--pan" as string]: `${-travel}px`, ["--pan-time" as string]: `${Math.max(5, travel / 62)}s` }}
+            className={`block w-full ${live && paused && travel > 0 ? "ring-pan-back" : ""}`}
+            style={{
+              ["--pan" as string]: `${-travel}px`,
+              ["--pan-time" as string]: `${Math.max(5, travel / 62)}s`,
+              // In front: a quick flick down the page while it holds. Elsewhere: back to the top.
+              transform: live && travel > 0 ? `translateY(${-travel}px)` : "translateY(0)",
+              transition: live ? "transform 1.5s cubic-bezier(0.45, 0, 0.25, 1) 0.25s" : "transform 0.5s cubic-bezier(0.45, 0, 0.55, 1)",
+            }}
           />
         </div>
         {glare && (
